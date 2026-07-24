@@ -1,10 +1,12 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import heroValley from "@/assets/hero-valley.jpg";
 import roomImg from "@/assets/room.jpg";
 import fogataImg from "@/assets/fogata.jpg";
 import alpacasImg from "@/assets/alpacas.jpg";
 import cocinaImg from "@/assets/cocina.jpg";
 import quinuaImg from "@/assets/quinua.jpg";
+import { casitas, WA_URL } from "@/lib/casitas";
+import { SiteNav, SiteFooter } from "@/components/site-nav";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -13,13 +15,12 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Valley Q Lodge, propuesta boutique de Altipacha Hotels en Quinua, Ayacucho. Habitaciones con vista al valle, fogatas, cocina vivencial y turismo con propósito.",
+          "Valley Q Lodge, propuesta boutique de Altipacha Hotels en Quinua, Ayacucho. Casitas y habitaciones con vista al valle, fogatas, cocina vivencial y turismo con propósito.",
       },
       { property: "og:title", content: "Valley Q Lodge — Refugio andino en Quinua" },
       {
         property: "og:description",
-        content:
-          "Entre montañas y neblina, un refugio boutique donde el silencio se convierte en descanso.",
+        content: "Entre montañas y neblina, un refugio boutique donde el silencio se convierte en descanso.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -28,52 +29,19 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const WA = "https://wa.me/51921500056";
-
 const experiences = [
-  { title: "Vistas privilegiadas", desc: "Terrazas y habitaciones abiertas al valle, donde el paisaje entra por la ventana." },
-  { title: "Fogatas y rituales andinos", desc: "Ceremonias del fuego bajo cielos estrellados, guiadas por la tradición local." },
-  { title: "Cocina típica", desc: "Sabores de la sierra servidos con producto de temporada y raíces ancestrales." },
-  { title: "Cocina y coctelería vivencial", desc: "Clases inmersivas para cocinar y brindar como en el corazón de los Andes." },
-  { title: "Alpacas y arte", desc: "Convive con alpacas y descubre técnicas de artesanos que resguardan Quinua." },
-  { title: "Spa · muy pronto", desc: "Un santuario de aguas termales y rituales de bienestar en preparación." },
-];
-
-const rates = [
-  { name: "Casita Betsy", weekday: 375, weekend: 390, holiday: 420 },
-  { name: "Casita Kallen · 4 personas", weekday: 570, weekend: 600, holiday: 650 },
-  { name: "Casita Kallen · 2 personas", weekday: 400, weekend: 430, holiday: 520 },
-  { name: "Habitación Matrimonial", weekday: 270, weekend: 300, holiday: 320 },
-  { name: "Habitación Dúplex · 2 personas", weekday: 300, weekend: 330, holiday: 360, note: "S/. 50 adicional por persona extra" },
+  { title: "Vistas privilegiadas", desc: "Terrazas y habitaciones abiertas al valle." },
+  { title: "Fogatas y rituales andinos", desc: "Ceremonias del fuego bajo cielos estrellados." },
+  { title: "Cocina típica", desc: "Sabores de la sierra con producto de temporada." },
+  { title: "Cocina y coctelería vivencial", desc: "Clases inmersivas para cocinar y brindar como en los Andes." },
+  { title: "Alpacas y arte", desc: "Convive con alpacas y descubre técnicas ancestrales." },
+  { title: "Spa · muy pronto", desc: "Un santuario de rituales de bienestar en preparación." },
 ];
 
 function Index() {
   return (
     <main className="bg-background text-foreground">
-      {/* NAV */}
-      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-background/70 border-b border-border/40">
-        <div className="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
-          <a href="#top" className="flex items-baseline gap-2">
-            <span className="font-serif text-2xl tracking-tight text-clay">Valley Q</span>
-            <span className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground">Lodge</span>
-          </a>
-          <nav className="hidden md:flex items-center gap-8 text-sm">
-            <a href="#experiencias" className="hover:text-clay transition">Experiencias</a>
-            <a href="#habitaciones" className="hover:text-clay transition">Habitaciones</a>
-            <a href="#quinua" className="hover:text-clay transition">Quinua</a>
-            <a href="#proposito" className="hover:text-clay transition">Propósito</a>
-            <a href="#contacto" className="hover:text-clay transition">Contacto</a>
-          </nav>
-          <a
-            href={WA}
-            target="_blank"
-            rel="noreferrer"
-            className="text-xs md:text-sm px-4 py-2 bg-clay text-primary-foreground rounded-sm hover:bg-ember transition"
-          >
-            Reservar
-          </a>
-        </div>
-      </header>
+      <SiteNav variant="overlay" />
 
       {/* HERO */}
       <section id="top" className="relative h-screen min-h-[680px] w-full overflow-hidden">
@@ -96,20 +64,21 @@ function Index() {
             Entre montañas y neblina, nace un lugar para reconectarte con lo esencial.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
-            <a
-              href={WA}
-              target="_blank"
-              rel="noreferrer"
+            <Link
+              to="/"
+              hash="habitaciones"
               className="inline-flex items-center gap-3 bg-ivory text-ink px-8 py-4 rounded-sm hover:bg-clay hover:text-ivory transition-all group"
             >
-              Reserva tu estadía
+              Elegir casita
               <span className="group-hover:translate-x-1 transition">→</span>
-            </a>
+            </Link>
             <a
-              href="#experiencias"
+              href={WA_URL}
+              target="_blank"
+              rel="noreferrer"
               className="inline-flex items-center gap-3 border border-ivory/40 text-ivory px-8 py-4 rounded-sm hover:bg-ivory/10 transition"
             >
-              Descubre el lodge
+              Reservar por WhatsApp
             </a>
           </div>
         </div>
@@ -126,12 +95,9 @@ function Index() {
             <p>
               En el corazón de Quinua, donde la historia del Perú se encuentra con la naturaleza más pura,
               nace <span className="text-clay">Valley Q Lodge</span>. Una propuesta boutique by Altipacha Hotels,
-              diseñada para quienes buscan desconectar del ruido, descansar en confort y vivir una experiencia
-              auténtica con raíces andinas.
+              diseñada para quienes buscan desconectar del ruido, descansar en confort y vivir una experiencia auténtica con raíces andinas.
             </p>
-            <p className="italic font-serif text-2xl text-foreground/90">
-              Turismo con alma, en tierra de historia.
-            </p>
+            <p className="italic font-serif text-2xl text-foreground/90">Turismo con alma, en tierra de historia.</p>
           </div>
         </div>
       </section>
@@ -172,60 +138,49 @@ function Index() {
         ))}
       </section>
 
-      {/* HABITACIONES + TARIFAS */}
+      {/* CASITAS */}
       <section id="habitaciones" className="py-24 md:py-32 px-6 md:px-16">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-          <div className="relative">
-            <img
-              src={roomImg}
-              alt="Habitación con vista al valle andino"
-              loading="lazy"
-              width={1400}
-              height={1000}
-              className="w-full aspect-[4/3] object-cover"
-            />
-            <div className="absolute -bottom-6 -right-6 hidden md:block bg-clay text-ivory p-6 max-w-[240px]">
-              <p className="font-serif text-xl italic leading-snug">
-                "Silencio, paisaje y comodidad… todo en armonía."
-              </p>
-            </div>
-          </div>
-          <div>
+        <div className="max-w-7xl mx-auto">
+          <div className="max-w-3xl mb-16">
             <span className="eyebrow">Casitas y habitaciones</span>
-            <h2 className="mt-4 font-serif text-4xl md:text-5xl">Espacios diseñados para el descanso verdadero.</h2>
-            <p className="mt-6 text-foreground/80 font-light leading-relaxed">
-              Cada casita y habitación de Valley Q está pensada como un pequeño refugio: madera cálida,
-              texturas tejidas a mano y grandes ventanas que enmarcan el valle. Precios en soles por noche.
+            <h2 className="mt-4 font-serif text-4xl md:text-5xl">Elige tu refugio.</h2>
+            <p className="mt-6 text-foreground/70 font-light">
+              Cada espacio tiene su propio carácter. Ábrelo para conocer sus virtudes, ver fotos y reservar en pocos pasos.
             </p>
+          </div>
 
-            <div className="mt-10 border-t border-border">
-              <div className="grid grid-cols-12 py-3 text-[10px] uppercase tracking-[0.2em] text-muted-foreground border-b border-border">
-                <div className="col-span-6">Alojamiento</div>
-                <div className="col-span-2 text-right">L–V</div>
-                <div className="col-span-2 text-right">Sáb–Dom</div>
-                <div className="col-span-2 text-right">Feriados</div>
-              </div>
-              {rates.map((r) => (
-                <div key={r.name} className="grid grid-cols-12 py-5 border-b border-border/60 items-baseline">
-                  <div className="col-span-6">
-                    <div className="font-serif text-lg">{r.name}</div>
-                    {r.note && <div className="text-xs text-muted-foreground mt-1">{r.note}</div>}
-                  </div>
-                  <div className="col-span-2 text-right tabular-nums">S/ {r.weekday}</div>
-                  <div className="col-span-2 text-right tabular-nums">S/ {r.weekend}</div>
-                  <div className="col-span-2 text-right tabular-nums text-clay font-medium">S/ {r.holiday}</div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {casitas.map((c) => (
+              <Link
+                key={c.id}
+                to="/casitas/$id"
+                params={{ id: c.id }}
+                className="group block bg-card border border-border hover:border-clay transition overflow-hidden"
+              >
+                <div className="aspect-[4/3] overflow-hidden">
+                  <img
+                    src={c.cover}
+                    alt={c.name}
+                    loading="lazy"
+                    className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
+                  />
                 </div>
-              ))}
-            </div>
-
-            <a
-              href={WA}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-10 inline-flex items-center gap-3 bg-ink text-ivory px-8 py-4 rounded-sm hover:bg-clay transition"
-            >
-              Consultar disponibilidad →
-            </a>
+                <div className="p-6">
+                  <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{c.capacity}</div>
+                  <h3 className="mt-2 font-serif text-2xl">{c.name}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground line-clamp-2">{c.tagline}</p>
+                  <div className="mt-6 flex items-baseline justify-between">
+                    <div>
+                      <span className="text-xs text-muted-foreground">desde</span>
+                      <div className="font-serif text-2xl text-clay">S/ {c.prices.weekday}</div>
+                    </div>
+                    <span className="text-sm text-clay group-hover:translate-x-1 transition">
+                      Ver y reservar →
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
@@ -238,13 +193,9 @@ function Index() {
         </div>
         <div className="relative z-10 max-w-3xl text-ivory">
           <span className="eyebrow text-ember">Quinua, tierra de historia</span>
-          <h2 className="mt-6 font-serif text-4xl md:text-6xl leading-tight">
-            Donde el pasado vive en el presente.
-          </h2>
+          <h2 className="mt-6 font-serif text-4xl md:text-6xl leading-tight">Donde el pasado vive en el presente.</h2>
           <p className="mt-8 text-lg text-ivory/85 font-light leading-relaxed max-w-2xl">
-            Quinua es un Pueblo con Encanto, cuna de la Batalla de Ayacucho y hogar de artesanos que
-            conservan técnicas ancestrales. Valley Q te invita a caminar entre árboles de queuña,
-            conocer esta historia viva y reconectar con lo profundo del Perú.
+            Quinua es un Pueblo con Encanto, cuna de la Batalla de Ayacucho y hogar de artesanos que conservan técnicas ancestrales. Valley Q te invita a caminar entre árboles de queuña y reconectar con lo profundo del Perú.
           </p>
         </div>
       </section>
@@ -255,9 +206,8 @@ function Index() {
           <span className="eyebrow">Turismo con propósito</span>
           <h2 className="mt-4 font-serif text-4xl md:text-5xl">Viajar también es transformar.</h2>
           <p className="mt-8 text-lg text-foreground/80 font-light leading-relaxed max-w-3xl mx-auto">
-            Valley Q forma parte de Altipacha y colabora con la ONG <span className="text-clay">Quinua Q</span> y el
-            programa <span className="text-clay">Mamá Alis</span>, apoyando a comunidades vulnerables a través de
-            formación y empleabilidad. Cada reserva impulsa una cadena de impacto positivo.
+            Valley Q forma parte de Altipacha y colabora con la ONG <span className="text-clay">Quinua Q</span> y el programa{" "}
+            <span className="text-clay">Mamá Alis</span>, apoyando a comunidades vulnerables a través de formación y empleabilidad. Cada reserva impulsa una cadena de impacto positivo.
           </p>
           <div className="mt-12 grid sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
             {[
@@ -287,7 +237,7 @@ function Index() {
               Escríbenos por WhatsApp o llámanos para coordinar tu estadía, experiencias privadas y traslados desde Ayacucho.
             </p>
             <a
-              href={WA}
+              href={WA_URL}
               target="_blank"
               rel="noreferrer"
               className="mt-8 inline-flex items-center gap-3 bg-ember text-ivory px-8 py-4 rounded-sm hover:bg-clay transition"
@@ -313,8 +263,7 @@ function Index() {
             <div>
               <div className="eyebrow text-ivory/50">Central Altipacha</div>
               <div className="mt-3 text-ivory/90">
-                Jirón 28 de Julio N° 527<br />
-                Ayacucho — Huamanga, Perú
+                Jirón 28 de Julio N° 527<br />Ayacucho — Huamanga, Perú
               </div>
             </div>
             <div>
@@ -325,16 +274,7 @@ function Index() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="py-10 px-6 md:px-16 bg-ink text-ivory/60 border-t border-ivory/10">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between gap-4 text-xs">
-          <div>
-            © {new Date().getFullYear()} Valley Q Lodge · Altipacha Hotels · Parte de{" "}
-            <a href="https://quinuaq.com" className="text-ember hover:underline">QuinuaQ</a>
-          </div>
-          <div>Refugio boutique en Quinua, Ayacucho — Perú</div>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }
