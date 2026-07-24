@@ -1,4 +1,4 @@
-import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useMemo, useState } from "react";
 import { getCasita, buildWhatsAppLink, WA_URL } from "@/lib/casitas";
@@ -156,7 +156,7 @@ function CasitaDetail() {
             />
           </div>
           <div className="mt-3 grid grid-cols-4 gap-3">
-            {casita.gallery.map((g, i) => (
+            {casita.gallery.map((g: string, i: number) => (
               <button
                 key={i}
                 type="button"
@@ -182,7 +182,7 @@ function CasitaDetail() {
           <div className="mt-10">
             <h3 className="eyebrow">Virtudes</h3>
             <ul className="mt-4 space-y-2">
-              {casita.virtues.map((v) => (
+              {casita.virtues.map((v: string) => (
                 <li key={v} className="flex gap-3 text-sm">
                   <span className="text-clay mt-1">✦</span>
                   <span>{v}</span>
@@ -194,7 +194,7 @@ function CasitaDetail() {
           <div className="mt-10">
             <h3 className="eyebrow">Amenidades</h3>
             <div className="mt-4 flex flex-wrap gap-2">
-              {casita.amenities.map((a) => (
+              {casita.amenities.map((a: string) => (
                 <span key={a} className="text-xs px-3 py-1 border border-border rounded-full text-muted-foreground">
                   {a}
                 </span>
