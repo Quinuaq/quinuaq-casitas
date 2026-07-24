@@ -14,7 +14,54 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      reservations: {
+        Row: {
+          casita_id: string
+          casita_name: string
+          check_in: string
+          check_out: string
+          created_at: string
+          estimated_total: number | null
+          guest_email: string | null
+          guest_name: string
+          guest_phone: string
+          guests: number
+          id: string
+          message: string | null
+          status: string
+        }
+        Insert: {
+          casita_id: string
+          casita_name: string
+          check_in: string
+          check_out: string
+          created_at?: string
+          estimated_total?: number | null
+          guest_email?: string | null
+          guest_name: string
+          guest_phone: string
+          guests?: number
+          id?: string
+          message?: string | null
+          status?: string
+        }
+        Update: {
+          casita_id?: string
+          casita_name?: string
+          check_in?: string
+          check_out?: string
+          created_at?: string
+          estimated_total?: number | null
+          guest_email?: string | null
+          guest_name?: string
+          guest_phone?: string
+          guests?: number
+          id?: string
+          message?: string | null
+          status?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
