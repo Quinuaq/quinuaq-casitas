@@ -1,4 +1,5 @@
-import { createFileRoute, Link, notFound, useNavigate, useServerFn } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { useMemo, useState } from "react";
 import { getCasita, buildWhatsAppLink, WA_URL } from "@/lib/casitas";
 import { createReservation } from "@/lib/reservations.functions";
