@@ -51,7 +51,6 @@ function isWeekend(dateISO: string) {
 
 function CasitaDetail() {
   const { casita } = Route.useLoaderData();
-  const navigate = useNavigate();
   const submit = useServerFn(createReservation);
 
   const [activeImg, setActiveImg] = useState(0);
