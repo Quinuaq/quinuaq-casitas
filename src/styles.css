@@ -5,47 +5,50 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Valley Q Lodge — World-Class Luxury Hospitality Design System
- * Inspired by Aman Resorts, Six Senses, Belmond, Explora.
- * Aesthetics: Quiet Luxury, Obsidian Dark, Champagne Gold, Warm Ivory, Architectural Framing.
+ * Valley Q Lodge — Luxury Design System v3 ("Lino & Piedra Andina")
+ * Inspired by Explora Valle Sagrado, Belmond Las Casitas, Aman.
+ * Palette: Warm Linen Canvas, Deep Mineral Charcoal, Antique Bronze & Terracotta.
  */
 
 :root {
-  --bg-obsidian:  #0B0A09;   /* Primary deep obsidian */
-  --bg-surface:   #12110F;   /* Card & section background */
-  --bg-elevated:  #181614;   /* Elevated panels */
+  --bg-linen:       #F7F4EF;   /* Main page canvas - warm linen */
+  --bg-surface:     #FFFFFF;   /* Card & panel surface */
+  --bg-subtle:      #EFEAE1;   /* Subtle section contrast */
+  --bg-obsidian:     #12110F;   /* Nocturnal obsidian surface */
   
-  --gold-accent:  #C5A059;   /* Muted Antique Champagne Gold */
-  --gold-light:   #DBC086;   /* Hover gold state */
-  --gold-dim:     rgba(197, 160, 89, 0.25);
+  --text-charcoal:  #1B1917;   /* Deep mineral charcoal text */
+  --text-muted:     #6B635A;   /* Taupe body text */
+  --text-subtle:    #999084;   /* Light captions & metadata */
+  --text-ivory:     #F7F4EF;   /* Text on dark surfaces */
   
-  --ivory-main:   #F4F0E8;   /* Warm Ivory primary text */
-  --taupe-muted:  #9E9488;   /* Muted Taupe secondary text */
-  --stone-dim:    #5E554C;   /* Low-contrast captions/labels */
+  --bronze-accent:  #9C7A3C;   /* Antique Warm Bronze */
+  --bronze-light:   #B59253;   /* Hover bronze state */
+  --terracotta:     #8C5135;   /* Andean Terracotta accent */
   
-  --border-subtle: rgba(244, 240, 232, 0.08);
-  --border-gold:   rgba(197, 160, 89, 0.35);
+  --border-linen:   rgba(27, 25, 23, 0.09);
+  --border-bronze:  rgba(156, 122, 60, 0.35);
+  --border-dark:    rgba(247, 244, 239, 0.1);
 }
 
 @layer base {
   *, *::before, *::after {
     box-sizing: border-box;
-    border-color: var(--border-subtle);
+    border-color: var(--border-linen);
   }
 
   html {
     scroll-behavior: smooth;
     font-size: 16px;
-    background-color: var(--bg-obsidian);
-    color: var(--ivory-main);
+    background-color: var(--bg-linen);
+    color: var(--text-charcoal);
   }
 
   body {
-    background-color: var(--bg-obsidian);
-    color: var(--ivory-main);
+    background-color: var(--bg-linen);
+    color: var(--text-charcoal);
     font-family: "Inter", system-ui, -apple-system, sans-serif;
     font-weight: 300;
-    line-height: 1.65;
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
@@ -54,9 +57,9 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: "Cormorant Garamond", Georgia, serif;
     font-weight: 300;
-    line-height: 1.08;
+    line-height: 1.1;
     letter-spacing: -0.015em;
-    color: var(--ivory-main);
+    color: var(--text-charcoal);
     margin: 0;
   }
 
@@ -72,12 +75,12 @@
   }
 
   ::selection {
-    background: var(--gold-accent);
-    color: var(--bg-obsidian);
+    background: var(--bronze-accent);
+    color: var(--bg-linen);
   }
 }
 
-/* ── Luxury Micro-Utilities ── */
+/* ── Typography & Micro Utilities ── */
 
 .font-serif {
   font-family: "Cormorant Garamond", Georgia, serif;
@@ -87,63 +90,49 @@
   font-family: "Inter", system-ui, sans-serif;
 }
 
-/* Luxury Eyebrow / Badge Label */
+/* Eyebrow Label (Light Mode) */
 .label-luxury {
   font-family: "Inter", system-ui, sans-serif;
   font-size: 0.65rem;
-  font-weight: 400;
-  letter-spacing: 0.38em;
+  font-weight: 500;
+  letter-spacing: 0.35em;
   text-transform: uppercase;
-  color: var(--gold-accent);
+  color: var(--bronze-accent);
   display: inline-block;
 }
 
-.label-taupe {
+.label-terracotta {
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  display: inline-block;
+}
+
+.label-dark-gold {
   font-family: "Inter", system-ui, sans-serif;
   font-size: 0.65rem;
   font-weight: 400;
   letter-spacing: 0.35em;
   text-transform: uppercase;
-  color: var(--taupe-muted);
+  color: #D5B374;
   display: inline-block;
 }
 
-/* Thin Gold Architectural Line */
-.gold-line {
-  display: block;
-  width: 40px;
-  height: 1px;
-  background: var(--gold-accent);
-  opacity: 0.6;
-}
-
-/* Glassmorphism Panel */
-.glass-panel {
-  background: rgba(18, 17, 15, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border-subtle);
-}
-
-.glass-header {
-  background: rgba(11, 10, 9, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(244, 240, 232, 0.06);
-}
-
-/* Luxury Outline Button */
+/* Luxury Outline Button (Light Mode) */
 .btn-luxury-outline {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
   padding: 14px 32px;
-  border: 1px solid var(--border-gold);
-  color: var(--gold-accent);
+  border: 1px solid var(--border-bronze);
+  color: var(--bronze-accent);
   font-family: "Inter", system-ui, sans-serif;
   font-size: 0.65rem;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: 0.35em;
   text-transform: uppercase;
   background: transparent;
@@ -152,39 +141,40 @@
   white-space: nowrap;
 }
 .btn-luxury-outline:hover {
-  background: rgba(197, 160, 89, 0.09);
-  border-color: var(--gold-accent);
-  color: var(--ivory-main);
+  background: var(--bronze-accent);
+  border-color: var(--bronze-accent);
+  color: var(--bg-linen);
   transform: translateY(-1px);
 }
 
-/* Luxury Solid Gold CTA Button */
+/* Luxury Solid Bronze CTA Button */
 .btn-luxury-solid {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
   padding: 16px 38px;
-  background: var(--gold-accent);
-  color: var(--bg-obsidian);
+  background: var(--text-charcoal);
+  color: var(--bg-linen);
   font-family: "Inter", system-ui, sans-serif;
   font-size: 0.65rem;
   font-weight: 500;
   letter-spacing: 0.35em;
   text-transform: uppercase;
-  border: 1px solid var(--gold-accent);
+  border: 1px solid var(--text-charcoal);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
   white-space: nowrap;
 }
 .btn-luxury-solid:hover {
-  background: var(--gold-light);
-  border-color: var(--gold-light);
-  box-shadow: 0 4px 20px rgba(197, 160, 89, 0.25);
+  background: var(--bronze-accent);
+  border-color: var(--bronze-accent);
+  color: var(--bg-linen);
+  box-shadow: 0 4px 20px rgba(156, 122, 60, 0.2);
   transform: translateY(-1px);
 }
 
-/* Ghost / Underline Link */
+/* Luxury Link */
 .link-luxury {
   display: inline-flex;
   align-items: center;
@@ -193,11 +183,11 @@
   font-size: 0.65rem;
   letter-spacing: 0.35em;
   text-transform: uppercase;
-  color: var(--taupe-muted);
+  color: var(--text-muted);
   transition: color 0.35s ease;
 }
 .link-luxury:hover {
-  color: var(--gold-accent);
+  color: var(--bronze-accent);
 }
 .link-luxury .line {
   display: inline-block;
@@ -210,14 +200,14 @@
   width: 44px;
 }
 
-/* Luxury Minimal Input */
+/* Inputs (Light Mode) */
 .input-luxury {
   width: 100%;
   padding: 12px 0;
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(244, 240, 232, 0.12);
-  color: var(--ivory-main);
+  border-bottom: 1px solid rgba(27, 25, 23, 0.18);
+  color: var(--text-charcoal);
   font-family: "Inter", system-ui, sans-serif;
   font-size: 0.875rem;
   font-weight: 300;
@@ -226,16 +216,25 @@
   border-radius: 0;
 }
 .input-luxury::placeholder {
-  color: var(--stone-dim);
+  color: var(--text-subtle);
 }
 .input-luxury:focus {
-  border-bottom-color: var(--gold-accent);
+  border-bottom-color: var(--bronze-accent);
 }
 
-select.input-luxury option {
-  background-color: var(--bg-surface);
-  color: var(--ivory-main);
-  padding: 10px;
+/* Glass & Translucent Panels */
+.glass-header-light {
+  background: rgba(247, 244, 239, 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(27, 25, 23, 0.08);
+}
+
+.glass-header-dark {
+  background: rgba(18, 17, 15, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(247, 244, 239, 0.08);
 }
 
 /* Image Zoom Effect */
@@ -250,19 +249,19 @@ select.input-luxury option {
   object-fit: cover;
 }
 .img-container:hover img {
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
-/* Keyframe Animations */
+/* Keyframes */
 @keyframes ambientDrift {
   0%, 100% { transform: scale(1.03); }
-  50% { transform: scale(1.06) translateY(-8px); }
+  50% { transform: scale(1.06) translateY(-6px); }
 }
 
 @keyframes scrollLine {
   0% { transform: scaleY(0); transform-origin: top; opacity: 1; }
   50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
-  51% { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
   100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
 }
 
@@ -274,16 +273,16 @@ select.input-luxury option {
   animation: scrollLine 2.5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
 }
 
-/* Scroll Reveal Classes */
+/* Scroll Reveal */
 .reveal, .reveal-left, .reveal-right, .reveal-scale {
   opacity: 0;
-  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
-.reveal { transform: translateY(32px); }
-.reveal-left { transform: translateX(-32px); }
-.reveal-right { transform: translateX(32px); }
+.reveal { transform: translateY(28px); }
+.reveal-left { transform: translateX(-28px); }
+.reveal-right { transform: translateX(28px); }
 .reveal-scale { transform: scale(0.96); }
 
 .reveal.visible, .reveal.on,
@@ -294,13 +293,13 @@ select.input-luxury option {
   transform: none;
 }
 
-/* Scrollbar customization */
+/* Scrollbar */
 ::-webkit-scrollbar {
   width: 4px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--bg-obsidian);
+  background: var(--bg-linen);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(197, 160, 89, 0.35);
+  background: rgba(156, 122, 60, 0.35);
 }

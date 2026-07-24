@@ -36,7 +36,7 @@ function HomePage() {
   useScrollReveal();
 
   return (
-    <main className="bg-[#0B0A09] text-[#F4F0E8] overflow-x-hidden">
+    <main className="bg-[#F7F4EF] text-[#1B1917] overflow-x-hidden">
       <SiteNav variant="overlay" />
       <HeroSection />
       <BrandSection />
@@ -56,20 +56,20 @@ function HomePage() {
 /* ── 1. Brand Intro Section ── */
 function BrandSection() {
   return (
-    <section className="py-28 md:py-44 bg-[#0B0A09]">
+    <section className="py-28 md:py-44 bg-[#F7F4EF]">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-20 items-center">
           {/* Left Column: Branding watermark */}
           <div className="md:col-span-5 reveal-left">
-            <span className="font-serif text-8xl md:text-9xl text-[#C5A059]/10 select-none block -mb-8">
+            <span className="font-serif text-8xl md:text-9xl text-[#9C7A3C]/15 select-none block -mb-8">
               01
             </span>
             <div className="space-y-3">
               <span className="label-luxury">Bienvenidos a</span>
-              <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-[#F4F0E8] font-light">
+              <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-[#1B1917] font-light">
                 Valley Q Lodge
               </h2>
-              <span className="label-taupe text-[10px] block">
+              <span className="label-terracotta text-[10px] block">
                 An Altipacha Estate · Quinua
               </span>
             </div>
@@ -77,33 +77,33 @@ function BrandSection() {
 
           {/* Right Column: Editorial narrative */}
           <div className="md:col-span-7 space-y-6 reveal-right">
-            <p className="text-lg md:text-xl text-[#9E9488] font-light leading-relaxed">
+            <p className="text-lg md:text-xl text-[#6B635A] font-light leading-relaxed">
               En el corazón histórico de Quinua, donde la majestuosidad de los Andes abraza la tranquilidad del campo peruano, nace{" "}
-              <span className="text-[#C5A059] font-normal">Valley Q Lodge</span>.
+              <span className="text-[#9C7A3C] font-normal">Valley Q Lodge</span>.
             </p>
 
-            <p className="text-sm text-[#9E9488] font-light leading-relaxed">
+            <p className="text-sm text-[#6B635A] font-light leading-relaxed">
               Una propuesta boutique gestada por Altipacha Hotels, diseñada para viajeros exigentes que buscan desconectar del ruido urbano, habitar la serenidad y reconectarse con lo esencial a través de la arquitectura andina y el servicio personalizado.
             </p>
 
-            <blockquote className="border-l border-[#C5A059]/40 pl-6 py-1">
-              <p className="font-serif text-xl sm:text-2xl italic text-[#F4F0E8] font-light">
+            <blockquote className="border-l border-[#9C7A3C]/40 pl-6 py-1">
+              <p className="font-serif text-xl sm:text-2xl italic text-[#1B1917] font-light">
                 "Turismo con alma en tierra de historia y silencio."
               </p>
             </blockquote>
 
-            <div className="pt-4 grid grid-cols-3 gap-6 border-t border-[#F4F0E8]/10">
+            <div className="pt-4 grid grid-cols-3 gap-6 border-t border-[#1B1917]/10">
               <div>
-                <span className="block text-[9px] uppercase tracking-[0.3em] text-[#5E554C]">Categoría</span>
-                <span className="text-xs text-[#F4F0E8] mt-1 block">Boutique Lodge</span>
+                <span className="block text-[9px] uppercase tracking-[0.3em] text-[#999084]">Categoría</span>
+                <span className="text-xs text-[#1B1917] mt-1 block">Boutique Lodge</span>
               </div>
               <div>
-                <span className="block text-[9px] uppercase tracking-[0.3em] text-[#5E554C]">Ubicación</span>
-                <span className="text-xs text-[#F4F0E8] mt-1 block">Quinua, Ayacucho</span>
+                <span className="block text-[9px] uppercase tracking-[0.3em] text-[#999084]">Ubicación</span>
+                <span className="text-xs text-[#1B1917] mt-1 block">Quinua, Ayacucho</span>
               </div>
               <div>
-                <span className="block text-[9px] uppercase tracking-[0.3em] text-[#5E554C]">Altitud</span>
-                <span className="text-xs text-[#F4F0E8] mt-1 block">3,500 msnm</span>
+                <span className="block text-[9px] uppercase tracking-[0.3em] text-[#999084]">Altitud</span>
+                <span className="text-xs text-[#1B1917] mt-1 block">3,500 msnm</span>
               </div>
             </div>
           </div>
@@ -116,42 +116,42 @@ function BrandSection() {
 /* ── 2. Quinua Destination Section ── */
 function QuinuaSection() {
   return (
-    <section id="quinua" className="py-28 md:py-40 bg-[#12110F]">
+    <section id="quinua" className="py-28 md:py-40 bg-[#EFEAE1]">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="grid lg:grid-cols-12 gap-12 items-center">
           {/* Photo */}
-          <div className="lg:col-span-6 img-container aspect-[4/3] border border-[#F4F0E8]/10 reveal-left">
+          <div className="lg:col-span-6 img-container aspect-[4/3] border border-[#1B1917]/8 shadow-sm reveal-left">
             <img src={quinuaImg} alt="Pampa de Quinua al atardecer" />
           </div>
 
           {/* Editorial Content */}
           <div className="lg:col-span-6 space-y-6 reveal-right">
             <span className="label-luxury">Pueblo con Encanto</span>
-            <h2 className="font-serif text-4xl sm:text-5xl text-[#F4F0E8] font-light">
+            <h2 className="font-serif text-4xl sm:text-5xl text-[#1B1917] font-light">
               Quinua, tierra donde el pasado{" "}
-              <em className="italic text-[#C5A059] font-serif">vive en el presente.</em>
+              <em className="italic text-[#9C7A3C] font-serif">vive en el presente.</em>
             </h2>
 
-            <p className="text-sm text-[#9E9488] font-light leading-relaxed">
+            <p className="text-sm text-[#6B635A] font-light leading-relaxed">
               Reconocida por la legendaria Batalla de Ayacucho de 1824 que sello la independencia de Sudamérica, Quinua conserva sus calles empedradas, iglesias coloniales y una herencia alfarera declarada Patrimonio Cultural de la Nación.
             </p>
 
-            <p className="text-sm text-[#9E9488] font-light leading-relaxed">
+            <p className="text-sm text-[#6B635A] font-light leading-relaxed">
               Desde Valley Q, podrás explorar la Pampa de la Quinua, recorrer talleres artesanales de cerámica en barro y caminar entre bosques nativos de queuña protegidos.
             </p>
 
-            <div className="pt-4 grid grid-cols-3 gap-6 border-t border-[#F4F0E8]/10">
+            <div className="pt-4 grid grid-cols-3 gap-6 border-t border-[#1B1917]/10">
               <div>
-                <span className="font-serif text-2xl text-[#C5A059]">1824</span>
-                <span className="block text-[9px] uppercase tracking-[0.25em] text-[#5E554C] mt-0.5">Batalla de Ayacucho</span>
+                <span className="font-serif text-2xl text-[#9C7A3C]">1824</span>
+                <span className="block text-[9px] uppercase tracking-[0.25em] text-[#999084] mt-0.5">Batalla de Ayacucho</span>
               </div>
               <div>
-                <span className="font-serif text-2xl text-[#C5A059]">S. XVII</span>
-                <span className="block text-[9px] uppercase tracking-[0.25em] text-[#5E554C] mt-0.5">Tradición Alfarera</span>
+                <span className="font-serif text-2xl text-[#9C7A3C]">S. XVII</span>
+                <span className="block text-[9px] uppercase tracking-[0.25em] text-[#999084] mt-0.5">Tradición Alfarera</span>
               </div>
               <div>
-                <span className="font-serif text-2xl text-[#C5A059]">3,500 m</span>
-                <span className="block text-[9px] uppercase tracking-[0.25em] text-[#5E554C] mt-0.5">Sobre el nivel del mar</span>
+                <span className="font-serif text-2xl text-[#9C7A3C]">3,500 m</span>
+                <span className="block text-[9px] uppercase tracking-[0.25em] text-[#999084] mt-0.5">Sobre el nivel del mar</span>
               </div>
             </div>
           </div>
@@ -161,20 +161,20 @@ function QuinuaSection() {
   );
 }
 
-/* ── 3. Social Purpose & NGO Section ── */
+/* ── 3. Social Purpose & NGO Section (Nocturnal Contrast) ── */
 function PurposeSection() {
   return (
-    <section id="proposito" className="py-28 md:py-40 bg-[#0B0A09] relative overflow-hidden">
+    <section id="proposito" className="py-28 md:py-40 bg-[#12110F] text-[#F7F4EF] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 space-y-16">
         {/* Header */}
         <div className="max-w-3xl space-y-4 reveal">
-          <span className="label-luxury">Turismo Sostenible & Responsable</span>
-          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#F4F0E8] font-light">
+          <span className="label-dark-gold">Turismo Sostenible & Responsable</span>
+          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#F7F4EF] font-light">
             Viajar también es{" "}
-            <em className="italic text-[#C5A059] font-serif">generar impacto positivo.</em>
+            <em className="italic text-[#D5B374] font-serif">generar impacto positivo.</em>
           </h2>
-          <p className="text-sm text-[#9E9488] font-light leading-relaxed">
-            Valley Q es parte de Altipacha Hotels y trabaja en alianza directa con la ONG <span className="text-[#C5A059]">Quinua Q</span> y el programa social <span className="text-[#C5A059]">Mamá Alis</span>, capacitando e impulsando la empleabilidad de familias locales en Ayacucho.
+          <p className="text-sm text-[#999084] font-light leading-relaxed">
+            Valley Q es parte de Altipacha Hotels y trabaja en alianza directa con la ONG <span className="text-[#D5B374]">Quinua Q</span> y el programa social <span className="text-[#D5B374]">Mamá Alis</span>, capacitando e impulsando la empleabilidad de familias locales en Ayacucho.
           </p>
         </div>
 
@@ -199,12 +199,12 @@ function PurposeSection() {
           ].map((pillar, idx) => (
             <div
               key={pillar.num}
-              className="bg-[#12110F] border border-[#F4F0E8]/5 p-8 space-y-4 hover:border-[#C5A059]/30 transition-all duration-300 reveal"
+              className="bg-[#1B1917] border border-[#F7F4EF]/8 p-8 space-y-4 hover:border-[#D5B374]/30 transition-all duration-300 reveal"
               style={{ transitionDelay: `${idx * 120}ms` }}
             >
-              <span className="font-serif text-4xl text-[#C5A059]/40">{pillar.num}</span>
-              <h3 className="font-serif text-2xl text-[#F4F0E8] font-light">{pillar.title}</h3>
-              <p className="text-xs text-[#9E9488] font-light leading-relaxed">{pillar.description}</p>
+              <span className="font-serif text-4xl text-[#D5B374]/40">{pillar.num}</span>
+              <h3 className="font-serif text-2xl text-[#F7F4EF] font-light">{pillar.title}</h3>
+              <p className="text-xs text-[#999084] font-light leading-relaxed">{pillar.description}</p>
             </div>
           ))}
         </div>
@@ -216,57 +216,57 @@ function PurposeSection() {
 /* ── 4. Concierge & Reservation Form Section ── */
 function ContactSection() {
   return (
-    <section id="contacto" className="py-28 md:py-40 bg-[#12110F] border-t border-[#F4F0E8]/10">
+    <section id="contacto" className="py-28 md:py-40 bg-[#F7F4EF] border-t border-[#1B1917]/10">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16">
           {/* Left Info Panel */}
           <div className="lg:col-span-5 space-y-8 reveal-left">
             <div className="space-y-3">
               <span className="label-luxury">Concierge & Reservas</span>
-              <h2 className="font-serif text-4xl sm:text-5xl text-[#F4F0E8] font-light">
+              <h2 className="font-serif text-4xl sm:text-5xl text-[#1B1917] font-light">
                 Planifica tu estadía en{" "}
-                <em className="italic text-[#C5A059] font-serif">Valley Q.</em>
+                <em className="italic text-[#9C7A3C] font-serif">Valley Q.</em>
               </h2>
             </div>
 
-            <p className="text-sm text-[#9E9488] font-light leading-relaxed">
+            <p className="text-sm text-[#6B635A] font-light leading-relaxed">
               Ponte en contacto con nuestro equipo de atención personalizada para coordinar reservas de casitas, traslados privados desde el aeropuerto de Ayacucho y experiencias gastronómicas exclusivas.
             </p>
 
-            <div className="space-y-4 pt-4 border-t border-[#F4F0E8]/10">
+            <div className="space-y-4 pt-4 border-t border-[#1B1917]/10">
               <div>
-                <span className="block text-[9px] uppercase tracking-[0.3em] text-[#5E554C]">Atención Inmediata</span>
+                <span className="block text-[9px] uppercase tracking-[0.3em] text-[#999084]">Atención Inmediata</span>
                 <a
                   href={WA_URL}
                   target="_blank"
                   rel="noreferrer"
-                  className="font-serif text-xl text-[#C5A059] hover:text-[#DBC086] transition-colors"
+                  className="font-serif text-xl text-[#9C7A3C] hover:text-[#B59253] transition-colors"
                 >
                   WhatsApp: +51 921 500 056
                 </a>
               </div>
 
               <div>
-                <span className="block text-[9px] uppercase tracking-[0.3em] text-[#5E554C]">Oficina Central</span>
-                <p className="text-xs text-[#9E9488] font-light">
+                <span className="block text-[9px] uppercase tracking-[0.3em] text-[#999084]">Oficina Central</span>
+                <p className="text-xs text-[#6B635A] font-light">
                   Jirón 28 de Julio N° 527, Huamanga, Ayacucho
                 </p>
-                <p className="text-xs text-[#9E9488] font-light">Teléfono: (066) 280 891</p>
+                <p className="text-xs text-[#6B635A] font-light">Teléfono: (066) 280 891</p>
               </div>
 
               <div>
-                <span className="block text-[9px] uppercase tracking-[0.3em] text-[#5E554C]">Correo Electrónico</span>
-                <p className="text-xs text-[#9E9488] font-light">reservas@altipachahotel.com</p>
+                <span className="block text-[9px] uppercase tracking-[0.3em] text-[#999084]">Correo Electrónico</span>
+                <p className="text-xs text-[#6B635A] font-light">reservas@altipachahotel.com</p>
               </div>
             </div>
           </div>
 
           {/* Right Inquiry Form */}
-          <div className="lg:col-span-7 bg-[#0B0A09] border border-[#F4F0E8]/10 p-8 md:p-12 reveal-right">
-            <h3 className="font-serif text-2xl md:text-3xl text-[#F4F0E8] font-light mb-2">
+          <div className="lg:col-span-7 bg-[#FFFFFF] border border-[#1B1917]/8 p-8 md:p-12 shadow-sm reveal-right">
+            <h3 className="font-serif text-2xl md:text-3xl text-[#1B1917] font-light mb-2">
               Solicitud de Reserva
             </h3>
-            <p className="text-xs text-[#9E9488] font-light mb-8">
+            <p className="text-xs text-[#6B635A] font-light mb-8">
               Completa los datos de tu viaje y te responderemos a la brevedad con la disponibilidad confirmada.
             </p>
 
@@ -279,13 +279,13 @@ function ContactSection() {
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-[9px] uppercase tracking-[0.3em] text-[#5E554C] mb-1.5">
+                  <label className="block text-[9px] uppercase tracking-[0.3em] text-[#999084] mb-1.5">
                     Nombre completo
                   </label>
                   <input type="text" placeholder="Ej. Carlos Mendoza" required className="input-luxury" />
                 </div>
                 <div>
-                  <label className="block text-[9px] uppercase tracking-[0.3em] text-[#5E554C] mb-1.5">
+                  <label className="block text-[9px] uppercase tracking-[0.3em] text-[#999084] mb-1.5">
                     Teléfono / WhatsApp
                   </label>
                   <input type="tel" placeholder="+51 900 000 000" required className="input-luxury" />
@@ -294,19 +294,19 @@ function ContactSection() {
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 <div>
-                  <label className="block text-[9px] uppercase tracking-[0.3em] text-[#5E554C] mb-1.5">
+                  <label className="block text-[9px] uppercase tracking-[0.3em] text-[#999084] mb-1.5">
                     Check-in
                   </label>
                   <input type="date" required className="input-luxury" />
                 </div>
                 <div>
-                  <label className="block text-[9px] uppercase tracking-[0.3em] text-[#5E554C] mb-1.5">
+                  <label className="block text-[9px] uppercase tracking-[0.3em] text-[#999084] mb-1.5">
                     Check-out
                   </label>
                   <input type="date" required className="input-luxury" />
                 </div>
                 <div>
-                  <label className="block text-[9px] uppercase tracking-[0.3em] text-[#5E554C] mb-1.5">
+                  <label className="block text-[9px] uppercase tracking-[0.3em] text-[#999084] mb-1.5">
                     Huéspedes
                   </label>
                   <select className="input-luxury">
@@ -319,7 +319,7 @@ function ContactSection() {
               </div>
 
               <div>
-                <label className="block text-[9px] uppercase tracking-[0.3em] text-[#5E554C] mb-1.5">
+                <label className="block text-[9px] uppercase tracking-[0.3em] text-[#999084] mb-1.5">
                   Casita / Habitación Preferida
                 </label>
                 <select className="input-luxury">
@@ -333,7 +333,7 @@ function ContactSection() {
               </div>
 
               <div>
-                <label className="block text-[9px] uppercase tracking-[0.3em] text-[#5E554C] mb-1.5">
+                <label className="block text-[9px] uppercase tracking-[0.3em] text-[#999084] mb-1.5">
                   Comentarios o solicitudes especiales
                 </label>
                 <textarea

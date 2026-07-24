@@ -31,9 +31,9 @@ export const Route = createFileRoute("/casitas/$id")({
   },
   component: CasitaDetail,
   notFoundComponent: () => (
-    <div className="min-h-screen bg-[#0B0A09] flex flex-col items-center justify-center text-center p-8">
-      <div className="font-serif text-6xl text-[#C5A059]/30 mb-6">404</div>
-      <h1 className="font-serif text-4xl text-[#F4F0E8]">Casita no encontrada</h1>
+    <div className="min-h-screen bg-[#F7F4EF] flex flex-col items-center justify-center text-center p-8">
+      <div className="font-serif text-6xl text-[#9C7A3C]/30 mb-6">404</div>
+      <h1 className="font-serif text-4xl text-[#1B1917]">Casita no encontrada</h1>
       <Link to="/" className="mt-8 btn-luxury-outline">
         ← Volver al Lodge
       </Link>
@@ -134,7 +134,7 @@ function CasitaDetail() {
   };
 
   return (
-    <main className="bg-[#0B0A09] text-[#F4F0E8] min-h-screen">
+    <main className="bg-[#F7F4EF] text-[#1B1917] min-h-screen">
       <SiteNav variant="solid" />
 
       {/* Hero Showcase Gallery */}
@@ -144,15 +144,15 @@ function CasitaDetail() {
           alt={casita.name}
           className="w-full h-full object-cover transition-all duration-700"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-[#0B0A09]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-[#F7F4EF]" />
 
         {/* Breadcrumb Navigation */}
-        <div className="absolute top-28 left-6 md:left-12 flex items-center gap-2 text-xs text-[#9E9488]">
-          <Link to="/" className="hover:text-[#C5A059] transition-colors">Valley Q</Link>
+        <div className="absolute top-28 left-6 md:left-12 flex items-center gap-2 text-xs text-[#E6E0D4]">
+          <Link to="/" className="hover:text-[#D5B374] transition-colors">Valley Q</Link>
           <span>/</span>
-          <Link to="/" hash="habitaciones" className="hover:text-[#C5A059] transition-colors">Alojamiento</Link>
+          <Link to="/" hash="habitaciones" className="hover:text-[#D5B374] transition-colors">Alojamiento</Link>
           <span>/</span>
-          <span className="text-[#F4F0E8] font-medium">{casita.name}</span>
+          <span className="text-[#F7F4EF] font-medium">{casita.name}</span>
         </div>
 
         {/* Gallery Thumbnails Overlay */}
@@ -163,7 +163,7 @@ function CasitaDetail() {
               type="button"
               onClick={() => setActiveImg(idx)}
               className={`w-16 h-12 overflow-hidden border transition-all duration-300 ${
-                idx === activeImg ? "border-[#C5A059] scale-105" : "border-white/10 opacity-60 hover:opacity-100"
+                idx === activeImg ? "border-[#9C7A3C] scale-105" : "border-white/20 opacity-70 hover:opacity-100"
               }`}
             >
               <img src={imgUrl} alt="" className="w-full h-full object-cover" />
@@ -180,40 +180,40 @@ function CasitaDetail() {
           <div className="lg:col-span-7 space-y-12">
             {/* Room Title Header */}
             <div className="space-y-2 reveal">
-              <span className="label-luxury">{casita.capacity}</span>
-              <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#F4F0E8] font-light">
+              <span className="label-terracotta">{casita.capacity}</span>
+              <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#1B1917] font-light">
                 {casita.name}
               </h1>
-              <p className="font-serif text-xl italic text-[#C5A059]">
+              <p className="font-serif text-xl italic text-[#9C7A3C]">
                 {casita.tagline}
               </p>
             </div>
 
-            <p className="text-base text-[#9E9488] font-light leading-relaxed reveal d1">
+            <p className="text-base text-[#6B635A] font-light leading-relaxed reveal d1">
               {casita.description}
             </p>
 
             {/* Rates Table */}
             <div className="space-y-4 reveal d2">
               <span className="label-luxury text-[10px]">Tarifario por Noche</span>
-              <div className="grid grid-cols-3 gap-px bg-[#F4F0E8]/10 border border-[#F4F0E8]/10">
+              <div className="grid grid-cols-3 gap-px bg-[#1B1917]/10 border border-[#1B1917]/10">
                 {[
                   { label: "Lun – Vie", price: casita.prices.weekday },
                   { label: "Sáb – Dom", price: casita.prices.weekend },
                   { label: "Feriados", price: casita.prices.holiday },
                 ].map((item) => (
-                  <div key={item.label} className="p-6 bg-[#12110F] text-center space-y-1">
-                    <span className="block text-[9px] uppercase tracking-[0.25em] text-[#5E554C]">
+                  <div key={item.label} className="p-6 bg-[#FFFFFF] text-center space-y-1">
+                    <span className="block text-[9px] uppercase tracking-[0.25em] text-[#999084]">
                       {item.label}
                     </span>
-                    <span className="font-serif text-2xl text-[#C5A059]">
+                    <span className="font-serif text-2xl text-[#9C7A3C]">
                       S/ {item.price}
                     </span>
                   </div>
                 ))}
               </div>
               {casita.extraNote && (
-                <p className="text-xs text-[#9E9488] italic">* {casita.extraNote}</p>
+                <p className="text-xs text-[#6B635A] italic">* {casita.extraNote}</p>
               )}
             </div>
 
@@ -222,8 +222,8 @@ function CasitaDetail() {
               <span className="label-luxury text-[10px]">Servicios Incluidos</span>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {casita.virtues.map((virtue: string) => (
-                  <div key={virtue} className="flex items-center gap-3 text-xs text-[#F4F0E8]">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
+                  <div key={virtue} className="flex items-center gap-3 text-xs text-[#1B1917]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#9C7A3C]" />
                     <span>{virtue}</span>
                   </div>
                 ))}
@@ -237,7 +237,7 @@ function CasitaDetail() {
                 {casita.amenities.map((amenity: string) => (
                   <span
                     key={amenity}
-                    className="text-xs px-3.5 py-1.5 bg-[#12110F] border border-[#F4F0E8]/10 text-[#9E9488]"
+                    className="text-xs px-3.5 py-1.5 bg-[#FFFFFF] border border-[#1B1917]/10 text-[#6B635A]"
                   >
                     {amenity}
                   </span>
@@ -248,17 +248,17 @@ function CasitaDetail() {
 
           {/* Right Sticky Booking Widget */}
           <div className="lg:col-span-5">
-            <div className="sticky top-28 bg-[#12110F] border border-[#F4F0E8]/10 p-8 space-y-6">
-              <div className="border-b border-[#F4F0E8]/10 pb-6">
+            <div className="sticky top-28 bg-[#FFFFFF] border border-[#1B1917]/10 p-8 shadow-sm space-y-6">
+              <div className="border-b border-[#1B1917]/10 pb-6">
                 <span className="label-luxury text-[10px]">Reserva Inmediata</span>
-                <h2 className="font-serif text-2xl text-[#F4F0E8] mt-1">{casita.name}</h2>
-                <p className="text-xs text-[#9E9488] mt-1">Desayuno andino incluido</p>
+                <h2 className="font-serif text-2xl text-[#1B1917] mt-1">{casita.name}</h2>
+                <p className="text-xs text-[#6B635A] mt-1">Desayuno andino incluido</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[9px] uppercase tracking-[0.25em] text-[#5E554C] mb-1">
+                    <label className="block text-[9px] uppercase tracking-[0.25em] text-[#999084] mb-1">
                       Check-in
                     </label>
                     <input
@@ -271,7 +271,7 @@ function CasitaDetail() {
                     />
                   </div>
                   <div>
-                    <label className="block text-[9px] uppercase tracking-[0.25em] text-[#5E554C] mb-1">
+                    <label className="block text-[9px] uppercase tracking-[0.25em] text-[#999084] mb-1">
                       Check-out
                     </label>
                     <input
@@ -286,7 +286,7 @@ function CasitaDetail() {
                 </div>
 
                 <div>
-                  <label className="block text-[9px] uppercase tracking-[0.25em] text-[#5E554C] mb-1">
+                  <label className="block text-[9px] uppercase tracking-[0.25em] text-[#999084] mb-1">
                     Huéspedes (máx. {casita.maxGuests})
                   </label>
                   <input
@@ -300,7 +300,7 @@ function CasitaDetail() {
                 </div>
 
                 <div>
-                  <label className="block text-[9px] uppercase tracking-[0.25em] text-[#5E554C] mb-1">
+                  <label className="block text-[9px] uppercase tracking-[0.25em] text-[#999084] mb-1">
                     Nombre Completo
                   </label>
                   <input
@@ -314,7 +314,7 @@ function CasitaDetail() {
                 </div>
 
                 <div>
-                  <label className="block text-[9px] uppercase tracking-[0.25em] text-[#5E554C] mb-1">
+                  <label className="block text-[9px] uppercase tracking-[0.25em] text-[#999084] mb-1">
                     WhatsApp / Teléfono
                   </label>
                   <input
@@ -328,29 +328,29 @@ function CasitaDetail() {
                 </div>
 
                 {/* Total Summary Box */}
-                <div className="bg-[#0B0A09] p-4 border border-[#F4F0E8]/5 space-y-2 text-xs">
-                  <div className="flex justify-between text-[#9E9488]">
+                <div className="bg-[#F7F4EF] p-4 border border-[#1B1917]/5 space-y-2 text-xs">
+                  <div className="flex justify-between text-[#6B635A]">
                     <span>Duración</span>
                     <span>{nights} {nights === 1 ? "noche" : "noches"}</span>
                   </div>
-                  <div className="flex justify-between text-[#9E9488]">
+                  <div className="flex justify-between text-[#6B635A]">
                     <span>Subtotal</span>
                     <span>S/ {subtotal}</span>
                   </div>
                   {extraGuestFee > 0 && (
-                    <div className="flex justify-between text-[#9E9488]">
+                    <div className="flex justify-between text-[#6B635A]">
                       <span>Huéspedes extra</span>
                       <span>S/ {extraGuestFee}</span>
                     </div>
                   )}
-                  <div className="pt-2 border-t border-[#F4F0E8]/10 flex justify-between items-baseline">
-                    <span className="font-medium text-[#F4F0E8]">Estimado Total</span>
-                    <span className="font-serif text-2xl text-[#C5A059]">S/ {total}</span>
+                  <div className="pt-2 border-t border-[#1B1917]/10 flex justify-between items-baseline">
+                    <span className="font-medium text-[#1B1917]">Estimado Total</span>
+                    <span className="font-serif text-2xl text-[#9C7A3C]">S/ {total}</span>
                   </div>
                 </div>
 
                 {error && (
-                  <p className="text-xs text-red-400 border border-red-400/20 bg-red-400/5 p-3">
+                  <p className="text-xs text-red-600 border border-red-600/20 bg-red-600/5 p-3">
                     {error}
                   </p>
                 )}

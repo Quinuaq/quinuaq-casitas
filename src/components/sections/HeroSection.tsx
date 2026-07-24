@@ -13,43 +13,47 @@ export function HeroSection() {
           className="w-full h-full object-cover object-center anim-drift scale-105"
           fetchPriority="high"
         />
-        {/* Layered Vignette Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0B0A09] via-[#0B0A09]/40 to-[#0B0A09]/60" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0B0A09]/70 via-transparent to-[#0B0A09]/40" />
+        {/* Layered Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#12110F] via-black/40 to-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/20 to-transparent" />
       </div>
 
-      {/* Main Hero Body Container */}
+      {/* Main Hero Content Container */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full my-auto py-12">
         <div className="max-w-3xl space-y-6">
-          {/* Eyebrow Metadata */}
+          {/* Eyebrow Metadata Badge */}
           <div className="reveal">
-            <span className="label-luxury">
+            <span className="label-dark-gold">
               Altipacha Select · Quinua, Ayacucho · 3,500 msnm
             </span>
           </div>
 
-          {/* Main Headline */}
-          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] text-[#F4F0E8] font-light reveal d1">
+          {/* Main Editorial Headline */}
+          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] text-[#F7F4EF] font-light reveal d1">
             Un refugio andino{" "}
-            <em className="italic text-[#C5A059] font-serif">donde el silencio</em>{" "}
+            <em className="italic text-[#D5B374] font-serif">donde el silencio</em>{" "}
             se convierte en descanso.
           </h1>
 
           {/* Subtitle */}
-          <p className="text-base sm:text-lg text-[#9E9488] font-light leading-relaxed max-w-xl reveal d2">
+          <p className="text-base sm:text-lg text-[#E6E0D4] font-light leading-relaxed max-w-xl reveal d2">
             Entre montañas y neblina, nace un espacio concebido para desconectar del ruido exterior y habitar la serenidad del altiplano.
           </p>
 
-          {/* Call to Actions */}
+          {/* Call to Action Buttons */}
           <div className="pt-4 flex flex-wrap items-center gap-4 reveal d3">
-            <Link to="/" hash="habitaciones" className="btn-luxury-solid">
+            <Link
+              to="/"
+              hash="habitaciones"
+              className="py-4 px-8 bg-[#D5B374] text-[#12110F] font-medium text-[10px] uppercase tracking-[0.35em] hover:bg-[#EBD2A2] transition-all duration-300"
+            >
               Elegir Casita
             </Link>
             <a
               href={WA_URL}
               target="_blank"
               rel="noreferrer"
-              className="btn-luxury-outline"
+              className="py-4 px-8 border border-[#F7F4EF]/40 text-[#F7F4EF] font-medium text-[10px] uppercase tracking-[0.35em] hover:border-[#D5B374] hover:text-[#D5B374] transition-all duration-300"
             >
               Reservar por WhatsApp
             </a>
@@ -57,34 +61,34 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Bottom Bar: Key Credentials & Scroll Prompt */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full border-t border-[#F4F0E8]/10 pt-6">
+      {/* Bottom Bar: Credentials & Scroll Indicator */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full border-t border-[#F7F4EF]/15 pt-6">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-          {/* Stats Bar */}
+          {/* Key Credentials Stats */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-12">
             <div>
-              <span className="block text-[9px] uppercase tracking-[0.3em] text-[#5E554C]">Altitud</span>
-              <span className="font-serif text-lg text-[#F4F0E8]">3,500 msnm</span>
+              <span className="block text-[9px] uppercase tracking-[0.3em] text-[#999084]">Altitud</span>
+              <span className="font-serif text-lg text-[#F7F4EF]">3,500 msnm</span>
             </div>
             <div>
-              <span className="block text-[9px] uppercase tracking-[0.3em] text-[#5E554C]">Alojamiento</span>
-              <span className="font-serif text-lg text-[#F4F0E8]">5 Casitas & Suites</span>
+              <span className="block text-[9px] uppercase tracking-[0.3em] text-[#999084]">Alojamiento</span>
+              <span className="font-serif text-lg text-[#F7F4EF]">5 Casitas & Suites</span>
             </div>
             <div>
-              <span className="block text-[9px] uppercase tracking-[0.3em] text-[#5E554C]">Gastronomía</span>
-              <span className="font-serif text-lg text-[#F4F0E8]">Desayuno Incluido</span>
+              <span className="block text-[9px] uppercase tracking-[0.3em] text-[#999084]">Gastronomía</span>
+              <span className="font-serif text-lg text-[#F7F4EF]">Desayuno Incluido</span>
             </div>
             <div>
-              <span className="block text-[9px] uppercase tracking-[0.3em] text-[#5E554C]">Experiencias</span>
-              <span className="font-serif text-lg text-[#C5A059]">Rituales Andinos</span>
+              <span className="block text-[9px] uppercase tracking-[0.3em] text-[#999084]">Experiencias</span>
+              <span className="font-serif text-lg text-[#D5B374]">Rituales Andinos</span>
             </div>
           </div>
 
           {/* Scroll Prompt */}
-          <div className="hidden md:flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-[#9E9488]">
+          <div className="hidden md:flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-[#E6E0D4]">
             <span>Descubrir</span>
-            <div className="w-px h-8 bg-[#F4F0E8]/20 relative overflow-hidden">
-              <div className="w-full h-full bg-[#C5A059] anim-scroll-pulse" />
+            <div className="w-px h-8 bg-[#F7F4EF]/20 relative overflow-hidden">
+              <div className="w-full h-full bg-[#D5B374] anim-scroll-pulse" />
             </div>
           </div>
         </div>

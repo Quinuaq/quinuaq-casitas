@@ -38,12 +38,12 @@ const AMENITIES = [
 function StatCounter({ target, suffix = "", label }: { target: number; suffix?: string; label: string }) {
   const countRef = useCountUp(target);
   return (
-    <div className="text-center p-8 bg-[#12110F] border border-[#F4F0E8]/5">
-      <div className="font-serif text-4xl sm:text-5xl text-[#C5A059] font-light">
+    <div className="text-center p-8 bg-[#FFFFFF] border border-[#1B1917]/8 shadow-sm">
+      <div className="font-serif text-4xl sm:text-5xl text-[#9C7A3C] font-light">
         <span ref={countRef}>0</span>
         {suffix}
       </div>
-      <div className="text-[10px] uppercase tracking-[0.25em] text-[#9E9488] mt-2">
+      <div className="text-[10px] uppercase tracking-[0.25em] text-[#6B635A] mt-2">
         {label}
       </div>
     </div>
@@ -52,14 +52,14 @@ function StatCounter({ target, suffix = "", label }: { target: number; suffix?: 
 
 export function AmenitiesSection() {
   return (
-    <section className="py-28 md:py-40 bg-[#0B0A09]">
+    <section className="py-28 md:py-40 bg-[#F7F4EF]">
       <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-20">
         {/* Header */}
         <div className="max-w-2xl space-y-4 reveal">
           <span className="label-luxury">Comodidades del Lodge</span>
-          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#F4F0E8] font-light">
+          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#1B1917] font-light">
             Todo pensado para{" "}
-            <em className="italic text-[#C5A059] font-serif">tu bienestar absoluto.</em>
+            <em className="italic text-[#9C7A3C] font-serif">tu bienestar absoluto.</em>
           </h2>
         </div>
 
@@ -76,15 +76,15 @@ export function AmenitiesSection() {
           {AMENITIES.map((item, idx) => (
             <div
               key={item.title}
-              className="bg-[#12110F] border border-[#F4F0E8]/5 p-6 hover:border-[#C5A059]/30 transition-all duration-300 space-y-3"
+              className="bg-[#FFFFFF] border border-[#1B1917]/8 p-6 hover:border-[#9C7A3C]/40 hover:shadow-md transition-all duration-300 space-y-3"
             >
-              <span className="text-[10px] uppercase tracking-[0.3em] text-[#C5A059]">
+              <span className="text-[10px] uppercase tracking-[0.3em] text-[#9C7A3C] font-medium">
                 0{idx + 1}
               </span>
-              <h3 className="font-serif text-xl text-[#F4F0E8] font-light">
+              <h3 className="font-serif text-xl text-[#1B1917] font-light">
                 {item.title}
               </h3>
-              <p className="text-xs text-[#9E9488] font-light leading-relaxed">
+              <p className="text-xs text-[#6B635A] font-light leading-relaxed">
                 {item.description}
               </p>
             </div>

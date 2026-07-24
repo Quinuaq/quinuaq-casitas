@@ -68,47 +68,47 @@ export function ExperiencesSection() {
   const current = EXPERIENCES[activeTab];
 
   return (
-    <section id="experiencias" className="py-28 md:py-40 bg-[#12110F]">
+    <section id="experiencias" className="py-28 md:py-40 bg-[#EFEAE1]">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {/* Header */}
         <div className="max-w-2xl mb-16 space-y-4 reveal">
           <span className="label-luxury">Experiencias Exclusivas</span>
-          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#F4F0E8] font-light">
+          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#1B1917] font-light">
             Habitar la calma{" "}
-            <em className="italic text-[#C5A059] font-serif">en el altiplano.</em>
+            <em className="italic text-[#9C7A3C] font-serif">en el altiplano.</em>
           </h2>
         </div>
 
         {/* Tab Navigation */}
-        <div className="flex flex-wrap gap-2 md:gap-8 border-b border-[#F4F0E8]/10 mb-12 reveal d1">
+        <div className="flex flex-wrap gap-2 md:gap-8 border-b border-[#1B1917]/10 mb-12 reveal d1">
           {EXPERIENCES.map((exp, idx) => (
             <button
               key={exp.id}
               onClick={() => setActiveTab(idx)}
               className={`pb-4 text-xs uppercase tracking-[0.3em] font-medium transition-all relative focus:outline-none ${
                 activeTab === idx
-                  ? "text-[#C5A059]"
-                  : "text-[#9E9488] hover:text-[#F4F0E8]"
+                  ? "text-[#9C7A3C]"
+                  : "text-[#6B635A] hover:text-[#1B1917]"
               }`}
             >
               0{idx + 1}. {exp.title}
               {activeTab === idx && (
-                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#C5A059]" />
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#9C7A3C]" />
               )}
             </button>
           ))}
         </div>
 
         {/* Tab Content Panel */}
-        <div className="grid lg:grid-cols-12 gap-8 items-center bg-[#0B0A09] border border-[#F4F0E8]/10 p-6 md:p-12 reveal d2">
+        <div className="grid lg:grid-cols-12 gap-8 items-center bg-[#FFFFFF] border border-[#1B1917]/8 p-6 md:p-12 shadow-sm reveal d2">
           {/* Photo */}
-          <div className="lg:col-span-6 img-container aspect-[4/3] relative">
+          <div className="lg:col-span-6 img-container aspect-[4/3] relative border border-[#1B1917]/5">
             <img
               src={current.image}
               alt={current.title}
               className="w-full h-full object-cover"
             />
-            <div className="absolute top-4 left-4 glass-panel px-3 py-1 text-[9px] uppercase tracking-[0.3em] text-[#C5A059]">
+            <div className="absolute top-4 left-4 bg-[#F7F4EF]/90 backdrop-blur-md px-3 py-1 text-[9px] uppercase tracking-[0.3em] text-[#8C5135] font-medium border border-[#1B1917]/5">
               Experiencia Valley Q
             </div>
           </div>
@@ -116,20 +116,20 @@ export function ExperiencesSection() {
           {/* Text Description */}
           <div className="lg:col-span-6 space-y-6">
             <div>
-              <span className="label-taupe text-[10px]">{current.subtitle}</span>
-              <h3 className="font-serif text-3xl sm:text-4xl text-[#F4F0E8] mt-1 font-light">
+              <span className="label-terracotta text-[10px]">{current.subtitle}</span>
+              <h3 className="font-serif text-3xl sm:text-4xl text-[#1B1917] mt-1 font-light">
                 {current.title}
               </h3>
             </div>
 
-            <p className="text-sm text-[#9E9488] font-light leading-relaxed">
+            <p className="text-sm text-[#6B635A] font-light leading-relaxed">
               {current.description}
             </p>
 
             <ul className="space-y-3 pt-2">
               {current.highlights.map((highlight) => (
-                <li key={highlight} className="flex items-center gap-3 text-xs text-[#F4F0E8]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
+                <li key={highlight} className="flex items-center gap-3 text-xs text-[#1B1917]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#9C7A3C]" />
                   <span>{highlight}</span>
                 </li>
               ))}

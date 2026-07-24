@@ -16,18 +16,18 @@ const GALLERY_PHOTOS = [
 
 export function GallerySection() {
   return (
-    <section id="galeria" className="py-28 md:py-40 bg-[#0B0A09]">
+    <section id="galeria" className="py-28 md:py-40 bg-[#F7F4EF]">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
           <div className="space-y-4 reveal">
             <span className="label-luxury">Galería Fotográfica</span>
-            <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#F4F0E8] font-light">
+            <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#1B1917] font-light">
               Atmósfera &{" "}
-              <em className="italic text-[#C5A059] font-serif">paisaje andino.</em>
+              <em className="italic text-[#9C7A3C] font-serif">paisaje andino.</em>
             </h2>
           </div>
-          <p className="text-sm text-[#9E9488] font-light leading-relaxed max-w-sm reveal d2">
+          <p className="text-sm text-[#6B635A] font-light leading-relaxed max-w-sm reveal d2">
             Cada rincón de Valley Q refleja la armonía entre la arquitectura tradicional de quinua y el entorno natural.
           </p>
         </div>
@@ -37,7 +37,7 @@ export function GallerySection() {
           {GALLERY_PHOTOS.map((photo, index) => (
             <div
               key={index}
-              className={`img-container group aspect-[4/3] md:aspect-auto relative min-h-[260px] border border-[#F4F0E8]/10 reveal ${photo.size}`}
+              className={`img-container group aspect-[4/3] md:aspect-auto relative min-h-[260px] border border-[#1B1917]/8 shadow-sm reveal ${photo.size}`}
               style={{ transitionDelay: `${index * 80}ms` }}
             >
               <img
@@ -45,9 +45,9 @@ export function GallerySection() {
                 alt={photo.title}
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
-                <span className="label-luxury text-[9px]">{photo.category}</span>
-                <h3 className="font-serif text-xl text-[#F4F0E8] mt-0.5">{photo.title}</h3>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+                <span className="label-dark-gold text-[9px]">{photo.category}</span>
+                <h3 className="font-serif text-xl text-[#F7F4EF] mt-0.5">{photo.title}</h3>
               </div>
             </div>
           ))}
