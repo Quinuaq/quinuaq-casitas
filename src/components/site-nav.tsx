@@ -61,7 +61,7 @@ export function SiteNav({ variant = "overlay" }: { variant?: "overlay" | "solid"
                 isLightNav ? "text-[#8C5135]" : "text-[#D5B374]"
               }`}
             >
-              An Altipacha Estate
+              By QuinuaQ
             </span>
           </Link>
 
@@ -178,8 +178,8 @@ export function SiteNav({ variant = "overlay" }: { variant?: "overlay" | "solid"
               Reservar por WhatsApp
             </a>
             <div className="flex justify-between items-center text-[10px] uppercase tracking-[0.25em] text-[#6B635A]">
-              <span>Altipacha Select</span>
-              <span>+51 921 500 056</span>
+              <span>QuinuaQ Retreat</span>
+              <span>+51 930 678 951</span>
             </div>
           </div>
         </div>
@@ -198,15 +198,15 @@ export function SiteFooter() {
             <Link to="/" className="inline-block">
               <span className="font-serif text-3xl text-[#F7F4EF]">VALLEY Q</span>
               <span className="block text-[9px] uppercase tracking-[0.4em] text-[#D5B374] mt-0.5">
-                An Altipacha Estate · Quinua
+                By QuinuaQ · Ayacucho
               </span>
             </Link>
             <p className="text-sm text-[#999084] font-light leading-relaxed max-w-sm">
               Refugio boutique andino a 3,500 msnm. Entre montañas, neblina y silencio, un espacio diseñado para habitar la calma.
             </p>
             <div className="pt-2">
-              <span className="label-dark-gold text-[9px]">Oficina Central Altipacha</span>
-              <p className="text-xs text-[#999084] mt-1">Jirón 28 de Julio N° 527, Huamanga, Ayacucho</p>
+              <span className="label-dark-gold text-[9px]">Ubicación</span>
+              <p className="text-xs text-[#999084] mt-1">Quinua, Ayacucho — Perú</p>
             </div>
           </div>
 
@@ -228,10 +228,9 @@ export function SiteFooter() {
           <div className="md:col-span-4 space-y-4">
             <span className="label-dark-gold text-[10px]">Reservas & Concierge</span>
             <div className="space-y-2 text-xs text-[#999084]">
-              <p>WhatsApp: <a href={WA_URL} target="_blank" rel="noreferrer" className="text-[#F7F4EF] hover:text-[#D5B374] transition-colors">+51 921 500 056</a></p>
-              <p>Fijo: <a href="tel:+51066280891" className="text-[#F7F4EF] hover:text-[#D5B374] transition-colors">(066) 280 891</a></p>
-              <p>Email: <a href="mailto:reservas@altipachahotel.com" className="text-[#F7F4EF] hover:text-[#D5B374] transition-colors">reservas@altipachahotel.com</a></p>
-              <p>Ventas: <a href="mailto:ventas@altipachahotel.com" className="text-[#F7F4EF] hover:text-[#D5B374] transition-colors">ventas@altipachahotel.com</a></p>
+              <p>WhatsApp: <a href={WA_URL} target="_blank" rel="noreferrer" className="text-[#F7F4EF] hover:text-[#D5B374] transition-colors">+51 930 678 951</a></p>
+              <p>Contacto Directo: <a href="tel:+51930678951" className="text-[#F7F4EF] hover:text-[#D5B374] transition-colors">+51 930 678 951</a></p>
+              <p>Email: <a href="mailto:reservas@quinuaq.com" className="text-[#F7F4EF] hover:text-[#D5B374] transition-colors">reservas@quinuaq.com</a></p>
             </div>
             <div className="pt-4">
               <a
@@ -248,13 +247,10 @@ export function SiteFooter() {
 
         {/* Footer Sub-bar */}
         <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-[0.25em] text-[#999084]/60">
-          <p>© {new Date().getFullYear()} Valley Q Lodge · Altipacha Hotels. Todos los derechos reservados.</p>
+          <p>© {new Date().getFullYear()} Valley Q Lodge · QuinuaQ. Todos los derechos reservados.</p>
           <div className="flex gap-6">
-            <a href="https://altipachahotel.com/valley-q/" target="_blank" rel="noreferrer" className="hover:text-[#D5B374] transition-colors">
-              Altipacha Select
-            </a>
             <a href="https://quinuaq.com" target="_blank" rel="noreferrer" className="hover:text-[#D5B374] transition-colors">
-              ONG QuinuaQ
+              QuinuaQ Andes Retreat
             </a>
           </div>
         </div>

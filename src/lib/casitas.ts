@@ -123,7 +123,7 @@ export function getCasita(id: string): Casita | undefined {
   return casitas.find((c) => c.id === id);
 }
 
-export const WA_PHONE = "51921500056";
+export const WA_PHONE = "51930678951";
 export const WA_URL = `https://wa.me/${WA_PHONE}`;
 
 export function buildWhatsAppLink(params: {

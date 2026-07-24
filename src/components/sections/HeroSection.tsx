@@ -24,7 +24,7 @@ export function HeroSection() {
           {/* Eyebrow Metadata Badge */}
           <div className="reveal">
             <span className="label-dark-gold">
-              Altipacha Select · Quinua, Ayacucho · 3,500 msnm
+              QuinuaQ Retreat · Quinua, Ayacucho · 3,500 msnm
             </span>
           </div>
 

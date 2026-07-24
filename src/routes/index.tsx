@@ -9,16 +9,15 @@ import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { AmenitiesSection } from "@/components/sections/AmenitiesSection";
 import { useScrollReveal } from "@/hooks/useScrollAnimation";
 import quinuaImg from "@/assets/quinua.jpg";
-import heroValley from "@/assets/hero-valley.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Valley Q Lodge — Refugio Boutique Andino de Lujo en Quinua | Altipacha" },
+      { title: "Valley Q Lodge — Refugio Boutique Andino de Lujo en Quinua | QuinuaQ" },
       {
         name: "description",
         content:
-          "Valley Q Lodge, experiencia boutique de lujo by Altipacha Hotels en Quinua, Ayacucho. Casitas privadas con vista al valle, fogatas nocturnas, cocina vivencial y turismo con propósito a 3,500 msnm.",
+          "Valley Q Lodge, experiencia boutique de lujo by QuinuaQ en Quinua, Ayacucho. Casitas privadas con vista al valle, fogatas nocturnas, cocina vivencial y turismo con propósito a 3,500 msnm.",
       },
       { property: "og:title", content: "Valley Q Lodge — Refugio Andino de Lujo en Quinua" },
       {
@@ -70,7 +69,7 @@ function BrandSection() {
                 Valley Q Lodge
               </h2>
               <span className="label-terracotta text-[10px] block">
-                An Altipacha Estate · Quinua
+                By QuinuaQ · Ayacucho
               </span>
             </div>
           </div>
@@ -83,7 +82,7 @@ function BrandSection() {
             </p>
 
             <p className="text-sm text-[#6B635A] font-light leading-relaxed">
-              Una propuesta boutique gestada por Altipacha Hotels, diseñada para viajeros exigentes que buscan desconectar del ruido urbano, habitar la serenidad y reconectarse con lo esencial a través de la arquitectura andina y el servicio personalizado.
+              Una propuesta boutique impulsada por QuinuaQ, diseñada para viajeros exigentes que buscan desconectar del ruido urbano, habitar la serenidad y reconectarse con lo esencial a través de la arquitectura andina y el servicio personalizado.
             </p>
 
             <blockquote className="border-l border-[#9C7A3C]/40 pl-6 py-1">
@@ -174,7 +173,7 @@ function PurposeSection() {
             <em className="italic text-[#D5B374] font-serif">generar impacto positivo.</em>
           </h2>
           <p className="text-sm text-[#999084] font-light leading-relaxed">
-            Valley Q es parte de Altipacha Hotels y trabaja en alianza directa con la ONG <span className="text-[#D5B374]">Quinua Q</span> y el programa social <span className="text-[#D5B374]">Mamá Alis</span>, capacitando e impulsando la empleabilidad de familias locales en Ayacucho.
+            Valley Q es impulsado por <span className="text-[#D5B374]">QuinuaQ</span> y trabaja en alianza con el programa social <span className="text-[#D5B374]">Mamá Alis</span>, capacitando e impulsando la empleabilidad de familias locales en Ayacucho.
           </p>
         </div>
 
@@ -242,21 +241,21 @@ function ContactSection() {
                   rel="noreferrer"
                   className="font-serif text-xl text-[#9C7A3C] hover:text-[#B59253] transition-colors"
                 >
-                  WhatsApp: +51 921 500 056
+                  WhatsApp: +51 930 678 951
                 </a>
               </div>
 
               <div>
-                <span className="block text-[9px] uppercase tracking-[0.3em] text-[#999084]">Oficina Central</span>
+                <span className="block text-[9px] uppercase tracking-[0.3em] text-[#999084]">Ubicación</span>
                 <p className="text-xs text-[#6B635A] font-light">
-                  Jirón 28 de Julio N° 527, Huamanga, Ayacucho
+                  Quinua, Ayacucho — Perú
                 </p>
-                <p className="text-xs text-[#6B635A] font-light">Teléfono: (066) 280 891</p>
+                <p className="text-xs text-[#6B635A] font-light">Central: +51 930 678 951</p>
               </div>
 
               <div>
                 <span className="block text-[9px] uppercase tracking-[0.3em] text-[#999084]">Correo Electrónico</span>
-                <p className="text-xs text-[#6B635A] font-light">reservas@altipachahotel.com</p>
+                <p className="text-xs text-[#6B635A] font-light">reservas@quinuaq.com</p>
               </div>
             </div>
           </div>
@@ -288,7 +287,7 @@ function ContactSection() {
                   <label className="block text-[9px] uppercase tracking-[0.3em] text-[#999084] mb-1.5">
                     Teléfono / WhatsApp
                   </label>
-                  <input type="tel" placeholder="+51 900 000 000" required className="input-luxury" />
+                  <input type="tel" placeholder="+51 930 678 951" required className="input-luxury" />
                 </div>
               </div>
 
