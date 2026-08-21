@@ -68,7 +68,6 @@ export function AvailabilityCalendar({
       }
 
       if (hasBlocked) {
-        // Reset and make this the new checkIn
         onSelectRange(dateStr, "");
         setSelectingStep("checkOut");
       } else {
@@ -79,17 +78,17 @@ export function AvailabilityCalendar({
   };
 
   return (
-    <div className="bg-[#FFFFFF] border border-[#1B1917]/10 p-6 md:p-8 select-none">
+    <div className="bg-[#10271C] border border-white/10 p-6 md:p-8 select-none text-[#FBF8F1] shadow-xl">
       {/* Month Header & Controls */}
-      <div className="flex items-center justify-between mb-6 pb-4 border-b border-[#1B1917]/10">
-        <h4 className="font-serif text-lg text-[#1B1917] font-medium">
-          {monthNames[month]} {year}
+      <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
+        <h4 className="font-serif text-lg text-[#FBF8F1] font-medium">
+          {monthNames[month]} <span className="text-[#E2B94E]">{year}</span>
         </h4>
         <div className="flex gap-2">
           <button
             type="button"
             onClick={prevMonth}
-            className="w-8 h-8 flex items-center justify-center border border-[#1B1917]/10 hover:bg-[#F7F4EF] transition-colors"
+            className="w-8 h-8 flex items-center justify-center border border-white/10 hover:bg-white/10 rounded transition-colors text-[#FBF8F1]"
             aria-label="Mes anterior"
           >
             <ChevronLeft className="w-4 h-4" />
@@ -97,7 +96,7 @@ export function AvailabilityCalendar({
           <button
             type="button"
             onClick={nextMonth}
-            className="w-8 h-8 flex items-center justify-center border border-[#1B1917]/10 hover:bg-[#F7F4EF] transition-colors"
+            className="w-8 h-8 flex items-center justify-center border border-white/10 hover:bg-white/10 rounded transition-colors text-[#FBF8F1]"
             aria-label="Siguiente mes"
           >
             <ChevronRight className="w-4 h-4" />
@@ -106,7 +105,7 @@ export function AvailabilityCalendar({
       </div>
 
       {/* Weekday Labels */}
-      <div className="grid grid-cols-7 gap-1 text-center text-[10px] uppercase tracking-wider text-[#999084] font-medium mb-3">
+      <div className="grid grid-cols-7 gap-1 text-center text-[10px] uppercase tracking-wider text-[#687B70] font-medium mb-3">
         {dayNames.map((d) => (
           <div key={d} className="py-1">
             {d}
@@ -133,13 +132,13 @@ export function AvailabilityCalendar({
 
           const isDisabled = isBlocked || isPast;
 
-          let bgClass = "bg-transparent text-[#1B1917] hover:bg-[#F7F4EF]";
+          let bgClass = "bg-white/[0.03] text-[#FBF8F1] hover:bg-[#E2B94E]/20 hover:text-[#E2B94E]";
           if (isDisabled) {
-            bgClass = "bg-[#F0ECE1]/50 text-[#B0A79C] line-through cursor-not-allowed";
+            bgClass = "bg-black/40 text-white/20 line-through cursor-not-allowed";
           } else if (isCheckIn || isCheckOut) {
-            bgClass = "bg-[#9C7A3C] text-white font-medium shadow-sm";
+            bgClass = "bg-[#E2B94E] text-[#08140E] font-bold shadow-md";
           } else if (isInRange) {
-            bgClass = "bg-[#9C7A3C]/15 text-[#1B1917] font-medium";
+            bgClass = "bg-[#E2B94E]/20 text-[#E2B94E] font-medium";
           }
 
           return (
@@ -148,11 +147,11 @@ export function AvailabilityCalendar({
               type="button"
               disabled={isDisabled}
               onClick={() => handleDateClick(dateStr)}
-              className={`h-10 flex flex-col items-center justify-center text-xs transition-colors relative ${bgClass}`}
+              className={`h-10 flex flex-col items-center justify-center text-xs transition-all relative rounded ${bgClass}`}
             >
               <span>{dayNum}</span>
               {isBlocked && (
-                <span className="text-[8px] leading-none text-[#BB5A3E] font-sans no-underline block">
+                <span className="text-[8px] leading-none text-[#E07A5F] font-sans no-underline block">
                   Ocupado
                 </span>
               )}
@@ -162,17 +161,17 @@ export function AvailabilityCalendar({
       </div>
 
       {/* Legend */}
-      <div className="mt-6 pt-4 border-t border-[#1B1917]/10 flex flex-wrap items-center justify-between text-[11px] text-[#6B635A] gap-3">
+      <div className="mt-6 pt-4 border-t border-white/10 flex flex-wrap items-center justify-between text-[11px] text-[#A2B3A8] gap-3">
         <div className="flex items-center gap-2">
-          <span className="w-3 h-3 bg-[#9C7A3C]" />
+          <span className="w-3 h-3 bg-[#E2B94E] rounded" />
           <span>Fechas seleccionadas</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-3 h-3 bg-[#F0ECE1] line-through text-[#B0A79C] flex items-center justify-center text-[8px]" />
+          <span className="w-3 h-3 bg-black/50 border border-white/10 text-white/30 flex items-center justify-center text-[8px] line-through rounded" />
           <span>No disponible</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-3 h-3 border border-[#1B1917]/20" />
+          <span className="w-3 h-3 bg-white/10 border border-white/15 rounded" />
           <span>Disponible</span>
         </div>
       </div>

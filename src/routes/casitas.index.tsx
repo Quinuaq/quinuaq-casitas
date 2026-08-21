@@ -70,43 +70,43 @@ function CasitasCatalogPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#F7F4EF] text-[#1B1917] flex flex-col font-sans">
+    <div className="min-h-screen bg-[#08140E] text-[#FBF8F1] flex flex-col font-sans">
       <SiteNav variant="solid" />
 
       <main className="flex-1 pt-28 pb-20">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           {/* Header Banner */}
           <div className="mb-12 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#1B1917]/5 text-[10px] uppercase tracking-[0.3em] text-[#9C7A3C]">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 text-[10px] uppercase tracking-[0.3em] text-[#E2B94E] border border-white/10">
               <Sparkles className="w-3 h-3" />
               Colección de Alojamiento
             </div>
-            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-light text-[#1B1917]">
+            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-light text-[#FBF8F1]">
               Nuestras Casitas{" "}
-              <em className="italic font-serif text-[#9C7A3C]">frente al valle.</em>
+              <em className="italic font-serif text-[#E2B94E]">frente al valle.</em>
             </h1>
-            <p className="max-w-2xl text-sm text-[#6B635A] font-light leading-relaxed">
+            <p className="max-w-2xl text-sm text-[#A2B3A8] font-light leading-relaxed">
               Descubre refugios privados construidos con arquitectura tradicional, madera de queuña, vistas despejadas y todas las comodidades para una estadía inolvidable en Quinua.
             </p>
           </div>
 
           {/* Value Badges */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10 pb-8 border-b border-[#1B1917]/10">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10 pb-8 border-b border-white/10">
             <div className="flex items-center gap-3">
-              <Coffee className="w-5 h-5 text-[#9C7A3C] shrink-0" />
-              <span className="text-xs text-[#6B635A]">Desayuno andino incluido</span>
+              <Coffee className="w-5 h-5 text-[#E2B94E] shrink-0" />
+              <span className="text-xs text-[#A2B3A8]">Desayuno andino incluido</span>
             </div>
             <div className="flex items-center gap-3">
-              <MapPin className="w-5 h-5 text-[#9C7A3C] shrink-0" />
-              <span className="text-xs text-[#6B635A]">Quinua · 3,300 msnm</span>
+              <MapPin className="w-5 h-5 text-[#E2B94E] shrink-0" />
+              <span className="text-xs text-[#A2B3A8]">Quinua · 3,500 msnm</span>
             </div>
             <div className="flex items-center gap-3">
-              <Sparkles className="w-5 h-5 text-[#9C7A3C] shrink-0" />
-              <span className="text-xs text-[#6B635A]">Vistas panorámicas</span>
+              <Sparkles className="w-5 h-5 text-[#E2B94E] shrink-0" />
+              <span className="text-xs text-[#A2B3A8]">Vistas panorámicas</span>
             </div>
             <div className="flex items-center gap-3">
-              <ShieldCheck className="w-5 h-5 text-[#9C7A3C] shrink-0" />
-              <span className="text-xs text-[#6B635A]">Reserva directa garantizada</span>
+              <ShieldCheck className="w-5 h-5 text-[#E2B94E] shrink-0" />
+              <span className="text-xs text-[#A2B3A8]">Reserva directa garantizada</span>
             </div>
           </div>
 
@@ -124,8 +124,8 @@ function CasitasCatalogPage() {
 
           {/* Results Summary */}
           <div className="flex justify-between items-center mb-8">
-            <span className="text-xs uppercase tracking-wider text-[#6B635A]">
-              Mostrando <strong className="text-[#1B1917]">{filteredCasitas.length}</strong> opciones disponibles
+            <span className="text-xs uppercase tracking-wider text-[#A2B3A8]">
+              Mostrando <strong className="text-[#FBF8F1]">{filteredCasitas.length}</strong> opciones disponibles
             </span>
           </div>
 
@@ -143,9 +143,9 @@ function CasitasCatalogPage() {
               ))}
             </div>
           ) : (
-            <div className="bg-white border border-[#1B1917]/10 p-16 text-center space-y-4">
-              <p className="font-serif text-2xl text-[#1B1917]">No encontramos casitas con esos criterios</p>
-              <p className="text-xs text-[#6B635A]">Prueba modificando los filtros de precio o número de huéspedes.</p>
+            <div className="bg-[#10271C] border border-white/10 p-16 text-center space-y-4 shadow-xl">
+              <p className="font-serif text-2xl text-[#FBF8F1]">No encontramos casitas con esos criterios</p>
+              <p className="text-xs text-[#A2B3A8]">Prueba modificando los filtros de precio o número de huéspedes.</p>
               <button
                 onClick={() =>
                   setFilters({
@@ -157,7 +157,7 @@ function CasitasCatalogPage() {
                     selectedAmenities: [],
                   })
                 }
-                className="px-6 py-2.5 bg-[#1B1917] text-white text-xs uppercase tracking-wider"
+                className="px-6 py-2.5 bg-[#E2B94E] text-[#08140E] text-xs uppercase tracking-wider font-semibold"
               >
                 Limpiar Filtros
               </button>
@@ -171,10 +171,10 @@ function CasitasCatalogPage() {
                 <button
                   key={pageNum}
                   onClick={() => setCurrentPage(pageNum)}
-                  className={`w-10 h-10 flex items-center justify-center text-xs transition-colors ${
+                  className={`w-10 h-10 flex items-center justify-center text-xs transition-colors rounded ${
                     currentPage === pageNum
-                      ? "bg-[#1B1917] text-white font-medium"
-                      : "bg-white border border-[#1B1917]/10 text-[#6B635A] hover:bg-[#1B1917]/10"
+                      ? "bg-[#E2B94E] text-[#08140E] font-bold shadow-md"
+                      : "bg-[#10271C] border border-white/10 text-[#A2B3A8] hover:bg-white/10 hover:text-white"
                   }`}
                 >
                   {pageNum}

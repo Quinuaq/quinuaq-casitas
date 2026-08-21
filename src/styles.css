@@ -1,50 +1,52 @@
-@import "tailwindcss" source(none);
+﻿@import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
 /*
- * QuinuaQ Casitas — sistema editorial compartido con el restaurante.
- * Lino cálido, verde de campo, arcilla ayacuchana y amarillo de sol.
+ * QuinuaQ Casitas — Ultra Luxury Dark Andean Atmosphere.
+ * Noche andina, bosque de queuñas, oro cálido y lino marfil.
  */
 
 :root {
-  --bg-linen:       #FBF8F1;
-  --bg-surface:     #FFFFFF;   /* Card & panel surface */
-  --bg-subtle:      #F4EFE4;
-  --bg-obsidian:    #10271C;
+  --bg-obsidian:          #08140E;   /* Deep Andean forest obsidian */
+  --bg-surface:           #10271C;   /* Luxury card and panel surface */
+  --bg-surface-elevated:  #163526;   /* Hover/elevated surface */
+  --bg-subtle:            #0D1F16;
   
-  --text-charcoal:  #17251C;
-  --text-muted:     #5D6961;
-  --text-subtle:    #667169;
-  --text-ivory:     #FBF8F1;
+  --text-ivory:           #FBF8F1;   /* Primary warm ivory text */
+  --text-muted:           #A2B3A8;   /* Secondary soft sage text */
+  --text-subtle:          #687B70;   /* Tertiary text */
+  --text-gold:            #E2B94E;   /* Andean Gold accent */
+  --text-terracotta:      #E07A5F;   /* Warm terracotta */
   
-  --bronze-accent:  #204B35;
-  --bronze-light:   #2D6548;
-  --terracotta:     #BB5A3E;
+  --gold-accent:          #E2B94E;
+  --gold-light:           #F3D78A;
+  --emerald-accent:       #204B35;
+  --terracotta:           #BB5A3E;
   
-  --border-linen:   rgba(27, 25, 23, 0.09);
-  --border-bronze:  rgba(156, 122, 60, 0.35);
-  --border-dark:    rgba(247, 244, 239, 0.1);
+  --border-subtle:        rgba(255, 255, 255, 0.08);
+  --border-gold:          rgba(226, 185, 78, 0.3);
+  --border-gold-strong:   rgba(226, 185, 78, 0.6);
 }
 
 @layer base {
   *, *::before, *::after {
     box-sizing: border-box;
-    border-color: var(--border-linen);
+    border-color: var(--border-subtle);
   }
 
   html {
     scroll-behavior: smooth;
     font-size: 16px;
-    background-color: var(--bg-linen);
-    color: var(--text-charcoal);
+    background-color: var(--bg-obsidian);
+    color: var(--text-ivory);
   }
 
   body {
-    background-color: var(--bg-linen);
-    color: var(--text-charcoal);
+    background-color: var(--bg-obsidian);
+    color: var(--text-ivory);
     font-family: "Manrope", system-ui, -apple-system, sans-serif;
     font-weight: 300;
     line-height: 1.7;
@@ -58,7 +60,7 @@
     font-weight: 300;
     line-height: 1.1;
     letter-spacing: -0.015em;
-    color: var(--text-charcoal);
+    color: var(--text-ivory);
     margin: 0;
   }
 
@@ -74,8 +76,8 @@
   }
 
   ::selection {
-    background: var(--bronze-accent);
-    color: var(--bg-linen);
+    background: var(--gold-accent);
+    color: var(--bg-obsidian);
   }
 }
 
@@ -89,14 +91,14 @@
   font-family: "Manrope", system-ui, sans-serif;
 }
 
-/* Eyebrow Label (Light Mode) */
+/* Eyebrow Labels */
 .label-luxury {
   font-family: "Manrope", system-ui, sans-serif;
   font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--bronze-accent);
+  color: var(--gold-accent);
   display: inline-block;
 }
 
@@ -104,9 +106,9 @@
   font-family: "Manrope", system-ui, sans-serif;
   font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--terracotta);
+  color: var(--text-terracotta);
   display: inline-block;
 }
 
@@ -114,63 +116,66 @@
   font-family: "Manrope", system-ui, sans-serif;
   font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #E2B94E;
+  color: var(--gold-accent);
   display: inline-block;
 }
 
-/* Luxury Outline Button (Light Mode) */
+/* Luxury Outline Button */
 .btn-luxury-outline {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
   padding: 14px 32px;
-  border: 1px solid var(--border-bronze);
-  color: var(--bronze-accent);
+  border: 1px solid var(--border-gold);
+  color: var(--gold-accent);
   font-family: "Manrope", system-ui, sans-serif;
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 0.35em;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  background: transparent;
+  background: rgba(16, 39, 28, 0.4);
+  backdrop-filter: blur(8px);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
   white-space: nowrap;
 }
 .btn-luxury-outline:hover {
-  background: var(--bronze-accent);
-  border-color: var(--bronze-accent);
-  color: var(--bg-linen);
-  transform: translateY(-1px);
+  background: var(--gold-accent);
+  border-color: var(--gold-accent);
+  color: var(--bg-obsidian);
+  box-shadow: 0 0 25px rgba(226, 185, 78, 0.3);
+  transform: translateY(-2px);
 }
 
-/* Luxury Solid Bronze CTA Button */
+/* Luxury Solid Gold CTA Button */
 .btn-luxury-solid {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
   padding: 16px 38px;
-  background: var(--text-charcoal);
-  color: var(--bg-linen);
+  background: var(--gold-accent);
+  color: var(--bg-obsidian);
   font-family: "Manrope", system-ui, sans-serif;
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 0.35em;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  border: 1px solid var(--text-charcoal);
+  border: 1px solid var(--gold-accent);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
   white-space: nowrap;
+  box-shadow: 0 4px 20px rgba(226, 185, 78, 0.25);
 }
 .btn-luxury-solid:hover {
-  background: var(--bronze-accent);
-  border-color: var(--bronze-accent);
-  color: var(--bg-linen);
-  box-shadow: 0 4px 20px rgba(156, 122, 60, 0.2);
-  transform: translateY(-1px);
+  background: var(--gold-light);
+  border-color: var(--gold-light);
+  color: var(--bg-obsidian);
+  box-shadow: 0 6px 30px rgba(226, 185, 78, 0.45);
+  transform: translateY(-2px);
 }
 
 /* Luxury Link */
@@ -179,14 +184,14 @@
   align-items: center;
   gap: 12px;
   font-family: "Manrope", system-ui, sans-serif;
-  font-size: 0.65rem;
-  letter-spacing: 0.35em;
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--text-muted);
   transition: color 0.35s ease;
 }
 .link-luxury:hover {
-  color: var(--bronze-accent);
+  color: var(--gold-accent);
 }
 .link-luxury .line {
   display: inline-block;
@@ -197,16 +202,17 @@
 }
 .link-luxury:hover .line {
   width: 44px;
+  background: var(--gold-accent);
 }
 
-/* Inputs (Light Mode) */
+/* Inputs (Dark Luxury) */
 .input-luxury {
   width: 100%;
-  padding: 12px 0;
+  padding: 14px 0;
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(27, 25, 23, 0.18);
-  color: var(--text-charcoal);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-ivory);
   font-family: "Manrope", system-ui, sans-serif;
   font-size: 0.875rem;
   font-weight: 300;
@@ -218,67 +224,155 @@
   color: var(--text-subtle);
 }
 .input-luxury:focus {
-  border-bottom-color: var(--bronze-accent);
+  border-bottom-color: var(--gold-accent);
 }
 
-/* Glass & Translucent Panels */
-.glass-header-light {
-  background: rgba(247, 244, 239, 0.9);
+/* Header & Navigation Styles */
+.casitas-header-light {
+  background: rgba(8, 20, 14, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(27, 25, 23, 0.08);
+}
+.casitas-header-overlay {
+  background: linear-gradient(180deg, rgba(8, 20, 14, 0.85), rgba(8, 20, 14, 0.3), transparent);
+}
+.property-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex: 0 0 auto;
+  padding: 4px 8px;
+}
+.property-brand-on-dark, .property-brand-on-light {
+  background: transparent;
+}
+.property-brand img {
+  width: 76px;
+  height: auto;
+  filter: brightness(0) invert(1);
+}
+.property-brand small {
+  padding-left: 9px;
+  border-left: 1px solid rgba(255, 255, 255, 0.25);
+  color: var(--gold-accent);
+  font: 700 10px/1 "Manrope", sans-serif;
+  letter-spacing: 0.2em;
 }
 
-.glass-header-dark {
-  background: rgba(18, 17, 15, 0.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(247, 244, 239, 0.08);
+.casitas-nav-link {
+  position: relative;
+  padding: 10px 0;
+  font: 700 11px/1 "Manrope", sans-serif;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-ivory);
+  transition: color 0.22s;
+}
+.casitas-nav-link:hover {
+  color: var(--gold-accent);
+}
+.casitas-nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 2px;
+  width: 0;
+  height: 2px;
+  background: var(--gold-accent);
+  transition: width 0.25s ease;
+}
+.casitas-nav-link:hover::after {
+  width: 100%;
 }
 
-/* Shared QuinuaQ navigation */
-.casitas-header-light { background:rgba(251,248,241,.97); border-bottom:1px solid rgba(23,37,28,.18); backdrop-filter:blur(14px); }
-.casitas-header-overlay { background:linear-gradient(180deg,rgba(8,27,17,.76),rgba(8,27,17,.28),transparent); }
-.property-brand { display:flex; align-items:center; gap:9px; flex:0 0 auto; padding:4px 8px; }
-.property-brand-on-dark { background:transparent; box-shadow:none; }
-.property-brand-on-light { background:transparent; }
-.property-brand img { width:74px; height:auto; }
-.property-brand small { padding-left:9px; border-left:1px solid rgba(23,37,28,.22); color:#204B35; font:700 10px/1 "Manrope",sans-serif; letter-spacing:.18em; }
-.property-brand-on-dark img { filter:brightness(0) invert(1); }
-.property-brand-on-dark small { border-left-color:rgba(255,255,255,.35); color:#E2B94E; }
-.casitas-nav-link { position:relative; padding:10px 0; font:700 11px/1 "Manrope",sans-serif; letter-spacing:.14em; text-transform:uppercase; transition:color .22s; }
-.casitas-nav-link::after { content:""; position:absolute; left:0; bottom:2px; width:0; height:2px; background:#BB5A3E; transition:width .22s; }
-.casitas-nav-link:hover::after { width:100%; }
-.property-switch { padding:10px 13px; border:1px solid currentColor; font:700 11px/1 "Manrope",sans-serif; letter-spacing:.12em; text-transform:uppercase; transition:all .22s; }
-.property-switch span { margin-left:7px; color:#BB5A3E; }
-.property-switch-light { color:#204B35; border-color:rgba(32,75,53,.3); }
-.property-switch-dark { color:#FBF8F1; border-color:rgba(251,248,241,.42); }
-.property-switch:hover { background:#204B35; border-color:#204B35; color:white; }
-.casitas-book { min-width:142px; height:46px; padding:0 8px 0 17px; display:inline-flex; align-items:center; justify-content:space-between; gap:18px; font:700 11px/1 "Manrope",sans-serif; letter-spacing:.12em; text-transform:uppercase; transition:transform .22s,background .22s; }
-.casitas-book span { width:28px; height:28px; display:grid; place-items:center; flex:0 0 28px; border-radius:50%; background:#E2B94E; color:#17251C; }
-.casitas-book-light { background:#204B35; color:white; }
-.casitas-book-dark { border:1px solid rgba(251,248,241,.45); color:white; background:rgba(16,39,28,.36); backdrop-filter:blur(8px); }
-.casitas-book:hover { transform:translateY(-2px); background:#204B35; }
-.casitas-menu-button { width:40px; height:40px; border:1px solid currentColor; display:grid; place-content:center; gap:4px; opacity:.9; }
-.casitas-menu-button i { display:block; width:16px; height:1px; background:currentColor; }
-.footer-label { color:#E2B94E; font:700 11px/1 "Manrope",sans-serif; letter-spacing:.14em; text-transform:uppercase; }
-
-@media (min-width:1280px) {
-  .casitas-menu-button { display:none; }
+.property-switch {
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font: 700 11px/1 "Manrope", sans-serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-ivory);
+  transition: all 0.25s ease;
+  background: rgba(255, 255, 255, 0.03);
+}
+.property-switch span {
+  margin-left: 7px;
+  color: var(--gold-accent);
+}
+.property-switch:hover {
+  background: var(--emerald-accent);
+  border-color: var(--gold-accent);
+  color: white;
 }
 
-/* Palette bridge: the original lodge components now inherit QuinuaQ colors. */
-.bg-\[\#F7F4EF\] { background-color:#FBF8F1 !important; }
-.bg-\[\#EFEAE1\] { background-color:#F4EFE4 !important; }
-.bg-\[\#12110F\] { background-color:#10271C !important; }
-.bg-\[\#1B1917\] { background-color:#163526 !important; }
-.text-\[\#1B1917\] { color:#17251C !important; }
-.text-\[\#6B635A\] { color:#5D6961 !important; }
-.text-\[\#999084\] { color:#667169 !important; }
-.text-\[\#9C7A3C\] { color:#204B35 !important; }
-.text-\[\#8C5135\] { color:#BB5A3E !important; }
-.text-\[\#D5B374\] { color:#E2B94E !important; }
-.text-\[\#E6E0D4\] { color:#F4EFE4 !important; }
+.casitas-book {
+  min-width: 142px;
+  height: 46px;
+  padding: 0 8px 0 17px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font: 700 11px/1 "Manrope", sans-serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: transform 0.25s, background 0.25s, box-shadow 0.25s;
+}
+.casitas-book span {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 28px;
+  border-radius: 50%;
+  background: var(--gold-accent);
+  color: var(--bg-obsidian);
+}
+.casitas-book-light {
+  background: var(--gold-accent);
+  color: var(--bg-obsidian);
+  box-shadow: 0 4px 15px rgba(226, 185, 78, 0.25);
+}
+.casitas-book-light span {
+  background: var(--bg-obsidian);
+  color: var(--gold-accent);
+}
+.casitas-book-dark {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: white;
+  background: rgba(16, 39, 28, 0.5);
+  backdrop-filter: blur(10px);
+}
+.casitas-book:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(226, 185, 78, 0.35);
+}
+
+.casitas-menu-button {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: grid;
+  place-content: center;
+  gap: 4px;
+  color: var(--text-ivory);
+}
+.casitas-menu-button i {
+  display: block;
+  width: 16px;
+  height: 1px;
+  background: currentColor;
+}
+.footer-label {
+  color: var(--gold-accent);
+  font: 700 11px/1 "Manrope", sans-serif;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 1280px) {
+  .casitas-menu-button { display: none; }
+}
 
 /* Image Zoom Effect */
 .img-container {
@@ -301,19 +395,8 @@
   50% { transform: scale(1.06) translateY(-6px); }
 }
 
-@keyframes scrollLine {
-  0% { transform: scaleY(0); transform-origin: top; opacity: 1; }
-  50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
-  51% { transform: scaleY(1); transform-origin: bottom; }
-  100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
-}
-
 .anim-drift {
   animation: ambientDrift 22s ease-in-out infinite;
-}
-
-.anim-scroll-pulse {
-  animation: scrollLine 2.5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
 }
 
 /* Scroll Reveal */
@@ -336,13 +419,17 @@
   transform: none;
 }
 
-/* Scrollbar */
+/* Luxury Scrollbar */
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--bg-linen);
+  background: var(--bg-obsidian);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(156, 122, 60, 0.35);
+  background: rgba(226, 185, 78, 0.35);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-accent);
 }

@@ -46,10 +46,10 @@ export const Route = createFileRoute("/casitas/$id")({
   },
   component: CasitaDetailPage,
   notFoundComponent: () => (
-    <div className="min-h-screen bg-[#F7F4EF] flex flex-col items-center justify-center text-center p-8">
-      <div className="font-serif text-6xl text-[#9C7A3C]/30 mb-6">404</div>
-      <h1 className="font-serif text-4xl text-[#1B1917]">Casita no encontrada</h1>
-      <Link to="/casitas" className="mt-8 px-6 py-3 bg-[#1B1917] text-white text-xs uppercase tracking-wider">
+    <div className="min-h-screen bg-[#08140E] flex flex-col items-center justify-center text-center p-8 text-[#FBF8F1]">
+      <div className="font-serif text-6xl text-[#E2B94E]/30 mb-6">404</div>
+      <h1 className="font-serif text-4xl text-[#FBF8F1]">Casita no encontrada</h1>
+      <Link to="/casitas" className="mt-8 px-6 py-3 bg-[#E2B94E] text-[#08140E] text-xs uppercase tracking-wider font-semibold">
         ← Volver al Catálogo de Casitas
       </Link>
     </div>
@@ -167,7 +167,7 @@ function CasitaDetailPage() {
   };
 
   return (
-    <main className="bg-[#F7F4EF] text-[#1B1917] min-h-screen font-sans">
+    <main className="bg-[#08140E] text-[#FBF8F1] min-h-screen font-sans">
       <SiteNav variant="solid" />
 
       {/* Hero Gallery Banner */}
@@ -177,15 +177,15 @@ function CasitaDetailPage() {
           alt={casita.name}
           className="w-full h-full object-cover transition-all duration-700"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-[#F7F4EF]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-[#08140E]" />
 
         {/* Breadcrumb */}
         <div className="absolute top-28 left-6 md:left-12 flex items-center gap-2 text-xs text-[#E6E0D4] z-10">
-          <Link to="/" className="hover:text-[#D5B374] transition-colors">QuinuaQ Casitas</Link>
+          <Link to="/" className="hover:text-[#E2B94E] transition-colors">QuinuaQ Casitas</Link>
           <span>/</span>
-          <Link to="/casitas" className="hover:text-[#D5B374] transition-colors">Catálogo</Link>
+          <Link to="/casitas" className="hover:text-[#E2B94E] transition-colors">Catálogo</Link>
           <span>/</span>
-          <span className="text-[#F7F4EF] font-medium">{casita.name}</span>
+          <span className="text-[#FBF8F1] font-medium">{casita.name}</span>
         </div>
 
         {/* Gallery Thumbnails */}
@@ -195,8 +195,8 @@ function CasitaDetailPage() {
               key={idx}
               type="button"
               onClick={() => setActiveImg(idx)}
-              className={`w-16 h-12 overflow-hidden border transition-all duration-300 ${
-                idx === activeImg ? "border-[#9C7A3C] scale-105 shadow-md" : "border-white/30 opacity-70 hover:opacity-100"
+              className={`w-16 h-12 overflow-hidden border transition-all duration-300 rounded ${
+                idx === activeImg ? "border-[#E2B94E] scale-105 shadow-lg" : "border-white/20 opacity-60 hover:opacity-100"
               }`}
             >
               <img src={imgUrl} alt="" className="w-full h-full object-cover" />
@@ -213,53 +213,53 @@ function CasitaDetailPage() {
           <div className="lg:col-span-7 space-y-12">
             {/* Title & Tagline */}
             <div className="space-y-3">
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#1B1917]/5 text-[10px] uppercase tracking-[0.25em] text-[#9C7A3C] font-medium">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 text-[10px] uppercase tracking-[0.25em] text-[#E2B94E] font-medium border border-white/10">
                 <Users className="w-3 h-3" />
                 {casita.capacity}
               </div>
-              <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#1B1917] font-light">
+              <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#FBF8F1] font-light">
                 {casita.name}
               </h1>
-              <p className="font-serif text-xl italic text-[#9C7A3C]">
+              <p className="font-serif text-xl italic text-[#E2B94E]">
                 {casita.tagline}
               </p>
             </div>
 
-            <p className="text-sm md:text-base text-[#6B635A] font-light leading-relaxed">
+            <p className="text-sm md:text-base text-[#A2B3A8] font-light leading-relaxed">
               {casita.description}
             </p>
 
             {/* Rates Table */}
             <div className="space-y-4">
-              <span className="text-[10px] uppercase tracking-[0.25em] text-[#999084] font-medium block">
+              <span className="text-[10px] uppercase tracking-[0.25em] text-[#687B70] font-medium block">
                 Tarifario por Noche (PEN S/)
               </span>
-              <div className="grid grid-cols-3 gap-px bg-[#1B1917]/10 border border-[#1B1917]/10">
-                <div className="p-5 bg-white text-center">
-                  <span className="block text-[9px] uppercase tracking-wider text-[#999084]">Lunes a Jueves</span>
-                  <span className="font-serif text-2xl text-[#9C7A3C] font-medium">S/ {casita.prices.weekday}</span>
+              <div className="grid grid-cols-3 gap-px bg-white/10 border border-white/10">
+                <div className="p-5 bg-[#10271C] text-center">
+                  <span className="block text-[9px] uppercase tracking-wider text-[#A2B3A8]">Lunes a Jueves</span>
+                  <span className="font-serif text-2xl text-[#E2B94E] font-medium">S/ {casita.prices.weekday}</span>
                 </div>
-                <div className="p-5 bg-white text-center">
-                  <span className="block text-[9px] uppercase tracking-wider text-[#999084]">Viernes y Sábado</span>
-                  <span className="font-serif text-2xl text-[#9C7A3C] font-medium">S/ {casita.prices.weekend}</span>
+                <div className="p-5 bg-[#10271C] text-center">
+                  <span className="block text-[9px] uppercase tracking-wider text-[#A2B3A8]">Viernes y Sábado</span>
+                  <span className="font-serif text-2xl text-[#E2B94E] font-medium">S/ {casita.prices.weekend}</span>
                 </div>
-                <div className="p-5 bg-white text-center">
-                  <span className="block text-[9px] uppercase tracking-wider text-[#999084]">Feriados</span>
-                  <span className="font-serif text-2xl text-[#9C7A3C] font-medium">S/ {casita.prices.holiday}</span>
+                <div className="p-5 bg-[#10271C] text-center">
+                  <span className="block text-[9px] uppercase tracking-wider text-[#A2B3A8]">Feriados</span>
+                  <span className="font-serif text-2xl text-[#E2B94E] font-medium">S/ {casita.prices.holiday}</span>
                 </div>
               </div>
               {casita.extraNote && (
-                <p className="text-xs text-[#8C5135] italic">* {casita.extraNote}</p>
+                <p className="text-xs text-[#E07A5F] italic">* {casita.extraNote}</p>
               )}
             </div>
 
             {/* Interactive Availability Calendar */}
-            <div className="space-y-4 pt-4 border-t border-[#1B1917]/10">
+            <div className="space-y-4 pt-4 border-t border-white/10">
               <div>
-                <span className="text-[10px] uppercase tracking-[0.25em] text-[#999084] font-medium block">
+                <span className="text-[10px] uppercase tracking-[0.25em] text-[#687B70] font-medium block">
                   Calendario de Disponibilidad en Vivo
                 </span>
-                <p className="text-xs text-[#6B635A] mt-0.5">
+                <p className="text-xs text-[#A2B3A8] mt-0.5">
                   Selecciona tus fechas directamente en el calendario interactivo.
                 </p>
               </div>
@@ -275,14 +275,14 @@ function CasitaDetailPage() {
             </div>
 
             {/* Included Services */}
-            <div className="space-y-4 pt-4 border-t border-[#1B1917]/10">
-              <span className="text-[10px] uppercase tracking-[0.25em] text-[#999084] font-medium block">
+            <div className="space-y-4 pt-4 border-t border-white/10">
+              <span className="text-[10px] uppercase tracking-[0.25em] text-[#687B70] font-medium block">
                 Servicios & Virtudes Incluidas
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {casita.virtues.map((virtue: string) => (
-                  <div key={virtue} className="flex items-center gap-3 text-xs text-[#1B1917]">
-                    <Sparkles className="w-3 h-3 text-[#9C7A3C] shrink-0" />
+                  <div key={virtue} className="flex items-center gap-3 text-xs text-[#FBF8F1]">
+                    <Sparkles className="w-3.5 h-3.5 text-[#E2B94E] shrink-0" />
                     <span>{virtue}</span>
                   </div>
                 ))}
@@ -290,15 +290,15 @@ function CasitaDetailPage() {
             </div>
 
             {/* Amenities Badges */}
-            <div className="space-y-4 pt-4 border-t border-[#1B1917]/10">
-              <span className="text-[10px] uppercase tracking-[0.25em] text-[#999084] font-medium block">
+            <div className="space-y-4 pt-4 border-t border-white/10">
+              <span className="text-[10px] uppercase tracking-[0.25em] text-[#687B70] font-medium block">
                 Amenidades
               </span>
               <div className="flex flex-wrap gap-2">
                 {casita.amenities.map((amenity: string) => (
                   <span
                     key={amenity}
-                    className="text-xs px-3.5 py-1.5 bg-[#FFFFFF] border border-[#1B1917]/10 text-[#6B635A]"
+                    className="text-xs px-3.5 py-1.5 bg-[#10271C] border border-white/10 text-[#C2CCC6]"
                   >
                     {amenity}
                   </span>
@@ -309,38 +309,38 @@ function CasitaDetailPage() {
 
           {/* Right Column: Sticky Booking Widget */}
           <div className="lg:col-span-5">
-            <div className="sticky top-28 bg-[#FFFFFF] border border-[#1B1917]/10 p-8 shadow-lg space-y-6">
+            <div className="sticky top-28 bg-[#10271C] border border-white/10 p-8 shadow-2xl space-y-6 text-[#FBF8F1]">
               
               {bookingSuccess ? (
-                /* Success State Modal Content */
+                /* Success State */
                 <div className="space-y-6 text-center py-4">
-                  <div className="w-16 h-16 bg-[#9C7A3C]/10 text-[#9C7A3C] rounded-full flex items-center justify-center mx-auto">
+                  <div className="w-16 h-16 bg-[#E2B94E]/15 text-[#E2B94E] rounded-full flex items-center justify-center mx-auto border border-[#E2B94E]/30">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
                   <div className="space-y-2">
-                    <span className="text-[10px] uppercase tracking-[0.25em] text-[#9C7A3C] font-medium block">
+                    <span className="text-[10px] uppercase tracking-[0.25em] text-[#E2B94E] font-medium block">
                       ¡Solicitud Registrada!
                     </span>
-                    <h3 className="font-serif text-3xl text-[#1B1917]">
+                    <h3 className="font-serif text-3xl text-[#FBF8F1]">
                       Código: {bookingSuccess.code}
                     </h3>
-                    <p className="text-xs text-[#6B635A] max-w-sm mx-auto leading-relaxed">
+                    <p className="text-xs text-[#A2B3A8] max-w-sm mx-auto leading-relaxed">
                       Tu reserva ha sido registrada en nuestro sistema con estado <strong>Pendiente de Confirmación</strong>.
                     </p>
                   </div>
 
-                  <div className="bg-[#F7F4EF] p-5 border border-[#1B1917]/10 text-left space-y-2 text-xs text-[#6B635A]">
-                    <p><strong>Casita:</strong> {casita.name}</p>
-                    <p><strong>Fechas:</strong> {checkIn} al {checkOut} ({quote.nights} noches)</p>
-                    <p><strong>Total Estadía:</strong> S/ {quote.total}</p>
-                    <p><strong>Adelanto 50% requerido:</strong> S/ {quote.suggestedDeposit}</p>
+                  <div className="bg-[#08140E] p-5 border border-white/10 text-left space-y-2 text-xs text-[#A2B3A8]">
+                    <p><strong>Casita:</strong> <span className="text-[#FBF8F1]">{casita.name}</span></p>
+                    <p><strong>Fechas:</strong> <span className="text-[#FBF8F1]">{checkIn} al {checkOut} ({quote.nights} noches)</span></p>
+                    <p><strong>Total Estadía:</strong> <span className="text-[#E2B94E] font-bold">S/ {quote.total}</span></p>
+                    <p><strong>Adelanto 50% requerido:</strong> <span className="text-[#E2B94E] font-bold">S/ {quote.suggestedDeposit}</span></p>
                   </div>
 
                   <a
                     href={bookingSuccess.waUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="w-full inline-flex items-center justify-center gap-2 py-4 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-medium text-xs uppercase tracking-wider transition-colors shadow-md"
+                    className="w-full inline-flex items-center justify-center gap-2 py-4 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-semibold text-xs uppercase tracking-wider transition-colors shadow-lg rounded"
                   >
                     <Phone className="w-4 h-4" />
                     Enviar Voucher por WhatsApp
@@ -349,7 +349,7 @@ function CasitaDetailPage() {
                   <button
                     type="button"
                     onClick={() => setBookingSuccess(null)}
-                    className="text-xs text-[#999084] underline block mx-auto hover:text-[#1B1917]"
+                    className="text-xs text-[#A2B3A8] underline block mx-auto hover:text-white"
                   >
                     Hacer otra solicitud
                   </button>
@@ -357,23 +357,23 @@ function CasitaDetailPage() {
               ) : (
                 /* Booking Form */
                 <>
-                  <div className="border-b border-[#1B1917]/10 pb-5">
+                  <div className="border-b border-white/10 pb-5">
                     <div className="flex justify-between items-baseline">
-                      <span className="text-[10px] uppercase tracking-[0.25em] text-[#9C7A3C] font-medium">
+                      <span className="text-[10px] uppercase tracking-[0.25em] text-[#E2B94E] font-medium">
                         Cotización Inmediata
                       </span>
-                      <span className="text-xs text-[#6B635A]">
+                      <span className="text-xs text-[#A2B3A8]">
                         Desde S/ {casita.prices.weekday} / noche
                       </span>
                     </div>
-                    <h2 className="font-serif text-2xl text-[#1B1917] mt-1">{casita.name}</h2>
+                    <h2 className="font-serif text-2xl text-[#FBF8F1] mt-1">{casita.name}</h2>
                   </div>
 
                   <form onSubmit={handleSubmit} className="space-y-4">
                     {/* Dates */}
                     <div className="grid grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-[9px] uppercase tracking-[0.25em] text-[#999084] mb-1">
+                        <label className="block text-[9px] uppercase tracking-[0.25em] text-[#687B70] mb-1">
                           Llegada
                         </label>
                         <input
@@ -382,11 +382,11 @@ function CasitaDetailPage() {
                           value={checkIn}
                           min={todayISO(0)}
                           onChange={(e) => setCheckIn(e.target.value)}
-                          className="w-full bg-[#F7F4EF] border border-[#1B1917]/10 px-3 py-2 text-xs text-[#1B1917] font-sans focus:outline-none focus:border-[#9C7A3C]"
+                          className="w-full bg-[#08140E] border border-white/10 px-3 py-2 text-xs text-[#FBF8F1] font-sans focus:outline-none focus:border-[#E2B94E]"
                         />
                       </div>
                       <div>
-                        <label className="block text-[9px] uppercase tracking-[0.25em] text-[#999084] mb-1">
+                        <label className="block text-[9px] uppercase tracking-[0.25em] text-[#687B70] mb-1">
                           Salida
                         </label>
                         <input
@@ -395,20 +395,20 @@ function CasitaDetailPage() {
                           value={checkOut}
                           min={checkIn || todayISO(1)}
                           onChange={(e) => setCheckOut(e.target.value)}
-                          className="w-full bg-[#F7F4EF] border border-[#1B1917]/10 px-3 py-2 text-xs text-[#1B1917] font-sans focus:outline-none focus:border-[#9C7A3C]"
+                          className="w-full bg-[#08140E] border border-white/10 px-3 py-2 text-xs text-[#FBF8F1] font-sans focus:outline-none focus:border-[#E2B94E]"
                         />
                       </div>
                     </div>
 
                     {/* Guests */}
                     <div>
-                      <label className="block text-[9px] uppercase tracking-[0.25em] text-[#999084] mb-1">
+                      <label className="block text-[9px] uppercase tracking-[0.25em] text-[#687B70] mb-1">
                         Huéspedes (Capacidad máx: {casita.maxGuests})
                       </label>
                       <select
                         value={guests}
                         onChange={(e) => setGuests(Number(e.target.value))}
-                        className="w-full bg-[#F7F4EF] border border-[#1B1917]/10 px-3 py-2 text-xs text-[#1B1917] font-sans focus:outline-none focus:border-[#9C7A3C]"
+                        className="w-full bg-[#08140E] border border-white/10 px-3 py-2 text-xs text-[#FBF8F1] font-sans focus:outline-none focus:border-[#E2B94E]"
                       >
                         {Array.from({ length: casita.maxGuests }, (_, i) => i + 1).map((num) => (
                           <option key={num} value={num}>
@@ -420,7 +420,7 @@ function CasitaDetailPage() {
 
                     {/* Guest Information */}
                     <div>
-                      <label className="block text-[9px] uppercase tracking-[0.25em] text-[#999084] mb-1">
+                      <label className="block text-[9px] uppercase tracking-[0.25em] text-[#687B70] mb-1">
                         Nombre Completo
                       </label>
                       <input
@@ -429,12 +429,12 @@ function CasitaDetailPage() {
                         placeholder="Ej. Lucía Alarcón"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        className="w-full bg-[#F7F4EF] border border-[#1B1917]/10 px-3 py-2 text-xs text-[#1B1917] font-sans focus:outline-none focus:border-[#9C7A3C]"
+                        className="w-full bg-[#08140E] border border-white/10 px-3 py-2 text-xs text-[#FBF8F1] font-sans focus:outline-none focus:border-[#E2B94E]"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-[9px] uppercase tracking-[0.25em] text-[#999084] mb-1">
+                      <label className="block text-[9px] uppercase tracking-[0.25em] text-[#687B70] mb-1">
                         WhatsApp / Teléfono
                       </label>
                       <input
@@ -443,12 +443,12 @@ function CasitaDetailPage() {
                         placeholder="+51 946 393 256"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
-                        className="w-full bg-[#F7F4EF] border border-[#1B1917]/10 px-3 py-2 text-xs text-[#1B1917] font-sans focus:outline-none focus:border-[#9C7A3C]"
+                        className="w-full bg-[#08140E] border border-white/10 px-3 py-2 text-xs text-[#FBF8F1] font-sans focus:outline-none focus:border-[#E2B94E]"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-[9px] uppercase tracking-[0.25em] text-[#999084] mb-1">
+                      <label className="block text-[9px] uppercase tracking-[0.25em] text-[#687B70] mb-1">
                         Correo Electrónico (opcional)
                       </label>
                       <input
@@ -456,40 +456,40 @@ function CasitaDetailPage() {
                         placeholder="correo@ejemplo.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full bg-[#F7F4EF] border border-[#1B1917]/10 px-3 py-2 text-xs text-[#1B1917] font-sans focus:outline-none focus:border-[#9C7A3C]"
+                        className="w-full bg-[#08140E] border border-white/10 px-3 py-2 text-xs text-[#FBF8F1] font-sans focus:outline-none focus:border-[#E2B94E]"
                       />
                     </div>
 
                     {/* Live Financial Breakdown Box */}
                     {quote.nights > 0 && (
-                      <div className="bg-[#F7F4EF] p-4 border border-[#1B1917]/10 space-y-2 text-xs">
-                        <div className="flex justify-between text-[#6B635A]">
+                      <div className="bg-[#08140E] p-4 border border-white/10 space-y-2 text-xs">
+                        <div className="flex justify-between text-[#A2B3A8]">
                           <span>Estadía</span>
                           <span>{quote.nights} noche{quote.nights !== 1 ? "s" : ""}</span>
                         </div>
                         {quote.weekdayNights > 0 && (
-                          <div className="flex justify-between text-[#6B635A]">
+                          <div className="flex justify-between text-[#A2B3A8]">
                             <span>{quote.weekdayNights} noche(s) entre semana</span>
                             <span>S/ {quote.weekdayNights * casita.prices.weekday}</span>
                           </div>
                         )}
                         {quote.weekendNights > 0 && (
-                          <div className="flex justify-between text-[#6B635A]">
+                          <div className="flex justify-between text-[#A2B3A8]">
                             <span>{quote.weekendNights} noche(s) fin de semana</span>
                             <span>S/ {quote.weekendNights * casita.prices.weekend}</span>
                           </div>
                         )}
                         {quote.extraGuestFee > 0 && (
-                          <div className="flex justify-between text-[#6B635A]">
+                          <div className="flex justify-between text-[#A2B3A8]">
                             <span>Huéspedes adicionales</span>
                             <span>S/ {quote.extraGuestFee}</span>
                           </div>
                         )}
-                        <div className="pt-2 border-t border-[#1B1917]/10 flex justify-between items-baseline">
-                          <span className="font-medium text-[#1B1917]">Total Estadía</span>
-                          <span className="font-serif text-2xl text-[#9C7A3C]">S/ {quote.total}</span>
+                        <div className="pt-2 border-t border-white/10 flex justify-between items-baseline">
+                          <span className="font-medium text-[#FBF8F1]">Total Estadía</span>
+                          <span className="font-serif text-2xl text-[#E2B94E] font-medium">S/ {quote.total}</span>
                         </div>
-                        <div className="flex justify-between text-[11px] text-[#8C5135] pt-1">
+                        <div className="flex justify-between text-[11px] text-[#E07A5F] pt-1">
                           <span>Adelanto sugerido (50%):</span>
                           <strong>S/ {quote.suggestedDeposit}</strong>
                         </div>
@@ -497,7 +497,7 @@ function CasitaDetailPage() {
                     )}
 
                     {error && (
-                      <p className="text-xs text-red-600 border border-red-600/20 bg-red-600/5 p-3">
+                      <p className="text-xs text-red-400 border border-red-500/20 bg-red-500/10 p-3">
                         {error}
                       </p>
                     )}
@@ -505,7 +505,7 @@ function CasitaDetailPage() {
                     <button
                       type="submit"
                       disabled={!canSubmit}
-                      className="w-full py-3.5 bg-[#1B1917] hover:bg-[#9C7A3C] text-white text-xs uppercase tracking-wider transition-colors duration-300 disabled:opacity-40 font-medium"
+                      className="w-full py-3.5 bg-[#E2B94E] hover:bg-[#F3D78A] text-[#08140E] text-xs uppercase tracking-wider transition-all duration-300 disabled:opacity-40 font-bold shadow-md rounded"
                     >
                       {saving ? "Generando solicitud..." : "Solicitar Reserva por WhatsApp →"}
                     </button>
