@@ -1,7 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import { createClient } from "@supabase/supabase-js";
-import type { Database } from "@/integrations/supabase/types";
+import { createGuestBooking } from "./supabase-pms";
 
 const reservationSchema = z.object({
   casita_id: z.string().min(1).max(60),
@@ -19,40 +18,17 @@ const reservationSchema = z.object({
 export const createReservation = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => reservationSchema.parse(data))
   .handler(async ({ data }) => {
-    const url = process.env.SUPABASE_URL!;
-    const key = process.env.SUPABASE_PUBLISHABLE_KEY!;
-    const supabase = createClient<Database>(url, key, {
-      auth: { persistSession: false },
-      global: {
-        fetch: (input, init) => {
-          const h = new Headers(init?.headers);
-          if (key.startsWith("sb_") && h.get("Authorization") === `Bearer ${key}`) h.delete("Authorization");
-          h.set("apikey", key);
-          return fetch(input, { ...init, headers: h });
-        },
-      },
+    const result = await createGuestBooking({
+      casitaId: data.casita_id,
+      guestName: data.guest_name,
+      guestPhone: data.guest_phone,
+      guestEmail: data.guest_email || undefined,
+      checkIn: data.check_in,
+      checkOut: data.check_out,
+      guestsCount: data.guests,
+      totalPrice: data.estimated_total ?? 0,
+      notes: data.message || undefined,
     });
-
-    const { data: row, error } = await supabase
-      .from("reservations")
-      .insert({
-        casita_id: data.casita_id,
-        casita_name: data.casita_name,
-        guest_name: data.guest_name,
-        guest_phone: data.guest_phone,
-        guest_email: data.guest_email || null,
-        check_in: data.check_in,
-        check_out: data.check_out,
-        guests: data.guests,
-        message: data.message || null,
-        estimated_total: data.estimated_total ?? null,
-      })
-      .select("id")
-      .single();
-
-    if (error) {
-      console.error("[reservations] insert failed", error);
-      throw new Error("No pudimos guardar la reserva. Intenta de nuevo.");
-    }
-    return { id: row.id };
+    return { id: result.id, reservationCode: result.reservationCode };
   });
+
