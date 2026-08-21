@@ -112,7 +112,7 @@ export function SiteFooter() {
           <div className="md:col-span-4">
             <small className="footer-label">Reservas</small>
             <div className="mt-5 space-y-3 text-sm text-white/75">
-              <a className="block hover:text-[#E2B94E]" href={WA_URL} target="_blank" rel="noreferrer">+51 930 678 951</a>
+              <a className="block hover:text-[#E2B94E]" href={WA_URL} target="_blank" rel="noreferrer">+51 946 393 256</a>
               <a className="block hover:text-[#E2B94E]" href="mailto:reservas@quinuaq.com">reservas@quinuaq.com</a>
               <p>Quinua, Ayacucho · Perú</p>
             </div>

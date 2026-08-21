@@ -241,7 +241,7 @@ function ContactSection() {
                   rel="noreferrer"
                   className="font-serif text-xl text-[#9C7A3C] hover:text-[#B59253] transition-colors"
                 >
-                  WhatsApp: +51 930 678 951
+                  WhatsApp: +51 946 393 256
                 </a>
               </div>
 
@@ -250,7 +250,7 @@ function ContactSection() {
                 <p className="text-xs text-[#6B635A] font-light">
                   Quinua, Ayacucho — Perú
                 </p>
-                <p className="text-xs text-[#6B635A] font-light">Central: +51 930 678 951</p>
+                <p className="text-xs text-[#6B635A] font-light">Central: +51 946 393 256</p>
               </div>
 
               <div>
@@ -287,7 +287,7 @@ function ContactSection() {
                   <label className="block text-[9px] uppercase tracking-[0.3em] text-[#999084] mb-1.5">
                     Teléfono / WhatsApp
                   </label>
-                  <input type="tel" placeholder="+51 930 678 951" required className="input-luxury" />
+                  <input type="tel" placeholder="+51 946 393 256" required className="input-luxury" />
                 </div>
               </div>
 
