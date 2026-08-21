@@ -4,93 +4,34 @@ import heroValley from "@/assets/hero-valley.jpg";
 
 export function HeroSection() {
   return (
-    <section id="top" className="relative min-h-screen w-full flex flex-col justify-between overflow-hidden pt-28 pb-12">
-      {/* Background Image with Ambient Drift */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <img
-          src={heroValley}
-          alt="Valley Q Lodge entre las montañas de Quinua, Ayacucho"
-          className="w-full h-full object-cover object-center anim-drift scale-105"
-          fetchPriority="high"
-        />
-        {/* Layered Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#12110F] via-black/40 to-black/60" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/20 to-transparent" />
+    <section id="top" className="relative min-h-[720px] h-[100svh] max-h-[920px] overflow-hidden flex items-end">
+      <div className="absolute inset-0">
+        <img src={heroValley} alt="Casitas de QuinuaQ frente al valle de Quinua" className="w-full h-full object-cover object-center anim-drift scale-105" fetchPriority="high" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#10271C]/90 via-[#10271C]/48 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#10271C]/80 via-transparent to-[#10271C]/35" />
       </div>
 
-      {/* Main Hero Content Container */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full my-auto py-12">
-        <div className="max-w-3xl space-y-6">
-          {/* Eyebrow Metadata Badge */}
-          <div className="reveal">
-            <span className="label-dark-gold">
-              QuinuaQ Retreat · Quinua, Ayacucho · 3,500 msnm
-            </span>
-          </div>
-
-          {/* Main Editorial Headline */}
-          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] text-[#F7F4EF] font-light reveal d1">
-            Un refugio andino{" "}
-            <em className="italic text-[#D5B374] font-serif">donde el silencio</em>{" "}
-            se convierte en descanso.
+      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-10 pb-10 md:pb-12">
+        <div className="max-w-[760px] pb-12 md:pb-16">
+          <p className="label-dark-gold mb-6">Casitas de campo · Quinua, Ayacucho · 3.500 m</p>
+          <h1 className="font-serif text-[52px] sm:text-6xl lg:text-[88px] leading-[.88] tracking-[-.04em] text-[#FBF8F1] font-normal">
+            Dormir cerca<br />
+            <em className="italic text-[#E2B94E] font-normal">del silencio.</em>
           </h1>
-
-          {/* Subtitle */}
-          <p className="text-base sm:text-lg text-[#E6E0D4] font-light leading-relaxed max-w-xl reveal d2">
-            Entre montañas y neblina, nace un espacio concebido para desconectar del ruido exterior y habitar la serenidad del altiplano.
+          <p className="mt-7 max-w-xl text-base md:text-lg leading-relaxed text-white/78 font-normal">
+            Casitas privadas frente al valle, desayunos con producto local y noches de fogata para volver a escuchar el campo.
           </p>
-
-          {/* Call to Action Buttons */}
-          <div className="pt-4 flex flex-wrap items-center gap-4 reveal d3">
-            <Link
-              to="/"
-              hash="habitaciones"
-              className="py-4 px-8 bg-[#D5B374] text-[#12110F] font-medium text-[10px] uppercase tracking-[0.35em] hover:bg-[#EBD2A2] transition-all duration-300"
-            >
-              Elegir Casita
-            </Link>
-            <a
-              href={WA_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="py-4 px-8 border border-[#F7F4EF]/40 text-[#F7F4EF] font-medium text-[10px] uppercase tracking-[0.35em] hover:border-[#D5B374] hover:text-[#D5B374] transition-all duration-300"
-            >
-              Reservar por WhatsApp
-            </a>
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Link to="/" hash="habitaciones" className="casitas-book casitas-book-light min-w-[196px]">Conocer las casitas <span>↗</span></Link>
+            <a href={WA_URL} target="_blank" rel="noreferrer" className="casitas-book casitas-book-dark min-w-[196px]">Consultar fechas <span>↗</span></a>
           </div>
         </div>
-      </div>
 
-      {/* Bottom Bar: Credentials & Scroll Indicator */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full border-t border-[#F7F4EF]/15 pt-6">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-          {/* Key Credentials Stats */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-12">
-            <div>
-              <span className="block text-[9px] uppercase tracking-[0.3em] text-[#999084]">Altitud</span>
-              <span className="font-serif text-lg text-[#F7F4EF]">3,500 msnm</span>
-            </div>
-            <div>
-              <span className="block text-[9px] uppercase tracking-[0.3em] text-[#999084]">Alojamiento</span>
-              <span className="font-serif text-lg text-[#F7F4EF]">5 Casitas & Suites</span>
-            </div>
-            <div>
-              <span className="block text-[9px] uppercase tracking-[0.3em] text-[#999084]">Gastronomía</span>
-              <span className="font-serif text-lg text-[#F7F4EF]">Desayuno Incluido</span>
-            </div>
-            <div>
-              <span className="block text-[9px] uppercase tracking-[0.3em] text-[#999084]">Experiencias</span>
-              <span className="font-serif text-lg text-[#D5B374]">Rituales Andinos</span>
-            </div>
-          </div>
-
-          {/* Scroll Prompt */}
-          <div className="hidden md:flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-[#E6E0D4]">
-            <span>Descubrir</span>
-            <div className="w-px h-8 bg-[#F7F4EF]/20 relative overflow-hidden">
-              <div className="w-full h-full bg-[#D5B374] anim-scroll-pulse" />
-            </div>
-          </div>
+        <div className="pt-6 border-t border-white/20 grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-10">
+          <div><small className="block text-[11px] uppercase tracking-[.15em] text-[#E2B94E]">Alojamiento</small><strong className="block mt-1 font-serif text-xl text-white font-normal">5 casitas & suites</strong></div>
+          <div><small className="block text-[11px] uppercase tracking-[.15em] text-[#E2B94E]">Cada mañana</small><strong className="block mt-1 font-serif text-xl text-white font-normal">Desayuno incluido</strong></div>
+          <div><small className="block text-[11px] uppercase tracking-[.15em] text-[#E2B94E]">Experiencia</small><strong className="block mt-1 font-serif text-xl text-white font-normal">Campo y fogata</strong></div>
+          <div><small className="block text-[11px] uppercase tracking-[.15em] text-[#E2B94E]">Ubicación</small><strong className="block mt-1 font-serif text-xl text-white font-normal">Quinua, Ayacucho</strong></div>
         </div>
       </div>
     </section>

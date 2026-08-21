@@ -3,7 +3,7 @@ import { useState } from "react";
 const TESTIMONIALS = [
   {
     quote:
-      "Valley Q superó todas nuestras expectativas. Las vistas del valle al amanecer son simplemente mágicas. La calidez del equipo y el desayuno andino hicieron de nuestra estancia un recuerdo inolvidable.",
+      "QuinuaQ superó todas nuestras expectativas. Las vistas del valle al amanecer son simplemente mágicas. La calidez del equipo y el desayuno andino hicieron de nuestra estancia un recuerdo inolvidable.",
     author: "María C. & Rodrigo V.",
     location: "Lima, Perú",
     stay: "Casita Betsy",
@@ -17,14 +17,14 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "La experiencia de cocina vivencial fue mi favorita. Aprender la preparación de potajes andinos con insumos nativos fue fascinante. Lodge impecable y acogedor.",
+      "La experiencia de cocina vivencial fue mi favorita. Aprender la preparación de potajes andinos con insumos nativos fue fascinante. Un lugar impecable y acogedor.",
     author: "Familia Herrera",
     location: "Cusco, Perú",
     stay: "Habitación Dúplex",
   },
   {
     quote:
-      "Quinua es un destino imprescindible. Valley Q combina sostenibilidad, integración con la comunidad y una atención humana excepcional.",
+      "Quinua es un destino imprescindible. QuinuaQ combina sostenibilidad, integración con la comunidad y una atención humana excepcional.",
     author: "Thomas B.",
     location: "París, Francia",
     stay: "Casita Kallen 2p",

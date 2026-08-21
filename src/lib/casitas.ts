@@ -139,7 +139,7 @@ export function buildWhatsAppLink(params: {
   message?: string;
 }) {
   const lines = [
-    `¡Hola! Quisiera reservar en Valley Q Lodge.`,
+    `¡Hola! Quisiera reservar en QuinuaQ Casitas.`,
     ``,
     `🏡 Casita: ${params.casitaName}`,
     `📅 Check-in: ${params.checkIn}`,

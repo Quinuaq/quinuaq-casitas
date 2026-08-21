@@ -2,14 +2,23 @@ import { Link } from "@tanstack/react-router";
 import { WA_URL } from "@/lib/casitas";
 import { useEffect, useState } from "react";
 
+const RESTAURANT_URL = import.meta.env.VITE_RESTAURANT_URL ?? (import.meta.env.DEV ? "http://localhost:3000" : "https://www.quinuaq.com");
+
 const NAV_ITEMS = [
   { label: "Experiencias", hash: "experiencias" },
-  { label: "Casitas & Suites", hash: "habitaciones" },
+  { label: "Casitas", hash: "habitaciones" },
   { label: "Galería", hash: "galeria" },
   { label: "Quinua", hash: "quinua" },
-  { label: "Propósito", hash: "proposito" },
-  { label: "Contacto", hash: "contacto" },
 ];
+
+function Brand({ light }: { light: boolean }) {
+  return (
+    <Link to="/" className={`property-brand ${light ? "property-brand-on-light" : "property-brand-on-dark"}`} aria-label="QuinuaQ Casitas, inicio">
+      <img src="/logo-quinuaq.png" alt="" />
+      <small>CASITAS</small>
+    </Link>
+  );
+}
 
 export function SiteNav({ variant = "overlay" }: { variant?: "overlay" | "solid" }) {
   const [scrolled, setScrolled] = useState(variant === "solid");
@@ -17,9 +26,7 @@ export function SiteNav({ variant = "overlay" }: { variant?: "overlay" | "solid"
 
   useEffect(() => {
     if (variant === "solid") return;
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 60);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 56);
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -27,161 +34,59 @@ export function SiteNav({ variant = "overlay" }: { variant?: "overlay" | "solid"
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
+    return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
-  const isLightNav = scrolled;
+  const light = scrolled;
 
   return (
     <>
-      {/* Top Main Navigation Header */}
-      <header
-        className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 h-20 flex items-center ${
-          isLightNav
-            ? "glass-header-light shadow-sm"
-            : "bg-gradient-to-b from-black/80 via-black/30 to-transparent"
-        }`}
-      >
-        <div className="w-full max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
-          {/* Logo */}
-          <Link to="/" className="group flex flex-col items-start focus:outline-none">
-            <span
-              className={`font-serif text-2xl tracking-tight transition-colors duration-300 ${
-                isLightNav
-                  ? "text-[#1B1917] group-hover:text-[#9C7A3C]"
-                  : "text-[#F7F4EF] group-hover:text-[#D5B374]"
-              }`}
-            >
-              VALLEY Q
-            </span>
-            <span
-              className={`text-[9px] uppercase tracking-[0.38em] -mt-0.5 ${
-                isLightNav ? "text-[#8C5135]" : "text-[#D5B374]"
-              }`}
-            >
-              By QuinuaQ
-            </span>
-          </Link>
+      <header className={`fixed inset-x-0 top-0 z-50 h-[74px] transition-all duration-500 ${light ? "casitas-header-light" : "casitas-header-overlay"}`}>
+        <div className="h-full max-w-[1440px] mx-auto px-5 md:px-10 flex items-center justify-between gap-8">
+          <Brand light={light} />
 
-          {/* Desktop Links */}
-          <nav className="hidden lg:flex items-center gap-9" aria-label="Navegación principal">
+          <nav className="hidden xl:flex items-center gap-7" aria-label="Navegación principal">
             {NAV_ITEMS.map((item) => (
-              <Link
-                key={item.hash}
-                to="/"
-                hash={item.hash}
-                className={`text-[11px] uppercase tracking-[0.3em] transition-colors duration-300 relative py-1 group ${
-                  isLightNav
-                    ? "text-[#6B635A] hover:text-[#9C7A3C]"
-                    : "text-[#E6E0D4] hover:text-[#D5B374]"
-                }`}
-              >
+              <Link key={item.hash} to="/" hash={item.hash} className={`casitas-nav-link ${light ? "text-[#17251C]" : "text-[#FBF8F1]"}`}>
                 {item.label}
-                <span
-                  className={`absolute bottom-0 left-0 w-0 h-px transition-all duration-300 group-hover:w-full ${
-                    isLightNav ? "bg-[#9C7A3C]" : "bg-[#D5B374]"
-                  }`}
-                />
               </Link>
             ))}
+            <a className={`property-switch ${light ? "property-switch-light" : "property-switch-dark"}`} href={RESTAURANT_URL}>
+              Restaurante <span>↗</span>
+            </a>
           </nav>
 
-          {/* Right Direct Action */}
-          <div className="flex items-center gap-5">
-            <a
-              href={WA_URL}
-              target="_blank"
-              rel="noreferrer"
-              className={`hidden sm:inline-flex py-2.5 px-6 text-[10px] uppercase tracking-[0.3em] font-medium transition-all duration-300 border ${
-                isLightNav
-                  ? "border-[#9C7A3C]/40 text-[#9C7A3C] hover:bg-[#9C7A3C] hover:text-[#F7F4EF]"
-                  : "border-[#D5B374]/50 text-[#D5B374] hover:bg-[#D5B374] hover:text-[#12110F]"
-              }`}
-            >
-              Reservar
+          <div className="flex items-center gap-3">
+            <a href={WA_URL} target="_blank" rel="noreferrer" className={`casitas-book ${light ? "casitas-book-light" : "casitas-book-dark"}`}>
+              Reservar <span>↗</span>
             </a>
-
-            {/* Mobile Hamburger Toggle */}
-            <button
-              onClick={() => setMenuOpen(true)}
-              className={`lg:hidden p-2 transition-colors focus:outline-none ${
-                isLightNav ? "text-[#1B1917] hover:text-[#9C7A3C]" : "text-[#F7F4EF] hover:text-[#D5B374]"
-              }`}
-              aria-label="Abrir menú"
-            >
-              <div className="w-6 flex flex-col gap-1.5 items-end">
-                <span className="w-6 h-px bg-current" />
-                <span className="w-4 h-px bg-current" />
-              </div>
+            <button onClick={() => setMenuOpen(true)} className={`xl:hidden casitas-menu-button ${light ? "text-[#17251C]" : "text-[#FBF8F1]"}`} aria-label="Abrir menú">
+              <i /><i /><i />
             </button>
           </div>
         </div>
       </header>
 
-      {/* Mobile Fullscreen Overlay */}
-      <div
-        className={`fixed inset-0 z-50 lg:hidden transition-all duration-500 ${
-          menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        }`}
-      >
-        <div
-          className="absolute inset-0 bg-[#F7F4EF]/98 backdrop-blur-2xl"
-          onClick={() => setMenuOpen(false)}
-        />
-        <div className="relative z-10 h-full flex flex-col justify-between p-8 md:p-12">
-          {/* Mobile Top Header */}
-          <div className="flex justify-between items-center">
-            <div className="flex flex-col">
-              <span className="font-serif text-2xl text-[#1B1917]">VALLEY Q</span>
-              <span className="text-[9px] uppercase tracking-[0.3em] text-[#9C7A3C]">
-                Quinua, Ayacucho
-              </span>
-            </div>
-            <button
-              onClick={() => setMenuOpen(false)}
-              className="p-3 text-[#6B635A] hover:text-[#1B1917] transition-colors"
-              aria-label="Cerrar menú"
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            </button>
+      <div className={`fixed inset-0 z-[60] bg-[#F4EFE4] transition-all duration-500 xl:hidden ${menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
+        <div className="h-full p-6 md:p-10 flex flex-col">
+          <div className="flex items-center justify-between">
+            <Brand light />
+            <button onClick={() => setMenuOpen(false)} className="w-11 h-11 border border-[#17251C]/20 text-3xl font-light text-[#17251C]" aria-label="Cerrar menú">×</button>
           </div>
 
-          {/* Links List */}
-          <nav className="flex flex-col gap-6 my-auto">
+          <nav className="my-auto flex flex-col" aria-label="Navegación móvil">
             {NAV_ITEMS.map((item, index) => (
-              <Link
-                key={item.hash}
-                to="/"
-                hash={item.hash}
-                onClick={() => setMenuOpen(false)}
-                className="font-serif text-3xl md:text-4xl text-[#1B1917] hover:text-[#9C7A3C] transition-colors"
-                style={{ transitionDelay: `${index * 45}ms` }}
-              >
-                {item.label}
+              <Link key={item.hash} to="/" hash={item.hash} onClick={() => setMenuOpen(false)} className="grid grid-cols-[40px_1fr_auto] items-center py-4 border-b border-[#17251C]/15 font-serif text-3xl text-[#17251C]">
+                <small className="font-sans text-[11px] text-[#BB5A3E]">0{index + 1}</small>{item.label}<span className="text-base">↗</span>
               </Link>
             ))}
+            <a href={RESTAURANT_URL} className="grid grid-cols-[40px_1fr_auto] items-center py-4 border-b border-[#17251C]/15 font-serif text-3xl text-[#204B35]">
+              <small className="font-sans text-[11px] text-[#BB5A3E]">05</small>Restaurante<span className="text-base">↗</span>
+            </a>
           </nav>
 
-          {/* Bottom Actions */}
-          <div className="pt-6 border-t border-[#1B1917]/10 flex flex-col gap-4">
-            <a
-              href={WA_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="btn-luxury-solid w-full text-center"
-            >
-              Reservar por WhatsApp
-            </a>
-            <div className="flex justify-between items-center text-[10px] uppercase tracking-[0.25em] text-[#6B635A]">
-              <span>QuinuaQ Retreat</span>
-              <span>+51 930 678 951</span>
-            </div>
-          </div>
+          <a href={WA_URL} target="_blank" rel="noreferrer" className="casitas-book casitas-book-light w-full">Reservar una casita <span>↗</span></a>
+          <p className="mt-5 text-[11px] uppercase tracking-[.18em] text-[#667169]">Quinua · Ayacucho · Perú</p>
         </div>
       </div>
     </>
@@ -190,69 +95,31 @@ export function SiteNav({ variant = "overlay" }: { variant?: "overlay" | "solid"
 
 export function SiteFooter() {
   return (
-    <footer className="bg-[#12110F] text-[#F7F4EF] border-t border-[#F7F4EF]/10 pt-20 pb-12">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-[#F7F4EF]/10">
-          {/* Brand & Identity */}
-          <div className="md:col-span-5 space-y-4">
-            <Link to="/" className="inline-block">
-              <span className="font-serif text-3xl text-[#F7F4EF]">VALLEY Q</span>
-              <span className="block text-[9px] uppercase tracking-[0.4em] text-[#D5B374] mt-0.5">
-                By QuinuaQ · Ayacucho
-              </span>
-            </Link>
-            <p className="text-sm text-[#999084] font-light leading-relaxed max-w-sm">
-              Refugio boutique andino a 3,500 msnm. Entre montañas, neblina y silencio, un espacio diseñado para habitar la calma.
-            </p>
-            <div className="pt-2">
-              <span className="label-dark-gold text-[9px]">Ubicación</span>
-              <p className="text-xs text-[#999084] mt-1">Quinua, Ayacucho — Perú</p>
-            </div>
+    <footer className="bg-[#10271C] text-[#FBF8F1] pt-20 pb-10">
+      <div className="max-w-[1360px] mx-auto px-6 md:px-12">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-14 border-b border-white/15">
+          <div className="md:col-span-5">
+            <Brand light={false} />
+            <p className="mt-6 max-w-sm text-sm text-white/65 leading-relaxed">Casitas privadas frente al valle. Un refugio de campo para dormir cerca del paisaje y despertar sin prisa.</p>
           </div>
-
-          {/* Quick Links */}
-          <div className="md:col-span-3 space-y-4">
-            <span className="label-dark-gold text-[10px]">Explorar</span>
-            <ul className="space-y-2.5 text-xs text-[#999084]">
-              {NAV_ITEMS.map((item) => (
-                <li key={item.hash}>
-                  <Link to="/" hash={item.hash} className="hover:text-[#D5B374] transition-colors">
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          <div className="md:col-span-3">
+            <small className="footer-label">Explora</small>
+            <nav className="mt-5 flex flex-col gap-3 text-sm text-white/75">
+              {NAV_ITEMS.map((item) => <Link key={item.hash} to="/" hash={item.hash} className="hover:text-[#E2B94E]">{item.label}</Link>)}
+              <a href={RESTAURANT_URL} className="hover:text-[#E2B94E]">Restaurante ↗</a>
+            </nav>
           </div>
-
-          {/* Contact & Concierge */}
-          <div className="md:col-span-4 space-y-4">
-            <span className="label-dark-gold text-[10px]">Reservas & Concierge</span>
-            <div className="space-y-2 text-xs text-[#999084]">
-              <p>WhatsApp: <a href={WA_URL} target="_blank" rel="noreferrer" className="text-[#F7F4EF] hover:text-[#D5B374] transition-colors">+51 930 678 951</a></p>
-              <p>Contacto Directo: <a href="tel:+51930678951" className="text-[#F7F4EF] hover:text-[#D5B374] transition-colors">+51 930 678 951</a></p>
-              <p>Email: <a href="mailto:reservas@quinuaq.com" className="text-[#F7F4EF] hover:text-[#D5B374] transition-colors">reservas@quinuaq.com</a></p>
-            </div>
-            <div className="pt-4">
-              <a
-                href={WA_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="py-2.5 px-5 text-[9px] uppercase tracking-[0.3em] border border-[#D5B374]/40 text-[#D5B374] hover:bg-[#D5B374] hover:text-[#12110F] transition-all duration-300 inline-block"
-              >
-                Contacto Directo
-              </a>
+          <div className="md:col-span-4">
+            <small className="footer-label">Reservas</small>
+            <div className="mt-5 space-y-3 text-sm text-white/75">
+              <a className="block hover:text-[#E2B94E]" href={WA_URL} target="_blank" rel="noreferrer">+51 930 678 951</a>
+              <a className="block hover:text-[#E2B94E]" href="mailto:reservas@quinuaq.com">reservas@quinuaq.com</a>
+              <p>Quinua, Ayacucho · Perú</p>
             </div>
           </div>
         </div>
-
-        {/* Footer Sub-bar */}
-        <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-[0.25em] text-[#999084]/60">
-          <p>© {new Date().getFullYear()} Valley Q Lodge · QuinuaQ. Todos los derechos reservados.</p>
-          <div className="flex gap-6">
-            <a href="https://quinuaq.com" target="_blank" rel="noreferrer" className="hover:text-[#D5B374] transition-colors">
-              QuinuaQ Andes Retreat
-            </a>
-          </div>
+        <div className="pt-7 flex flex-col sm:flex-row justify-between gap-3 text-[11px] uppercase tracking-[.16em] text-white/45">
+          <p>© {new Date().getFullYear()} QuinuaQ Casitas</p><p>Campo · cocina · hospitalidad</p>
         </div>
       </div>
     </footer>

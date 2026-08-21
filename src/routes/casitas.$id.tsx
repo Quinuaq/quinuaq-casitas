@@ -14,10 +14,10 @@ export const Route = createFileRoute("/casitas/$id")({
   },
   head: ({ loaderData }) => {
     const c = loaderData?.casita;
-    const title = c ? `${c.name} — Valley Q Lodge` : "Casita — Valley Q Lodge";
+    const title = c ? `${c.name} — QuinuaQ Casitas` : "Casita — QuinuaQ";
     const description = c
-      ? `${c.tagline}. Reserva ${c.name} en Valley Q Lodge, Quinua. Capacidad: ${c.capacity}.`
-      : "Reserva tu casita en Valley Q Lodge, Quinua.";
+      ? `${c.tagline}. Reserva ${c.name} en QuinuaQ Casitas. Capacidad: ${c.capacity}.`
+      : "Reserva tu casita en QuinuaQ, Quinua.";
     return {
       meta: [
         { title },
@@ -35,7 +35,7 @@ export const Route = createFileRoute("/casitas/$id")({
       <div className="font-serif text-6xl text-[#9C7A3C]/30 mb-6">404</div>
       <h1 className="font-serif text-4xl text-[#1B1917]">Casita no encontrada</h1>
       <Link to="/" className="mt-8 btn-luxury-outline">
-        ← Volver al Lodge
+        ← Volver a Casitas
       </Link>
     </div>
   ),
@@ -148,7 +148,7 @@ function CasitaDetail() {
 
         {/* Breadcrumb Navigation */}
         <div className="absolute top-28 left-6 md:left-12 flex items-center gap-2 text-xs text-[#E6E0D4]">
-          <Link to="/" className="hover:text-[#D5B374] transition-colors">Valley Q</Link>
+          <Link to="/" className="hover:text-[#D5B374] transition-colors">QuinuaQ Casitas</Link>
           <span>/</span>
           <Link to="/" hash="habitaciones" className="hover:text-[#D5B374] transition-colors">Alojamiento</Link>
           <span>/</span>

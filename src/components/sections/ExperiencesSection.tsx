@@ -10,7 +10,7 @@ const EXPERIENCES = [
     title: "Naturaleza",
     subtitle: "Vistas panorámicas al valle de Quinua",
     description:
-      "Desde las terrazas de Valley Q, contemplarás el horizonte andino a 3,500 metros de altitud. Camina por senderos rodeados de árboles de queuña centenarios y observa las místicas nieblas del amanecer.",
+      "Desde las terrazas de QuinuaQ, contemplarás el horizonte andino a 3.500 metros de altitud. Camina por senderos rodeados de árboles de queuña y observa las nieblas del amanecer.",
     image: quinuaImg,
     highlights: [
       "Terrazas privadas con vista al valle",
@@ -109,7 +109,7 @@ export function ExperiencesSection() {
               className="w-full h-full object-cover"
             />
             <div className="absolute top-4 left-4 bg-[#F7F4EF]/90 backdrop-blur-md px-3 py-1 text-[9px] uppercase tracking-[0.3em] text-[#8C5135] font-medium border border-[#1B1917]/5">
-              Experiencia Valley Q
+              Experiencia QuinuaQ
             </div>
           </div>
 

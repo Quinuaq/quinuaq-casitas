@@ -56,7 +56,7 @@ export function AmenitiesSection() {
       <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-20">
         {/* Header */}
         <div className="max-w-2xl space-y-4 reveal">
-          <span className="label-luxury">Comodidades del Lodge</span>
+          <span className="label-luxury">Comodidades incluidas</span>
           <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#1B1917] font-light">
             Todo pensado para{" "}
             <em className="italic text-[#9C7A3C] font-serif">tu bienestar absoluto.</em>

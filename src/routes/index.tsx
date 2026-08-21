@@ -13,13 +13,13 @@ import quinuaImg from "@/assets/quinua.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Valley Q Lodge — Refugio Boutique Andino de Lujo en Quinua | QuinuaQ" },
+      { title: "QuinuaQ Casitas — Refugio de campo frente al valle" },
       {
         name: "description",
         content:
-          "Valley Q Lodge, experiencia boutique de lujo by QuinuaQ en Quinua, Ayacucho. Casitas privadas con vista al valle, fogatas nocturnas, cocina vivencial y turismo con propósito a 3,500 msnm.",
+          "Casitas privadas de QuinuaQ con vista al valle, desayuno andino, fogatas y experiencias de campo en Quinua, Ayacucho.",
       },
-      { property: "og:title", content: "Valley Q Lodge — Refugio Andino de Lujo en Quinua" },
+      { property: "og:title", content: "QuinuaQ Casitas — Dormir cerca del silencio" },
       {
         property: "og:description",
         content: "Entre montañas y neblina, un refugio boutique donde el silencio se convierte en descanso.",
@@ -66,7 +66,7 @@ function BrandSection() {
             <div className="space-y-3">
               <span className="label-luxury">Bienvenidos a</span>
               <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-[#1B1917] font-light">
-                Valley Q Lodge
+                QuinuaQ Casitas
               </h2>
               <span className="label-terracotta text-[10px] block">
                 By QuinuaQ · Ayacucho
@@ -78,7 +78,7 @@ function BrandSection() {
           <div className="md:col-span-7 space-y-6 reveal-right">
             <p className="text-lg md:text-xl text-[#6B635A] font-light leading-relaxed">
               En el corazón histórico de Quinua, donde la majestuosidad de los Andes abraza la tranquilidad del campo peruano, nace{" "}
-              <span className="text-[#9C7A3C] font-normal">Valley Q Lodge</span>.
+              <span className="text-[#9C7A3C] font-normal">QuinuaQ Casitas</span>.
             </p>
 
             <p className="text-sm text-[#6B635A] font-light leading-relaxed">
@@ -94,7 +94,7 @@ function BrandSection() {
             <div className="pt-4 grid grid-cols-3 gap-6 border-t border-[#1B1917]/10">
               <div>
                 <span className="block text-[9px] uppercase tracking-[0.3em] text-[#999084]">Categoría</span>
-                <span className="text-xs text-[#1B1917] mt-1 block">Boutique Lodge</span>
+                <span className="text-xs text-[#1B1917] mt-1 block">Casitas boutique</span>
               </div>
               <div>
                 <span className="block text-[9px] uppercase tracking-[0.3em] text-[#999084]">Ubicación</span>
@@ -136,7 +136,7 @@ function QuinuaSection() {
             </p>
 
             <p className="text-sm text-[#6B635A] font-light leading-relaxed">
-              Desde Valley Q, podrás explorar la Pampa de la Quinua, recorrer talleres artesanales de cerámica en barro y caminar entre bosques nativos de queuña protegidos.
+              Desde QuinuaQ, podrás explorar la Pampa de la Quinua, recorrer talleres artesanales de cerámica en barro y caminar entre bosques nativos de queuña protegidos.
             </p>
 
             <div className="pt-4 grid grid-cols-3 gap-6 border-t border-[#1B1917]/10">
@@ -173,7 +173,7 @@ function PurposeSection() {
             <em className="italic text-[#D5B374] font-serif">generar impacto positivo.</em>
           </h2>
           <p className="text-sm text-[#999084] font-light leading-relaxed">
-            Valley Q es impulsado por <span className="text-[#D5B374]">QuinuaQ</span> y trabaja en alianza con el programa social <span className="text-[#D5B374]">Mamá Alis</span>, capacitando e impulsando la empleabilidad de familias locales en Ayacucho.
+            QuinuaQ Casitas comparte el propósito social del restaurante y trabaja junto al programa <span className="text-[#D5B374]">Mama Alice</span>, fortaleciendo la formación y la empleabilidad de familias locales en Ayacucho.
           </p>
         </div>
 
@@ -224,7 +224,7 @@ function ContactSection() {
               <span className="label-luxury">Concierge & Reservas</span>
               <h2 className="font-serif text-4xl sm:text-5xl text-[#1B1917] font-light">
                 Planifica tu estadía en{" "}
-                <em className="italic text-[#9C7A3C] font-serif">Valley Q.</em>
+                <em className="italic text-[#9C7A3C] font-serif">QuinuaQ.</em>
               </h2>
             </div>
 

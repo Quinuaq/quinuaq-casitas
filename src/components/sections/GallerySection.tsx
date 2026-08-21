@@ -9,7 +9,7 @@ const GALLERY_PHOTOS = [
   { src: heroValley, title: "Vista al Valle de Quinua", category: "Naturaleza", size: "col-span-12 md:col-span-8 row-span-2" },
   { src: roomImg, title: "Interiores Artesanales", category: "Casitas", size: "col-span-12 md:col-span-4" },
   { src: fogataImg, title: "Noches de Fogata", category: "Rituales", size: "col-span-12 md:col-span-4" },
-  { src: alpacasImg, title: "Alpacas en el Lodge", category: "Fauna Andina", size: "col-span-12 md:col-span-4" },
+  { src: alpacasImg, title: "Alpacas en el campo", category: "Fauna Andina", size: "col-span-12 md:col-span-4" },
   { src: cocinaImg, title: "Cocina de Origen", category: "Gastronomía", size: "col-span-12 md:col-span-4" },
   { src: quinuaImg, title: "Pampa de Quinua", category: "Patrimonio", size: "col-span-12 md:col-span-4" },
 ];
@@ -28,7 +28,7 @@ export function GallerySection() {
             </h2>
           </div>
           <p className="text-sm text-[#6B635A] font-light leading-relaxed max-w-sm reveal d2">
-            Cada rincón de Valley Q refleja la armonía entre la arquitectura tradicional de quinua y el entorno natural.
+            Cada rincón de QuinuaQ busca una relación serena entre arquitectura, paisaje y tradición local.
           </p>
         </div>
 
