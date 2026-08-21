@@ -5,10 +5,10 @@ import { useEffect, useState } from "react";
 const RESTAURANT_URL = import.meta.env.VITE_RESTAURANT_URL ?? (import.meta.env.DEV ? "http://localhost:3000" : "https://www.quinuaq.com");
 
 const NAV_ITEMS = [
-  { label: "Experiencias", hash: "experiencias" },
-  { label: "Casitas", hash: "habitaciones" },
-  { label: "Galería", hash: "galeria" },
-  { label: "Quinua", hash: "quinua" },
+  { label: "Casitas", to: "/casitas" },
+  { label: "Experiencias", to: "/", hash: "experiencias" },
+  { label: "Galería", to: "/", hash: "galeria" },
+  { label: "Quinua", to: "/", hash: "quinua" },
 ];
 
 function Brand({ light }: { light: boolean }) {
@@ -47,7 +47,12 @@ export function SiteNav({ variant = "overlay" }: { variant?: "overlay" | "solid"
 
           <nav className="hidden xl:flex items-center gap-7" aria-label="Navegación principal">
             {NAV_ITEMS.map((item) => (
-              <Link key={item.hash} to="/" hash={item.hash} className={`casitas-nav-link ${light ? "text-[#17251C]" : "text-[#FBF8F1]"}`}>
+              <Link
+                key={item.label}
+                to={item.to as any}
+                hash={item.hash}
+                className={`casitas-nav-link ${light ? "text-[#17251C]" : "text-[#FBF8F1]"}`}
+              >
                 {item.label}
               </Link>
             ))}
@@ -76,7 +81,13 @@ export function SiteNav({ variant = "overlay" }: { variant?: "overlay" | "solid"
 
           <nav className="my-auto flex flex-col" aria-label="Navegación móvil">
             {NAV_ITEMS.map((item, index) => (
-              <Link key={item.hash} to="/" hash={item.hash} onClick={() => setMenuOpen(false)} className="grid grid-cols-[40px_1fr_auto] items-center py-4 border-b border-[#17251C]/15 font-serif text-3xl text-[#17251C]">
+              <Link
+                key={item.label}
+                to={item.to as any}
+                hash={item.hash}
+                onClick={() => setMenuOpen(false)}
+                className="grid grid-cols-[40px_1fr_auto] items-center py-4 border-b border-[#17251C]/15 font-serif text-3xl text-[#17251C]"
+              >
                 <small className="font-sans text-[11px] text-[#BB5A3E]">0{index + 1}</small>{item.label}<span className="text-base">↗</span>
               </Link>
             ))}
@@ -105,7 +116,11 @@ export function SiteFooter() {
           <div className="md:col-span-3">
             <small className="footer-label">Explora</small>
             <nav className="mt-5 flex flex-col gap-3 text-sm text-white/75">
-              {NAV_ITEMS.map((item) => <Link key={item.hash} to="/" hash={item.hash} className="hover:text-[#E2B94E]">{item.label}</Link>)}
+              {NAV_ITEMS.map((item) => (
+                <Link key={item.label} to={item.to as any} hash={item.hash} className="hover:text-[#E2B94E]">
+                  {item.label}
+                </Link>
+              ))}
               <a href={RESTAURANT_URL} className="hover:text-[#E2B94E]">Restaurante ↗</a>
             </nav>
           </div>
