@@ -10,11 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminCalendarioRouteImport } from './routes/admin.calendario'
+import { Route as AdminCanalesRouteImport } from './routes/admin.canales'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AdminReservasRouteImport } from './routes/admin.reservas'
+import { Route as CasitasIndexRouteImport } from './routes/casitas.index'
 import { Route as CasitasIdRouteImport } from './routes/casitas.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCalendarioRoute = AdminCalendarioRouteImport.update({
+  id: '/calendario',
+  path: '/calendario',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCanalesRoute = AdminCanalesRouteImport.update({
+  id: '/canales',
+  path: '/canales',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminReservasRoute = AdminReservasRouteImport.update({
+  id: '/reservas',
+  path: '/reservas',
+  getParentRoute: () => AdminRoute,
+} as any)
+const CasitasIndexRoute = CasitasIndexRouteImport.update({
+  id: '/casitas/',
+  path: '/casitas/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CasitasIdRoute = CasitasIdRouteImport.update({
@@ -25,28 +67,77 @@ const CasitasIdRoute = CasitasIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/admin/calendario': typeof AdminCalendarioRoute
+  '/admin/canales': typeof AdminCanalesRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/reservas': typeof AdminReservasRoute
   '/casitas/$id': typeof CasitasIdRoute
+  '/admin/': typeof AdminIndexRoute
+  '/casitas/': typeof CasitasIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin/calendario': typeof AdminCalendarioRoute
+  '/admin/canales': typeof AdminCanalesRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/reservas': typeof AdminReservasRoute
   '/casitas/$id': typeof CasitasIdRoute
+  '/admin': typeof AdminIndexRoute
+  '/casitas': typeof CasitasIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/admin/calendario': typeof AdminCalendarioRoute
+  '/admin/canales': typeof AdminCanalesRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/reservas': typeof AdminReservasRoute
   '/casitas/$id': typeof CasitasIdRoute
+  '/admin/': typeof AdminIndexRoute
+  '/casitas/': typeof CasitasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/casitas/$id'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/admin/calendario'
+    | '/admin/canales'
+    | '/admin/login'
+    | '/admin/reservas'
+    | '/casitas/$id'
+    | '/admin/'
+    | '/casitas/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/casitas/$id'
-  id: '__root__' | '/' | '/casitas/$id'
+  to:
+    | '/'
+    | '/admin/calendario'
+    | '/admin/canales'
+    | '/admin/login'
+    | '/admin/reservas'
+    | '/casitas/$id'
+    | '/admin'
+    | '/casitas'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/admin/calendario'
+    | '/admin/canales'
+    | '/admin/login'
+    | '/admin/reservas'
+    | '/casitas/$id'
+    | '/admin/'
+    | '/casitas/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
   CasitasIdRoute: typeof CasitasIdRoute
+  CasitasIndexRoute: typeof CasitasIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -56,6 +147,55 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/calendario': {
+      id: '/admin/calendario'
+      path: '/calendario'
+      fullPath: '/admin/calendario'
+      preLoaderRoute: typeof AdminCalendarioRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/canales': {
+      id: '/admin/canales'
+      path: '/canales'
+      fullPath: '/admin/canales'
+      preLoaderRoute: typeof AdminCanalesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/reservas': {
+      id: '/admin/reservas'
+      path: '/reservas'
+      fullPath: '/admin/reservas'
+      preLoaderRoute: typeof AdminReservasRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/casitas/': {
+      id: '/casitas/'
+      path: '/casitas'
+      fullPath: '/casitas/'
+      preLoaderRoute: typeof CasitasIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/casitas/$id': {
@@ -68,9 +208,29 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AdminRouteChildren {
+  AdminCalendarioRoute: typeof AdminCalendarioRoute
+  AdminCanalesRoute: typeof AdminCanalesRoute
+  AdminLoginRoute: typeof AdminLoginRoute
+  AdminReservasRoute: typeof AdminReservasRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminCalendarioRoute: AdminCalendarioRoute,
+  AdminCanalesRoute: AdminCanalesRoute,
+  AdminLoginRoute: AdminLoginRoute,
+  AdminReservasRoute: AdminReservasRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
   CasitasIdRoute: CasitasIdRoute,
+  CasitasIndexRoute: CasitasIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

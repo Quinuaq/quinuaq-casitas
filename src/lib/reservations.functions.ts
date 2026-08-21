@@ -15,8 +15,11 @@ const reservationSchema = z.object({
   estimated_total: z.number().nonnegative().optional(),
 });
 
+import { getAdminReservations, getAdminDateBlocks } from "./supabase-pms";
+import { generateICalFeed } from "./ical-generator";
+
 export const createReservation = createServerFn({ method: "POST" })
-  .inputValidator((data: unknown) => reservationSchema.parse(data))
+  .validator((data: unknown) => reservationSchema.parse(data))
   .handler(async ({ data }) => {
     const result = await createGuestBooking({
       casitaId: data.casita_id,
@@ -31,4 +34,15 @@ export const createReservation = createServerFn({ method: "POST" })
     });
     return { id: result.id, reservationCode: result.reservationCode };
   });
+
+export const getICalFeedFn = createServerFn({ method: "GET" })
+  .validator((casitaId: string) => casitaId)
+  .handler(async ({ data: casitaId }) => {
+    const [reservations, blocks] = await Promise.all([
+      getAdminReservations(),
+      getAdminDateBlocks(),
+    ]);
+    return generateICalFeed(casitaId, reservations, blocks);
+  });
+
 
