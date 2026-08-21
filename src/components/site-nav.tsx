@@ -1,4 +1,4 @@
-﻿import { Link } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { WA_URL } from "@/lib/casitas";
 import { useEffect, useState } from "react";
 
@@ -8,8 +8,9 @@ const NAV_ITEMS = [
   { label: "Casitas", to: "/casitas" },
   { label: "Experiencias", to: "/", hash: "experiencias" },
   { label: "Galería", to: "/", hash: "galeria" },
-  { label: "Quinua", to: "/", hash: "quinua" },
+  { label: "Concierge", to: "/", hash: "contacto" },
 ];
+
 
 function Brand({ light }: { light: boolean }) {
   return (
