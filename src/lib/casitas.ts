@@ -123,10 +123,60 @@ export function getCasita(id: string): Casita | undefined {
   return casitas.find((c) => c.id === id);
 }
 
+import type { QuoteCalculation } from "@/types/pms";
+
+export function calculateQuote(casita: Casita, checkIn: string, checkOut: string, guests: number): QuoteCalculation {
+  const inD = new Date(checkIn + "T00:00:00");
+  const outD = new Date(checkOut + "T00:00:00");
+  const diff = Math.max(0, Math.round((outD.getTime() - inD.getTime()) / 86400000));
+
+  let weekdayNights = 0;
+  let weekendNights = 0;
+  let basePrice = 0;
+
+  for (let i = 0; i < diff; i++) {
+    const d = new Date(inD);
+    d.setDate(d.getDate() + i);
+    const day = d.getDay();
+    const isWknd = day === 5 || day === 6; // Friday and Saturday
+    if (isWknd) {
+      weekendNights++;
+      basePrice += casita.prices.weekend;
+    } else {
+      weekdayNights++;
+      basePrice += casita.prices.weekday;
+    }
+  }
+
+  const extraGuests = Math.max(0, guests - 2);
+  const extraGuestFee = casita.id === "duplex" && extraGuests > 0 ? extraGuests * 50 * diff : 0;
+  const total = basePrice + extraGuestFee;
+  const suggestedDeposit = Math.round(total * 0.5);
+  const balanceDue = total - suggestedDeposit;
+
+  return {
+    nights: diff,
+    weekdayNights,
+    weekendNights,
+    basePrice,
+    extraGuestFee,
+    total,
+    suggestedDeposit,
+    balanceDue,
+  };
+}
+
+export function generateReservationCode(): string {
+  const random = Math.floor(1000 + Math.random() * 9000);
+  const year = new Date().getFullYear();
+  return `QQ-${year}-${random}`;
+}
+
 export const WA_PHONE = "51946393256";
 export const WA_URL = `https://wa.me/${WA_PHONE}`;
 
 export function buildWhatsAppLink(params: {
+  reservationCode?: string;
   casitaName: string;
   checkIn: string;
   checkOut: string;
@@ -136,21 +186,27 @@ export function buildWhatsAppLink(params: {
   guestPhone: string;
   guestEmail?: string;
   estimatedTotal?: number;
+  suggestedDeposit?: number;
   message?: string;
 }) {
   const lines = [
-    `¡Hola! Quisiera reservar en QuinuaQ Casitas.`,
+    `¡Hola! Quisiera confirmar mi solicitud de reserva en QuinuaQ Casitas.`,
+    params.reservationCode ? `🔖 *Código de Reserva:* ${params.reservationCode}` : "",
     ``,
-    `🏡 Casita: ${params.casitaName}`,
-    `📅 Check-in: ${params.checkIn}`,
-    `📅 Check-out: ${params.checkOut} (${params.nights} noche${params.nights !== 1 ? "s" : ""})`,
-    `👥 Huéspedes: ${params.guests}`,
+    `🏡 *Casita:* ${params.casitaName}`,
+    `📅 *Check-in:* ${params.checkIn}`,
+    `📅 *Check-out:* ${params.checkOut} (${params.nights} noche${params.nights !== 1 ? "s" : ""})`,
+    `👥 *Huéspedes:* ${params.guests}`,
     ``,
-    `👤 Nombre: ${params.guestName}`,
-    `📞 Teléfono: ${params.guestPhone}`,
-    params.guestEmail ? `✉️ Email: ${params.guestEmail}` : "",
-    params.estimatedTotal ? `\n💰 Total estimado: S/ ${params.estimatedTotal}` : "",
-    params.message ? `\n📝 Mensaje: ${params.message}` : "",
+    `👤 *Nombre:* ${params.guestName}`,
+    `📞 *Teléfono:* ${params.guestPhone}`,
+    params.guestEmail ? `✉️ *Email:* ${params.guestEmail}` : "",
+    params.estimatedTotal ? `💰 *Total Estadía:* S/ ${params.estimatedTotal}` : "",
+    params.suggestedDeposit ? `💳 *Adelanto Sugerido (50%):* S/ ${params.suggestedDeposit}` : "",
+    params.message ? `\n📝 *Mensaje:* ${params.message}` : "",
+    ``,
+    `Quedo atento a los datos para realizar la transferencia/Yape. ¡Muchas gracias!`,
   ].filter(Boolean);
   return `${WA_URL}?text=${encodeURIComponent(lines.join("\n"))}`;
 }
+
