@@ -1,18 +1,27 @@
 ﻿import { createFileRoute } from "@tanstack/react-router";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { casitas, type Casita } from "@/lib/casitas";
 import { CasitaCard } from "@/components/casitas/CasitaCard";
 import { CasitasFilterBar } from "@/components/casitas/CasitasFilterBar";
 import { SiteNav, SiteFooter } from "@/components/site-nav";
 import { Sparkles, MapPin, ShieldCheck, Coffee } from "lucide-react";
+import { z } from "zod";
+
+const casitasSearchSchema = z.object({
+  checkIn: z.string().optional().default(""),
+  checkOut: z.string().optional().default(""),
+  guests: z.coerce.number().optional().default(2),
+  category: z.string().optional().default("all"),
+});
 
 export const Route = createFileRoute("/casitas/")({
+  validateSearch: (search) => casitasSearchSchema.parse(search),
   head: () => ({
     meta: [
-      { title: "Casitas y Habitaciones Boutique — QuinuaQ" },
+      { title: "Catálogo de Casitas y Habitaciones Boutique — QuinuaQ" },
       {
         name: "description",
-        content: "Explora nuestra colección de casitas de campo y habitaciones boutique frente al valle de Quinua, Ayacucho.",
+        content: "Explora nuestra colección de casitas de campo y habitaciones boutique frente al valle de Quinua, Ayacucho. Reserva directa con disponibilidad en tiempo real.",
       },
     ],
   }),
@@ -20,14 +29,28 @@ export const Route = createFileRoute("/casitas/")({
 });
 
 function CasitasCatalogPage() {
+  const searchParams = Route.useSearch();
+
   const [filters, setFilters] = useState({
-    category: "all",
-    checkIn: "",
-    checkOut: "",
-    guests: 2,
+    category: searchParams.category || "all",
+    checkIn: searchParams.checkIn || "",
+    checkOut: searchParams.checkOut || "",
+    guests: searchParams.guests || 2,
     maxPrice: 700,
     selectedAmenities: [] as string[],
   });
+
+  useEffect(() => {
+    if (searchParams.checkIn || searchParams.checkOut || searchParams.guests !== 2 || searchParams.category !== "all") {
+      setFilters((prev) => ({
+        ...prev,
+        category: searchParams.category || prev.category,
+        checkIn: searchParams.checkIn || prev.checkIn,
+        checkOut: searchParams.checkOut || prev.checkOut,
+        guests: searchParams.guests || prev.guests,
+      }));
+    }
+  }, [searchParams]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
