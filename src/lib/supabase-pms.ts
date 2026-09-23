@@ -2,19 +2,25 @@ import { createClient } from "@supabase/supabase-js";
 import type { Reservation, DateBlock, Payment, ReservationStatus, PaymentMethod, PaymentType } from "@/types/pms";
 import { generateReservationCode } from "./casitas";
 
-const supabaseUrl =
+const _url =
   (typeof process !== "undefined" && process.env?.SUPABASE_URL) ||
   (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_SUPABASE_URL) ||
-  import.meta.env.VITE_SUPABASE_URL ||
-  "https://onrcpixgwdxykduogyfl.supabase.co";
+  import.meta.env.VITE_SUPABASE_URL;
+  
+const supabaseUrl = (_url && _url.trim().length > 0) 
+  ? _url.trim() 
+  : "https://onrcpixgwdxykduogyfl.supabase.co";
 
-const supabaseKey =
+const _key =
   (typeof process !== "undefined" && process.env?.SUPABASE_ANON_KEY) ||
   (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_SUPABASE_ANON_KEY) ||
   (typeof process !== "undefined" && process.env?.SUPABASE_PUBLISHABLE_KEY) ||
   import.meta.env.VITE_SUPABASE_ANON_KEY ||
-  import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ||
-  "sb_publishable_iH5xekIg2GfB-rMHGtYRCw_SPCP_dzr";
+  import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+
+const supabaseKey = (_key && _key.trim().length > 0)
+  ? _key.trim()
+  : "sb_publishable_iH5xekIg2GfB-rMHGtYRCw_SPCP_dzr";
 
 export const supabase = createClient(supabaseUrl, supabaseKey, {
   auth: {
