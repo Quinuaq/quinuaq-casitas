@@ -1,5 +1,5 @@
-﻿export type ReservationStatus = "pending" | "confirmed" | "checked_in" | "checked_out" | "cancelled";
-export type ReservationSource = "web" | "whatsapp_direct" | "admin_manual" | "airbnb" | "booking";
+export type ReservationStatus = "pending" | "confirmed" | "checked_in" | "checked_out" | "cancelled";
+export type ReservationSource = "web" | "whatsapp_direct" | "admin_manual" | "airbnb" | "booking" | "walkin";
 export type PaymentType = "adelanto_50" | "saldo_checkin" | "pago_total" | "consumo_extra" | "reembolso";
 export type PaymentMethod = "yape" | "plin" | "transferencia_bcp" | "transferencia_bbva" | "efectivo" | "tarjeta" | "otro";
 
@@ -26,6 +26,7 @@ export interface Reservation {
   guest_email?: string | null;
   check_in: string; // YYYY-MM-DD
   check_out: string; // YYYY-MM-DD
+  arrival_time?: string | null; // HH:mm
   nights: number;
   guests_count: number;
   total_price: number;

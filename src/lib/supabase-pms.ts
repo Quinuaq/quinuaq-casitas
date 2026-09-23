@@ -1,4 +1,4 @@
-﻿import { createClient } from "@supabase/supabase-js";
+import { createClient } from "@supabase/supabase-js";
 import type { Reservation, DateBlock, Payment, ReservationStatus, PaymentMethod, PaymentType } from "@/types/pms";
 import { generateReservationCode } from "./casitas";
 
@@ -293,4 +293,135 @@ export async function getReservationPayments(reservationId: string): Promise<Pay
     return [];
   }
   return (data as Payment[]) || [];
+}
+
+/**
+ * Admin: Create Walk-in Booking
+ */
+export async function createWalkinBooking(data: {
+  casitaId: string;
+  guestName: string;
+  guestPhone: string;
+  guestEmail?: string;
+  checkIn: string;
+  checkOut: string;
+  guestsCount: number;
+  totalPrice: number;
+  arrivalTime: string;
+  notes?: string;
+}): Promise<{ id: string; reservationCode: string }> {
+  const reservationCode = generateReservationCode();
+  const inD = new Date(data.checkIn + "T00:00:00");
+  const outD = new Date(data.checkOut + "T00:00:00");
+  const nights = Math.max(1, Math.round((outD.getTime() - inD.getTime()) / 86400000));
+
+  const payload: Partial<Reservation> = {
+    id: reservationCode,
+    casita_id: data.casitaId,
+    guest_name: data.guestName,
+    guest_phone: data.guestPhone,
+    guest_email: data.guestEmail || null,
+    check_in: data.checkIn,
+    check_out: data.checkOut,
+    arrival_time: data.arrivalTime,
+    nights,
+    guests_count: data.guestsCount,
+    total_price: data.totalPrice,
+    paid_amount: 0,
+    status: "checked_in", // walk-ins are immediately checked in
+    source: "walkin",
+    notes: data.notes || null,
+  };
+
+  const { error } = await supabase.from("reservations").insert(payload);
+
+  if (error) {
+    console.error("[createWalkinBooking] insert failed", error);
+    throw new Error("No se pudo crear la reserva walk-in");
+  }
+
+  return { id: reservationCode, reservationCode };
+}
+
+/**
+ * Admin: Fetch Today's Occupancy Status
+ */
+export async function getTodayOccupancy(): Promise<{ 
+  staying: Reservation[]; 
+  arriving: Reservation[]; 
+  departing: Reservation[];
+}> {
+  const todayStr = new Date().toISOString().slice(0, 10);
+  
+  const { data, error } = await supabase
+    .from("reservations")
+    .select("*")
+    .neq("status", "cancelled")
+    .lte("check_in", todayStr)
+    .gte("check_out", todayStr);
+
+  if (error) {
+    console.error("[getTodayOccupancy] error", error);
+    return { staying: [], arriving: [], departing: [] };
+  }
+
+  const res = (data as Reservation[]) || [];
+  
+  return {
+    staying: res.filter(r => r.check_in < todayStr && r.check_out > todayStr),
+    arriving: res.filter(r => r.check_in === todayStr),
+    departing: res.filter(r => r.check_out === todayStr),
+  };
+}
+
+/**
+ * Admin: Update iCal URLs for a Casita
+ */
+export async function updateCasitaICalUrls(casitaId: string, airbnbUrl: string, bookingUrl: string) {
+  const { error } = await supabase
+    .from("casitas")
+    .update({ 
+      airbnb_ical_url: airbnbUrl || null,
+      booking_ical_url: bookingUrl || null
+    })
+    .eq("id", casitaId);
+    
+  if (error) {
+    console.error("[updateCasitaICalUrls] error", error);
+    throw new Error("No se pudo guardar la configuración");
+  }
+}
+
+/**
+ * Admin: Fetch sync logs for a casita
+ */
+export async function getCasitaSyncLogs(casitaId: string) {
+  const { data, error } = await supabase
+    .from("sync_logs")
+    .select("*")
+    .eq("casita_id", casitaId)
+    .order("synced_at", { ascending: false })
+    .limit(10);
+    
+  if (error) {
+    console.warn("[getCasitaSyncLogs] error", error);
+    return [];
+  }
+  return data || [];
+}
+
+/**
+ * Admin: Fetch all casitas from database
+ */
+export async function getDBCasitas(): Promise<any[]> {
+  const { data, error } = await supabase
+    .from("casitas")
+    .select("*")
+    .order("name", { ascending: true });
+    
+  if (error) {
+    console.warn("[getDBCasitas] error", error);
+    return [];
+  }
+  return data || [];
 }

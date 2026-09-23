@@ -15,9 +15,12 @@ import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminCalendarioRouteImport } from './routes/admin.calendario'
 import { Route as AdminCanalesRouteImport } from './routes/admin.canales'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AdminRecepcionRouteImport } from './routes/admin.recepcion'
 import { Route as AdminReservasRouteImport } from './routes/admin.reservas'
+import { Route as ApiSyncChannelsRouteImport } from './routes/api.sync-channels'
 import { Route as CasitasIndexRouteImport } from './routes/casitas.index'
 import { Route as CasitasIdRouteImport } from './routes/casitas.$id'
+import { Route as ApiIcalCasitaIdRouteImport } from './routes/api.ical.$casitaId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -49,10 +52,20 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
   path: '/login',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminRecepcionRoute = AdminRecepcionRouteImport.update({
+  id: '/recepcion',
+  path: '/recepcion',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminReservasRoute = AdminReservasRouteImport.update({
   id: '/reservas',
   path: '/reservas',
   getParentRoute: () => AdminRoute,
+} as any)
+const ApiSyncChannelsRoute = ApiSyncChannelsRouteImport.update({
+  id: '/api/sync-channels',
+  path: '/api/sync-channels',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const CasitasIndexRoute = CasitasIndexRouteImport.update({
   id: '/casitas/',
@@ -64,6 +77,11 @@ const CasitasIdRoute = CasitasIdRouteImport.update({
   path: '/casitas/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiIcalCasitaIdRoute = ApiIcalCasitaIdRouteImport.update({
+  id: '/api/ical/$casitaId',
+  path: '/api/ical/$casitaId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -71,20 +89,26 @@ export interface FileRoutesByFullPath {
   '/admin/calendario': typeof AdminCalendarioRoute
   '/admin/canales': typeof AdminCanalesRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/recepcion': typeof AdminRecepcionRoute
   '/admin/reservas': typeof AdminReservasRoute
+  '/api/sync-channels': typeof ApiSyncChannelsRoute
   '/casitas/$id': typeof CasitasIdRoute
   '/admin/': typeof AdminIndexRoute
   '/casitas/': typeof CasitasIndexRoute
+  '/api/ical/$casitaId': typeof ApiIcalCasitaIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin/calendario': typeof AdminCalendarioRoute
   '/admin/canales': typeof AdminCanalesRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/recepcion': typeof AdminRecepcionRoute
   '/admin/reservas': typeof AdminReservasRoute
+  '/api/sync-channels': typeof ApiSyncChannelsRoute
   '/casitas/$id': typeof CasitasIdRoute
   '/admin': typeof AdminIndexRoute
   '/casitas': typeof CasitasIndexRoute
+  '/api/ical/$casitaId': typeof ApiIcalCasitaIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -93,10 +117,13 @@ export interface FileRoutesById {
   '/admin/calendario': typeof AdminCalendarioRoute
   '/admin/canales': typeof AdminCanalesRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/recepcion': typeof AdminRecepcionRoute
   '/admin/reservas': typeof AdminReservasRoute
+  '/api/sync-channels': typeof ApiSyncChannelsRoute
   '/casitas/$id': typeof CasitasIdRoute
   '/admin/': typeof AdminIndexRoute
   '/casitas/': typeof CasitasIndexRoute
+  '/api/ical/$casitaId': typeof ApiIcalCasitaIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -106,20 +133,26 @@ export interface FileRouteTypes {
     | '/admin/calendario'
     | '/admin/canales'
     | '/admin/login'
+    | '/admin/recepcion'
     | '/admin/reservas'
+    | '/api/sync-channels'
     | '/casitas/$id'
     | '/admin/'
     | '/casitas/'
+    | '/api/ical/$casitaId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/admin/calendario'
     | '/admin/canales'
     | '/admin/login'
+    | '/admin/recepcion'
     | '/admin/reservas'
+    | '/api/sync-channels'
     | '/casitas/$id'
     | '/admin'
     | '/casitas'
+    | '/api/ical/$casitaId'
   id:
     | '__root__'
     | '/'
@@ -127,17 +160,22 @@ export interface FileRouteTypes {
     | '/admin/calendario'
     | '/admin/canales'
     | '/admin/login'
+    | '/admin/recepcion'
     | '/admin/reservas'
+    | '/api/sync-channels'
     | '/casitas/$id'
     | '/admin/'
     | '/casitas/'
+    | '/api/ical/$casitaId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
+  ApiSyncChannelsRoute: typeof ApiSyncChannelsRoute
   CasitasIdRoute: typeof CasitasIdRoute
   CasitasIndexRoute: typeof CasitasIndexRoute
+  ApiIcalCasitaIdRoute: typeof ApiIcalCasitaIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -184,12 +222,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/recepcion': {
+      id: '/admin/recepcion'
+      path: '/recepcion'
+      fullPath: '/admin/recepcion'
+      preLoaderRoute: typeof AdminRecepcionRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/reservas': {
       id: '/admin/reservas'
       path: '/reservas'
       fullPath: '/admin/reservas'
       preLoaderRoute: typeof AdminReservasRouteImport
       parentRoute: typeof AdminRoute
+    }
+    '/api/sync-channels': {
+      id: '/api/sync-channels'
+      path: '/api/sync-channels'
+      fullPath: '/api/sync-channels'
+      preLoaderRoute: typeof ApiSyncChannelsRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/casitas/': {
       id: '/casitas/'
@@ -205,6 +257,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CasitasIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/ical/$casitaId': {
+      id: '/api/ical/$casitaId'
+      path: '/api/ical/$casitaId'
+      fullPath: '/api/ical/$casitaId'
+      preLoaderRoute: typeof ApiIcalCasitaIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -212,6 +271,7 @@ interface AdminRouteChildren {
   AdminCalendarioRoute: typeof AdminCalendarioRoute
   AdminCanalesRoute: typeof AdminCanalesRoute
   AdminLoginRoute: typeof AdminLoginRoute
+  AdminRecepcionRoute: typeof AdminRecepcionRoute
   AdminReservasRoute: typeof AdminReservasRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
@@ -220,6 +280,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminCalendarioRoute: AdminCalendarioRoute,
   AdminCanalesRoute: AdminCanalesRoute,
   AdminLoginRoute: AdminLoginRoute,
+  AdminRecepcionRoute: AdminRecepcionRoute,
   AdminReservasRoute: AdminReservasRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
@@ -229,8 +290,10 @@ const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
+  ApiSyncChannelsRoute: ApiSyncChannelsRoute,
   CasitasIdRoute: CasitasIdRoute,
   CasitasIndexRoute: CasitasIndexRoute,
+  ApiIcalCasitaIdRoute: ApiIcalCasitaIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1,27 +1,27 @@
 ﻿import { createFileRoute } from "@tanstack/react-router";
 import { useState, useMemo, useEffect } from "react";
-import { casitas, type Casita } from "@/lib/casitas";
+import { casitas, WA_URL } from "@/lib/casitas";
 import { CasitaCard } from "@/components/casitas/CasitaCard";
 import { CasitasFilterBar } from "@/components/casitas/CasitasFilterBar";
 import { SiteNav, SiteFooter } from "@/components/site-nav";
-import { Sparkles, MapPin, ShieldCheck, Coffee } from "lucide-react";
 import { z } from "zod";
 
 const casitasSearchSchema = z.object({
-  checkIn: z.string().optional().default(""),
-  checkOut: z.string().optional().default(""),
-  guests: z.coerce.number().optional().default(2),
-  category: z.string().optional().default("all"),
+  checkIn: z.string().optional(),
+  checkOut: z.string().optional(),
+  guests: z.coerce.number().int().min(1).max(6).catch(2).optional(),
+  category: z.enum(["all", "couples", "family", "groups"]).catch("all").optional(),
 });
 
 export const Route = createFileRoute("/casitas/")({
   validateSearch: (search) => casitasSearchSchema.parse(search),
   head: () => ({
     meta: [
-      { title: "Catálogo de Casitas y Habitaciones Boutique — QuinuaQ" },
+      { title: "Las casitas — Encuentra tu estancia en QuinuaQ" },
       {
         name: "description",
-        content: "Explora nuestra colección de casitas de campo y habitaciones boutique frente al valle de Quinua, Ayacucho. Reserva directa con disponibilidad en tiempo real.",
+        content:
+          "Compara casitas y habitaciones de QuinuaQ en Quinua, Ayacucho. Consulta capacidades, tarifas y fechas para tu próxima estancia en el campo.",
       },
     ],
   }),
@@ -41,16 +41,15 @@ function CasitasCatalogPage() {
   });
 
   useEffect(() => {
-    if (searchParams.checkIn || searchParams.checkOut || searchParams.guests !== 2 || searchParams.category !== "all") {
-      setFilters((prev) => ({
-        ...prev,
-        category: searchParams.category || prev.category,
-        checkIn: searchParams.checkIn || prev.checkIn,
-        checkOut: searchParams.checkOut || prev.checkOut,
-        guests: searchParams.guests || prev.guests,
-      }));
-    }
-  }, [searchParams]);
+    setFilters((prev) => ({
+      ...prev,
+      category: searchParams.category || "all",
+      checkIn: searchParams.checkIn || "",
+      checkOut: searchParams.checkOut || "",
+      guests: searchParams.guests || 2,
+    }));
+    setCurrentPage(1);
+  }, [searchParams.category, searchParams.checkIn, searchParams.checkOut, searchParams.guests]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
@@ -65,7 +64,8 @@ function CasitasCatalogPage() {
     return casitas.filter((casita) => {
       // Category filter
       if (filters.category === "couples" && casita.maxGuests > 2) return false;
-      if (filters.category === "family" && (casita.maxGuests < 3 || casita.maxGuests > 4)) return false;
+      if (filters.category === "family" && (casita.maxGuests < 3 || casita.maxGuests > 4))
+        return false;
       if (filters.category === "groups" && casita.maxGuests < 5) return false;
 
       // Guests count filter
@@ -77,7 +77,7 @@ function CasitasCatalogPage() {
       // Amenities filter
       if (filters.selectedAmenities.length > 0) {
         const hasAll = filters.selectedAmenities.every((req) =>
-          casita.amenities.some((a) => a.toLowerCase().includes(req.toLowerCase()))
+          casita.amenities.some((a) => a.toLowerCase().includes(req.toLowerCase())),
         );
         if (!hasAll) return false;
       }
@@ -89,52 +89,35 @@ function CasitasCatalogPage() {
   const totalPages = Math.ceil(filteredCasitas.length / itemsPerPage);
   const paginatedCasitas = filteredCasitas.slice(
     (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
+    currentPage * itemsPerPage,
   );
 
   return (
-    <div className="min-h-screen bg-[#08140E] text-[#FBF8F1] flex flex-col font-sans">
+    <div className="qq-public">
       <SiteNav variant="solid" />
 
-      <main className="flex-1 pt-28 pb-20">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
+      <main id="contenido" tabIndex={-1} className="qq-catalog">
+        <div className="qq-wrap">
           {/* Header Banner */}
-          <div className="mb-12 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 text-[10px] uppercase tracking-[0.3em] text-[#E2B94E] border border-white/10">
-              <Sparkles className="w-3 h-3" />
-              Colección de Alojamiento
+          <div className="qq-catalog-heading">
+            <div>
+              <p className="qq-eyebrow">Casitas y habitaciones · Quinua, Ayacucho</p>
+              <h1>
+                Encuentra tu
+                <br />
+                <em>forma de quedarte.</em>
+              </h1>
             </div>
-            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-light text-[#FBF8F1]">
-              Nuestras Casitas{" "}
-              <em className="italic font-serif text-[#E2B94E]">frente al valle.</em>
-            </h1>
-            <p className="max-w-2xl text-sm text-[#A2B3A8] font-light leading-relaxed">
-              Descubre refugios privados construidos con arquitectura tradicional, madera de queuña, vistas despejadas y todas las comodidades para una estadía inolvidable en Quinua.
+            <p>
+              Una escapada para dos, unos días en familia o tiempo entre amigos. Compara nuestras
+              opciones y consulta tus fechas dentro de cada casita.
             </p>
           </div>
 
           {/* Value Badges */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10 pb-8 border-b border-white/10">
-            <div className="flex items-center gap-3">
-              <Coffee className="w-5 h-5 text-[#E2B94E] shrink-0" />
-              <span className="text-xs text-[#A2B3A8]">Desayuno andino incluido</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <MapPin className="w-5 h-5 text-[#E2B94E] shrink-0" />
-              <span className="text-xs text-[#A2B3A8]">Quinua · 3,500 msnm</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <Sparkles className="w-5 h-5 text-[#E2B94E] shrink-0" />
-              <span className="text-xs text-[#A2B3A8]">Vistas panorámicas</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <ShieldCheck className="w-5 h-5 text-[#E2B94E] shrink-0" />
-              <span className="text-xs text-[#A2B3A8]">Reserva directa garantizada</span>
-            </div>
-          </div>
 
           {/* Interactive Filter Bar */}
-          <div className="mb-12">
+          <div className="qq-catalog-filter">
             <CasitasFilterBar
               filters={filters}
               onChange={(newFilters) => {
@@ -146,15 +129,18 @@ function CasitasCatalogPage() {
           </div>
 
           {/* Results Summary */}
-          <div className="flex justify-between items-center mb-8">
-            <span className="text-xs uppercase tracking-wider text-[#A2B3A8]">
-              Mostrando <strong className="text-[#FBF8F1]">{filteredCasitas.length}</strong> opciones disponibles
-            </span>
+          <div className="qq-results" aria-live="polite">
+            <p>
+              <strong>{filteredCasitas.length}</strong>{" "}
+              {filteredCasitas.length === 1 ? "opción que coincide" : "opciones que coinciden"} con
+              tus preferencias
+            </p>
+            <p>Tarifas base por noche · Sujetas a fecha</p>
           </div>
 
           {/* Casitas Grid */}
           {paginatedCasitas.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="qq-catalog-grid">
               {paginatedCasitas.map((casita) => (
                 <CasitaCard
                   key={casita.id}
@@ -166,9 +152,9 @@ function CasitasCatalogPage() {
               ))}
             </div>
           ) : (
-            <div className="bg-[#10271C] border border-white/10 p-16 text-center space-y-4 shadow-xl">
-              <p className="font-serif text-2xl text-[#FBF8F1]">No encontramos casitas con esos criterios</p>
-              <p className="text-xs text-[#A2B3A8]">Prueba modificando los filtros de precio o número de huéspedes.</p>
+            <div className="qq-empty">
+              <h2>No encontramos una estancia con esas preferencias.</h2>
+              <p>Prueba otro número de huéspedes o amplía tu presupuesto.</p>
               <button
                 onClick={() =>
                   setFilters({
@@ -180,13 +166,19 @@ function CasitasCatalogPage() {
                     selectedAmenities: [],
                   })
                 }
-                className="px-6 py-2.5 bg-[#E2B94E] text-[#08140E] text-xs uppercase tracking-wider font-semibold"
+                className="qq-button"
               >
-                Limpiar Filtros
+                Restablecer preferencias
               </button>
             </div>
           )}
 
+          <aside className="qq-catalog-help">
+            <p>¿No sabes cuál elegir? Conversemos sobre tu visita.</p>
+            <a href={WA_URL} className="qq-text-link" target="_blank" rel="noreferrer">
+              Te ayudamos por WhatsApp <span aria-hidden="true">↗</span>
+            </a>
+          </aside>
           {/* Pagination */}
           {totalPages > 1 && (
             <div className="mt-16 flex justify-center items-center gap-2">

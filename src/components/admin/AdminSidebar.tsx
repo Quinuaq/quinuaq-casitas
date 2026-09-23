@@ -1,4 +1,4 @@
-﻿import { Link, useRouterState } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import {
   LayoutDashboard,
   CalendarDays,
@@ -7,6 +7,7 @@ import {
   ExternalLink,
   LogOut,
   ShieldCheck,
+  DoorOpen
 } from "lucide-react";
 import { signOutAdmin } from "@/lib/auth";
 
@@ -21,6 +22,7 @@ export function AdminSidebar({ userEmail, onSignOut }: AdminSidebarProps) {
 
   const navItems = [
     { label: "Resumen Hoy", to: "/admin", icon: LayoutDashboard },
+    { label: "Recepción (Walk-ins)", to: "/admin/recepcion", icon: DoorOpen },
     { label: "Calendario & Bloqueos", to: "/admin/calendario", icon: CalendarDays },
     { label: "Reservas & Pagos", to: "/admin/reservas", icon: Receipt },
     { label: "Canales iCal (Airbnb/Booking)", to: "/admin/canales", icon: Radio },

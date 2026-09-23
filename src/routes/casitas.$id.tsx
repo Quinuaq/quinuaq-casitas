@@ -6,22 +6,21 @@ import { createReservation } from "@/lib/reservations.functions";
 import { getCasitaBlockedDates } from "@/lib/supabase-pms";
 import { SiteNav, SiteFooter } from "@/components/site-nav";
 import { AvailabilityCalendar } from "@/components/casitas/AvailabilityCalendar";
-import { useScrollReveal } from "@/hooks/useScrollAnimation";
-import {
-  Sparkles,
-  Calendar,
-  CheckCircle2,
-  Phone,
-  ShieldCheck,
-  Coffee,
-  Users,
-  BedDouble,
-  Clock,
-  ArrowRight,
-  ExternalLink,
-} from "lucide-react";
+import roomImage from "@/assets/room.jpg";
+import { todayISO, nextDateISO } from "@/lib/stay-dates";
 
 export const Route = createFileRoute("/casitas/$id")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    checkIn:
+      typeof search.checkIn === "string" && /^\d{4}-\d{2}-\d{2}$/.test(search.checkIn)
+        ? search.checkIn
+        : "",
+    checkOut:
+      typeof search.checkOut === "string" && /^\d{4}-\d{2}-\d{2}$/.test(search.checkOut)
+        ? search.checkOut
+        : "",
+    guests: Number.isFinite(Number(search.guests)) ? Number(search.guests) : 2,
+  }),
   loader: ({ params }) => {
     const casita = getCasita(params.id);
     if (!casita) throw notFound();
@@ -49,28 +48,27 @@ export const Route = createFileRoute("/casitas/$id")({
     <div className="min-h-screen bg-[#08140E] flex flex-col items-center justify-center text-center p-8 text-[#FBF8F1]">
       <div className="font-serif text-6xl text-[#E2B94E]/30 mb-6">404</div>
       <h1 className="font-serif text-4xl text-[#FBF8F1]">Casita no encontrada</h1>
-      <Link to="/casitas" className="mt-8 px-6 py-3 bg-[#E2B94E] text-[#08140E] text-xs uppercase tracking-wider font-semibold">
+      <Link
+        to="/casitas"
+        className="mt-8 px-6 py-3 bg-[#E2B94E] text-[#08140E] text-xs uppercase tracking-wider font-semibold"
+      >
         ← Volver al Catálogo de Casitas
       </Link>
     </div>
   ),
 });
 
-function todayISO(offsetDays = 0) {
-  const d = new Date();
-  d.setDate(d.getDate() + offsetDays);
-  return d.toISOString().slice(0, 10);
-}
-
 function CasitaDetailPage() {
   const { casita } = Route.useLoaderData();
   const submitReservation = useServerFn(createReservation);
-  useScrollReveal();
+  const initialSearch = Route.useSearch();
 
   const [activeImg, setActiveImg] = useState(0);
-  const [checkIn, setCheckIn] = useState(todayISO(1));
-  const [checkOut, setCheckOut] = useState(todayISO(3));
-  const [guests, setGuests] = useState(2);
+  const [checkIn, setCheckIn] = useState(initialSearch.checkIn || todayISO(1));
+  const [checkOut, setCheckOut] = useState(initialSearch.checkOut || todayISO(3));
+  const [guests, setGuests] = useState(
+    Math.max(1, Math.min(casita.maxGuests, initialSearch.guests)),
+  );
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -111,12 +109,20 @@ function CasitaDetailPage() {
     return calculateQuote(casita, checkIn, checkOut, guests);
   }, [casita, checkIn, checkOut, guests]);
 
+  const dateWarning =
+    checkIn < todayISO()
+      ? "Elige una llegada a partir de hoy."
+      : blockedDates.some((date) => date >= checkIn && date < checkOut)
+        ? "Estas fechas incluyen una noche no disponible. Prueba con otra estancia o consúltanos por WhatsApp."
+        : null;
+
   const canSubmit =
     name.trim().length >= 2 &&
     phone.trim().length >= 6 &&
     quote.nights >= 1 &&
     guests >= 1 &&
     guests <= casita.maxGuests &&
+    !dateWarning &&
     !saving;
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -161,364 +167,349 @@ function CasitaDetailPage() {
       setSaving(false);
     } catch (err) {
       console.error(err);
-      setError(err instanceof Error ? err.message : "No pudimos registrar tu solicitud. Intenta nuevamente.");
+      setError(
+        err instanceof Error
+          ? err.message
+          : "No pudimos registrar tu solicitud. Intenta nuevamente.",
+      );
       setSaving(false);
     }
   };
 
+  const photos = [
+    {
+      src: roomImage,
+      alt: "Ambientación referencial de un dormitorio; no corresponde a una casita específica",
+      caption:
+        "Imagen de ambientación referencial. Solicita fotografías de la casita antes de reservar.",
+    },
+    {
+      src: "/images/atardecer-quinuaq.png",
+      alt: "Atardecer sobre el valle desde QuinuaQ",
+      caption: "El entorno de QuinuaQ · fotografía del paisaje.",
+    },
+  ];
   return (
-    <main className="bg-[#08140E] text-[#FBF8F1] min-h-screen font-sans">
+    <div className="qq-public">
       <SiteNav variant="solid" />
-
-      {/* Hero Gallery Banner */}
-      <div className="relative h-[65vh] min-h-[480px] overflow-hidden pt-20">
-        <img
-          src={casita.gallery[activeImg]}
-          alt={casita.name}
-          className="w-full h-full object-cover transition-all duration-700"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-[#08140E]" />
-
-        {/* Breadcrumb */}
-        <div className="absolute top-28 left-6 md:left-12 flex items-center gap-2 text-xs text-[#E6E0D4] z-10">
-          <Link to="/" className="hover:text-[#E2B94E] transition-colors">QuinuaQ Casitas</Link>
-          <span>/</span>
-          <Link to="/casitas" className="hover:text-[#E2B94E] transition-colors">Catálogo</Link>
-          <span>/</span>
-          <span className="text-[#FBF8F1] font-medium">{casita.name}</span>
-        </div>
-
-        {/* Gallery Thumbnails */}
-        <div className="absolute bottom-8 left-6 md:left-12 flex gap-3 z-10">
-          {casita.gallery.map((imgUrl: string, idx: number) => (
-            <button
-              key={idx}
-              type="button"
-              onClick={() => setActiveImg(idx)}
-              className={`w-16 h-12 overflow-hidden border transition-all duration-300 rounded ${
-                idx === activeImg ? "border-[#E2B94E] scale-105 shadow-lg" : "border-white/20 opacity-60 hover:opacity-100"
-              }`}
-            >
-              <img src={imgUrl} alt="" className="w-full h-full object-cover" />
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Main Content Layout */}
-      <div className="max-w-7xl mx-auto px-6 md:px-12 py-16">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          
-          {/* Left Column: Casita Details & Live Calendar */}
-          <div className="lg:col-span-7 space-y-12">
-            {/* Title & Tagline */}
-            <div className="space-y-3">
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 text-[10px] uppercase tracking-[0.25em] text-[#E2B94E] font-medium border border-white/10">
-                <Users className="w-3 h-3" />
-                {casita.capacity}
-              </div>
-              <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#FBF8F1] font-light">
-                {casita.name}
-              </h1>
-              <p className="font-serif text-xl italic text-[#E2B94E]">
-                {casita.tagline}
-              </p>
+      <main id="contenido" tabIndex={-1} className="qq-detail">
+        <div className="qq-wrap">
+          <nav className="qq-breadcrumb" aria-label="Ubicación de la página">
+            <Link to="/">Casitas QuinuaQ</Link>
+            <span aria-hidden="true">/</span>
+            <Link to="/casitas">Las casitas</Link>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">{casita.name}</span>
+          </nav>
+          <div className="qq-detail-heading">
+            <div>
+              <p className="qq-eyebrow">{casita.capacity}</p>
+              <h1>{casita.name}</h1>
+              <p>{casita.tagline}</p>
             </div>
-
-            <p className="text-sm md:text-base text-[#A2B3A8] font-light leading-relaxed">
-              {casita.description}
-            </p>
-
-            {/* Rates Table */}
-            <div className="space-y-4">
-              <span className="text-[10px] uppercase tracking-[0.25em] text-[#687B70] font-medium block">
-                Tarifario por Noche (PEN S/)
-              </span>
-              <div className="grid grid-cols-3 gap-px bg-white/10 border border-white/10">
-                <div className="p-5 bg-[#10271C] text-center">
-                  <span className="block text-[9px] uppercase tracking-wider text-[#A2B3A8]">Lunes a Jueves</span>
-                  <span className="font-serif text-2xl text-[#E2B94E] font-medium">S/ {casita.prices.weekday}</span>
-                </div>
-                <div className="p-5 bg-[#10271C] text-center">
-                  <span className="block text-[9px] uppercase tracking-wider text-[#A2B3A8]">Viernes y Sábado</span>
-                  <span className="font-serif text-2xl text-[#E2B94E] font-medium">S/ {casita.prices.weekend}</span>
-                </div>
-                <div className="p-5 bg-[#10271C] text-center">
-                  <span className="block text-[9px] uppercase tracking-wider text-[#A2B3A8]">Feriados</span>
-                  <span className="font-serif text-2xl text-[#E2B94E] font-medium">S/ {casita.prices.holiday}</span>
-                </div>
-              </div>
-              {casita.extraNote && (
-                <p className="text-xs text-[#E07A5F] italic">* {casita.extraNote}</p>
-              )}
-            </div>
-
-            {/* Interactive Availability Calendar */}
-            <div className="space-y-4 pt-4 border-t border-white/10">
-              <div>
-                <span className="text-[10px] uppercase tracking-[0.25em] text-[#687B70] font-medium block">
-                  Calendario de Disponibilidad en Vivo
-                </span>
-                <p className="text-xs text-[#A2B3A8] mt-0.5">
-                  Selecciona tus fechas directamente en el calendario interactivo.
-                </p>
-              </div>
-              <AvailabilityCalendar
-                blockedDates={blockedDates}
-                checkIn={checkIn}
-                checkOut={checkOut}
-                onSelectRange={(inDate, outDate) => {
-                  setCheckIn(inDate);
-                  setCheckOut(outDate);
-                }}
-              />
-            </div>
-
-            {/* Included Services */}
-            <div className="space-y-4 pt-4 border-t border-white/10">
-              <span className="text-[10px] uppercase tracking-[0.25em] text-[#687B70] font-medium block">
-                Servicios & Virtudes Incluidas
-              </span>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {casita.virtues.map((virtue: string) => (
-                  <div key={virtue} className="flex items-center gap-3 text-xs text-[#FBF8F1]">
-                    <Sparkles className="w-3.5 h-3.5 text-[#E2B94E] shrink-0" />
-                    <span>{virtue}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Amenities Badges */}
-            <div className="space-y-4 pt-4 border-t border-white/10">
-              <span className="text-[10px] uppercase tracking-[0.25em] text-[#687B70] font-medium block">
-                Amenidades
-              </span>
-              <div className="flex flex-wrap gap-2">
-                {casita.amenities.map((amenity: string) => (
-                  <span
-                    key={amenity}
-                    className="text-xs px-3.5 py-1.5 bg-[#10271C] border border-white/10 text-[#C2CCC6]"
-                  >
-                    {amenity}
-                  </span>
-                ))}
-              </div>
-            </div>
+            <a href="#solicitud" className="qq-button">
+              Consultar mi estancia <span aria-hidden="true">↗</span>
+            </a>
           </div>
-
-          {/* Right Column: Sticky Booking Widget */}
-          <div className="lg:col-span-5">
-            <div className="sticky top-28 bg-[#10271C] border border-white/10 p-8 shadow-2xl space-y-6 text-[#FBF8F1]">
-              
+          <figure className="qq-detail-gallery">
+            <img src={photos[activeImg].src} alt={photos[activeImg].alt} fetchPriority="high" />
+            <div className="qq-gallery-controls">
+              {photos.map((photo, index) => (
+                <button
+                  key={photo.src}
+                  type="button"
+                  aria-pressed={index === activeImg}
+                  onClick={() => setActiveImg(index)}
+                >
+                  {index === 0 ? "Ambientación referencial" : "El entorno de QuinuaQ"}
+                </button>
+              ))}
+            </div>
+            <figcaption>{photos[activeImg].caption}</figcaption>
+          </figure>
+          <div className="qq-detail-layout">
+            <div className="qq-detail-description">
+              <section>
+                <p className="qq-eyebrow">Tu estancia</p>
+                <h2>Una pausa en el campo.</h2>
+                <p>{casita.description}</p>
+              </section>
+              <section>
+                <h2>Tarifas por noche</h2>
+                <p className="qq-detail-note">
+                  Precios en soles. Consulta la tarifa final para tus fechas antes de confirmar.
+                </p>
+                <dl className="qq-rates">
+                  <div>
+                    <dt>Domingo a jueves</dt>
+                    <dd>S/ {casita.prices.weekday}</dd>
+                  </div>
+                  <div>
+                    <dt>Viernes y sábado</dt>
+                    <dd>S/ {casita.prices.weekend}</dd>
+                  </div>
+                  <div>
+                    <dt>Feriados</dt>
+                    <dd>S/ {casita.prices.holiday}</dd>
+                  </div>
+                </dl>
+                {casita.extraNote && <p className="qq-detail-note">{casita.extraNote}</p>}
+              </section>
+              <section>
+                <h2>Elige tus fechas</h2>
+                <p className="qq-detail-note">
+                  Selecciona tu llegada y después tu salida. El equipo confirmará la disponibilidad
+                  de tu estancia.
+                </p>
+                <div className="qq-calendar">
+                  <AvailabilityCalendar
+                    blockedDates={blockedDates}
+                    checkIn={checkIn}
+                    checkOut={checkOut}
+                    onSelectRange={(inDate, outDate) => {
+                      setCheckIn(inDate);
+                      setCheckOut(outDate);
+                    }}
+                  />
+                </div>
+              </section>
+              <section>
+                <h2>El espacio</h2>
+                <ul className="qq-virtues">
+                  {casita.virtues.map((virtue) => (
+                    <li key={virtue}>{virtue}</li>
+                  ))}
+                </ul>
+                <h3>Incluido en tu estancia</h3>
+                <ul className="qq-amenities">
+                  {casita.amenities.map((amenity) => (
+                    <li key={amenity}>{amenity}</li>
+                  ))}
+                </ul>
+              </section>
+              <aside className="qq-detail-assistance">
+                <p>¿Tienes una consulta sobre accesibilidad, tu grupo o las fechas?</p>
+                <a href={WA_URL} target="_blank" rel="noreferrer" className="qq-text-link">
+                  Conversemos antes de reservar <span aria-hidden="true">↗</span>
+                </a>
+              </aside>
+            </div>
+            <aside id="solicitud" className="qq-booking-panel" aria-label="Solicitud de estancia">
               {bookingSuccess ? (
-                /* Success State */
-                <div className="space-y-6 text-center py-4">
-                  <div className="w-16 h-16 bg-[#E2B94E]/15 text-[#E2B94E] rounded-full flex items-center justify-center mx-auto border border-[#E2B94E]/30">
-                    <CheckCircle2 className="w-8 h-8" />
-                  </div>
-                  <div className="space-y-2">
-                    <span className="text-[10px] uppercase tracking-[0.25em] text-[#E2B94E] font-medium block">
-                      ¡Solicitud Registrada!
-                    </span>
-                    <h3 className="font-serif text-3xl text-[#FBF8F1]">
-                      Código: {bookingSuccess.code}
-                    </h3>
-                    <p className="text-xs text-[#A2B3A8] max-w-sm mx-auto leading-relaxed">
-                      Tu reserva ha sido registrada en nuestro sistema con estado <strong>Pendiente de Confirmación</strong>.
-                    </p>
-                  </div>
-
-                  <div className="bg-[#08140E] p-5 border border-white/10 text-left space-y-2 text-xs text-[#A2B3A8]">
-                    <p><strong>Casita:</strong> <span className="text-[#FBF8F1]">{casita.name}</span></p>
-                    <p><strong>Fechas:</strong> <span className="text-[#FBF8F1]">{checkIn} al {checkOut} ({quote.nights} noches)</span></p>
-                    <p><strong>Total Estadía:</strong> <span className="text-[#E2B94E] font-bold">S/ {quote.total}</span></p>
-                    <p><strong>Adelanto 50% requerido:</strong> <span className="text-[#E2B94E] font-bold">S/ {quote.suggestedDeposit}</span></p>
-                  </div>
-
+                <div className="qq-booking-success" role="status">
+                  <p className="qq-eyebrow">Solicitud recibida</p>
+                  <h2>Ahora, coordinemos tu visita.</h2>
+                  <p>
+                    Tu solicitud <strong>{bookingSuccess.code}</strong> está pendiente de
+                    confirmación. Escríbenos para verificar las fechas y los detalles del pago.
+                  </p>
+                  <dl className="qq-quote">
+                    <div>
+                      <dt>Casita</dt>
+                      <dd>{casita.name}</dd>
+                    </div>
+                    <div>
+                      <dt>Fechas</dt>
+                      <dd>
+                        {checkIn} al {checkOut}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt>Total estimado</dt>
+                      <dd>S/ {quote.total}</dd>
+                    </div>
+                    <div>
+                      <dt>Adelanto sugerido</dt>
+                      <dd>S/ {quote.suggestedDeposit}</dd>
+                    </div>
+                  </dl>
                   <a
                     href={bookingSuccess.waUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="w-full inline-flex items-center justify-center gap-2 py-4 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-semibold text-xs uppercase tracking-wider transition-colors shadow-lg rounded"
+                    className="qq-button"
                   >
-                    <Phone className="w-4 h-4" />
-                    Enviar Voucher por WhatsApp
+                    Continuar por WhatsApp <span aria-hidden="true">↗</span>
                   </a>
-
                   <button
                     type="button"
+                    className="qq-text-link"
                     onClick={() => setBookingSuccess(null)}
-                    className="text-xs text-[#A2B3A8] underline block mx-auto hover:text-white"
                   >
                     Hacer otra solicitud
                   </button>
                 </div>
               ) : (
-                /* Booking Form */
                 <>
-                  <div className="border-b border-white/10 pb-5">
-                    <div className="flex justify-between items-baseline">
-                      <span className="text-[10px] uppercase tracking-[0.25em] text-[#E2B94E] font-medium">
-                        Cotización Inmediata
-                      </span>
-                      <span className="text-xs text-[#A2B3A8]">
-                        Desde S/ {casita.prices.weekday} / noche
-                      </span>
-                    </div>
-                    <h2 className="font-serif text-2xl text-[#FBF8F1] mt-1">{casita.name}</h2>
-                  </div>
-
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    {/* Dates */}
-                    <div className="grid grid-cols-2 gap-3">
-                      <div>
-                        <label className="block text-[9px] uppercase tracking-[0.25em] text-[#687B70] mb-1">
-                          Llegada
-                        </label>
+                  <p className="qq-eyebrow">Reserva directa</p>
+                  <h2>Planea tu estancia.</h2>
+                  <p className="qq-detail-note">
+                    Desde <strong>S/ {casita.prices.weekday}</strong> por noche.
+                  </p>
+                  <form onSubmit={handleSubmit} className="qq-booking-form">
+                    <div className="qq-date-fields">
+                      <label htmlFor="arrival">
+                        Llegada
                         <input
+                          id="arrival"
                           type="date"
                           required
                           value={checkIn}
                           min={todayISO(0)}
-                          onChange={(e) => setCheckIn(e.target.value)}
-                          className="w-full bg-[#08140E] border border-white/10 px-3 py-2 text-xs text-[#FBF8F1] font-sans focus:outline-none focus:border-[#E2B94E]"
+                          onChange={(event) => {
+                            const value = event.target.value;
+                            setCheckIn(value);
+                            if (value && checkOut <= value) setCheckOut(nextDateISO(value));
+                          }}
                         />
-                      </div>
-                      <div>
-                        <label className="block text-[9px] uppercase tracking-[0.25em] text-[#687B70] mb-1">
-                          Salida
-                        </label>
+                      </label>
+                      <label htmlFor="departure">
+                        Salida
                         <input
+                          id="departure"
                           type="date"
                           required
                           value={checkOut}
-                          min={checkIn || todayISO(1)}
-                          onChange={(e) => setCheckOut(e.target.value)}
-                          className="w-full bg-[#08140E] border border-white/10 px-3 py-2 text-xs text-[#FBF8F1] font-sans focus:outline-none focus:border-[#E2B94E]"
+                          min={checkIn ? nextDateISO(checkIn) : todayISO(1)}
+                          onChange={(event) => setCheckOut(event.target.value)}
                         />
-                      </div>
-                    </div>
-
-                    {/* Guests */}
-                    <div>
-                      <label className="block text-[9px] uppercase tracking-[0.25em] text-[#687B70] mb-1">
-                        Huéspedes (Capacidad máx: {casita.maxGuests})
                       </label>
+                    </div>
+                    {dateWarning && (
+                      <p role="status" className="qq-form-warning">
+                        {dateWarning}
+                      </p>
+                    )}
+                    <label htmlFor="guests">
+                      Huéspedes
                       <select
+                        id="guests"
                         value={guests}
-                        onChange={(e) => setGuests(Number(e.target.value))}
-                        className="w-full bg-[#08140E] border border-white/10 px-3 py-2 text-xs text-[#FBF8F1] font-sans focus:outline-none focus:border-[#E2B94E]"
+                        onChange={(event) => setGuests(Number(event.target.value))}
                       >
-                        {Array.from({ length: casita.maxGuests }, (_, i) => i + 1).map((num) => (
-                          <option key={num} value={num}>
-                            {num} {num === 1 ? "Huésped" : "Huéspedes"}
+                        {Array.from({ length: casita.maxGuests }, (_, i) => i + 1).map((number) => (
+                          <option key={number} value={number}>
+                            {number} {number === 1 ? "persona" : "personas"}
                           </option>
                         ))}
                       </select>
-                    </div>
-
-                    {/* Guest Information */}
-                    <div>
-                      <label className="block text-[9px] uppercase tracking-[0.25em] text-[#687B70] mb-1">
-                        Nombre Completo
-                      </label>
+                    </label>
+                    <label htmlFor="guest-name">
+                      Nombre completo
                       <input
+                        id="guest-name"
                         type="text"
                         required
-                        placeholder="Ej. Lucía Alarcón"
+                        minLength={2}
+                        autoComplete="name"
                         value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        className="w-full bg-[#08140E] border border-white/10 px-3 py-2 text-xs text-[#FBF8F1] font-sans focus:outline-none focus:border-[#E2B94E]"
+                        onChange={(event) => setName(event.target.value)}
+                        placeholder="¿A nombre de quién?"
                       />
-                    </div>
-
-                    <div>
-                      <label className="block text-[9px] uppercase tracking-[0.25em] text-[#687B70] mb-1">
-                        WhatsApp / Teléfono
-                      </label>
+                    </label>
+                    <label htmlFor="guest-phone">
+                      WhatsApp o teléfono
                       <input
+                        id="guest-phone"
                         type="tel"
                         required
-                        placeholder="+51 946 393 256"
+                        minLength={6}
+                        autoComplete="tel"
                         value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        className="w-full bg-[#08140E] border border-white/10 px-3 py-2 text-xs text-[#FBF8F1] font-sans focus:outline-none focus:border-[#E2B94E]"
+                        onChange={(event) => setPhone(event.target.value)}
+                        placeholder="+51"
                       />
-                    </div>
-
-                    <div>
-                      <label className="block text-[9px] uppercase tracking-[0.25em] text-[#687B70] mb-1">
-                        Correo Electrónico (opcional)
-                      </label>
+                    </label>
+                    <label htmlFor="guest-email">
+                      Correo electrónico <span>(opcional)</span>
                       <input
+                        id="guest-email"
                         type="email"
-                        placeholder="correo@ejemplo.com"
+                        autoComplete="email"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="w-full bg-[#08140E] border border-white/10 px-3 py-2 text-xs text-[#FBF8F1] font-sans focus:outline-none focus:border-[#E2B94E]"
+                        onChange={(event) => setEmail(event.target.value)}
+                        placeholder="correo@ejemplo.com"
                       />
-                    </div>
-
-                    {/* Live Financial Breakdown Box */}
-                    {quote.nights > 0 && (
-                      <div className="bg-[#08140E] p-4 border border-white/10 space-y-2 text-xs">
-                        <div className="flex justify-between text-[#A2B3A8]">
-                          <span>Estadía</span>
-                          <span>{quote.nights} noche{quote.nights !== 1 ? "s" : ""}</span>
-                        </div>
-                        {quote.weekdayNights > 0 && (
-                          <div className="flex justify-between text-[#A2B3A8]">
-                            <span>{quote.weekdayNights} noche(s) entre semana</span>
-                            <span>S/ {quote.weekdayNights * casita.prices.weekday}</span>
+                    </label>
+                    <details className="qq-booking-notes">
+                      <summary>¿Quieres contarnos algo más?</summary>
+                      <label htmlFor="guest-notes">
+                        Tu mensaje
+                        <textarea
+                          id="guest-notes"
+                          rows={3}
+                          value={notes}
+                          onChange={(event) => setNotes(event.target.value)}
+                        />
+                      </label>
+                    </details>
+                    {quote.nights > 0 ? (
+                      <div className="qq-quote-summary">
+                        <dl className="qq-quote">
+                          <div>
+                            <dt>Estancia</dt>
+                            <dd>
+                              {quote.nights} {quote.nights === 1 ? "noche" : "noches"}
+                            </dd>
                           </div>
-                        )}
-                        {quote.weekendNights > 0 && (
-                          <div className="flex justify-between text-[#A2B3A8]">
-                            <span>{quote.weekendNights} noche(s) fin de semana</span>
-                            <span>S/ {quote.weekendNights * casita.prices.weekend}</span>
+                          {quote.weekdayNights > 0 && (
+                            <div>
+                              <dt>{quote.weekdayNights} noche(s) entre semana</dt>
+                              <dd>S/ {quote.weekdayNights * casita.prices.weekday}</dd>
+                            </div>
+                          )}
+                          {quote.weekendNights > 0 && (
+                            <div>
+                              <dt>{quote.weekendNights} noche(s) de fin de semana</dt>
+                              <dd>S/ {quote.weekendNights * casita.prices.weekend}</dd>
+                            </div>
+                          )}
+                          {quote.extraGuestFee > 0 && (
+                            <div>
+                              <dt>Personas adicionales</dt>
+                              <dd>S/ {quote.extraGuestFee}</dd>
+                            </div>
+                          )}
+                          <div className="qq-quote-total">
+                            <dt>Total estimado</dt>
+                            <dd>S/ {quote.total}</dd>
                           </div>
-                        )}
-                        {quote.extraGuestFee > 0 && (
-                          <div className="flex justify-between text-[#A2B3A8]">
-                            <span>Huéspedes adicionales</span>
-                            <span>S/ {quote.extraGuestFee}</span>
+                          <div>
+                            <dt>Adelanto sugerido (50%)</dt>
+                            <dd>S/ {quote.suggestedDeposit}</dd>
                           </div>
-                        )}
-                        <div className="pt-2 border-t border-white/10 flex justify-between items-baseline">
-                          <span className="font-medium text-[#FBF8F1]">Total Estadía</span>
-                          <span className="font-serif text-2xl text-[#E2B94E] font-medium">S/ {quote.total}</span>
-                        </div>
-                        <div className="flex justify-between text-[11px] text-[#E07A5F] pt-1">
-                          <span>Adelanto sugerido (50%):</span>
-                          <strong>S/ {quote.suggestedDeposit}</strong>
-                        </div>
+                        </dl>
+                        <p>
+                          La estimación no aplica tarifas de feriados automáticamente. Confirmaremos
+                          el importe final contigo.
+                        </p>
                       </div>
+                    ) : (
+                      <p className="qq-form-warning">
+                        Elige una fecha de salida posterior a tu llegada.
+                      </p>
                     )}
-
                     {error && (
-                      <p className="text-xs text-red-400 border border-red-500/20 bg-red-500/10 p-3">
+                      <p role="alert" className="qq-form-warning">
                         {error}
                       </p>
                     )}
-
-                    <button
-                      type="submit"
-                      disabled={!canSubmit}
-                      className="w-full py-3.5 bg-[#E2B94E] hover:bg-[#F3D78A] text-[#08140E] text-xs uppercase tracking-wider transition-all duration-300 disabled:opacity-40 font-bold shadow-md rounded"
-                    >
-                      {saving ? "Generando solicitud..." : "Solicitar Reserva por WhatsApp →"}
+                    <button type="submit" disabled={!canSubmit} className="qq-button">
+                      {saving ? "Enviando solicitud…" : "Solicitar mi estancia"}
+                      <span aria-hidden="true">↗</span>
                     </button>
+                    <p className="qq-form-disclaimer">
+                      Esta solicitud no confirma una reserva ni realiza un cobro. Nuestro equipo
+                      coordinará los siguientes pasos contigo.
+                    </p>
                   </form>
                 </>
               )}
-            </div>
+            </aside>
           </div>
-
         </div>
-      </div>
-
+      </main>
       <SiteFooter />
-    </main>
+    </div>
   );
 }

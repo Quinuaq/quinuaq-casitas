@@ -1,0 +1,1578 @@
+/* Public hospitality experience. Admin/PMS styles remain independent. */
+.qq-public {
+  --q-paper: #f8f6f0;
+  --q-ink: #17392d;
+  --q-muted: #5c6860;
+  --q-clay: #a75c42;
+  --q-line: #d6d9cc;
+  background: var(--q-paper);
+  color: var(--q-ink);
+  font:
+    400 17px/1.7 "Manrope",
+    sans-serif;
+}
+.qq-public *,
+.qq-public *::before,
+.qq-public *::after {
+  box-sizing: border-box;
+}
+.qq-public h1,
+.qq-public h2,
+.qq-public h3,
+.qq-public h4 {
+  color: inherit;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+.qq-public h1 {
+  font-size: clamp(54px, 6.2vw, 88px);
+}
+.qq-public h2 {
+  font-size: clamp(40px, 4.3vw, 62px);
+}
+.qq-public h3 {
+  font-size: 34px;
+}
+.qq-public p {
+  margin: 0;
+}
+.qq-public em {
+  font-weight: 400;
+}
+.qq-public button,
+.qq-public input,
+.qq-public select,
+.qq-public textarea {
+  font-family: "Manrope", sans-serif;
+}
+.qq-public :is(a, button, input, select, textarea, summary):focus-visible {
+  outline: 2px solid var(--q-clay);
+  outline-offset: 5px;
+}
+.qq-public :is(button, summary) {
+  cursor: pointer;
+}
+.qq-public button:disabled {
+  cursor: not-allowed;
+}
+.qq-public [id] {
+  scroll-margin-top: 112px;
+}
+.qq-public main:focus {
+  outline: none;
+}
+.qq-wrap {
+  width: calc(100% - 112px);
+  max-width: 1360px;
+  margin-inline: auto;
+}
+.qq-eyebrow {
+  display: block;
+  margin-bottom: 20px !important;
+  color: var(--q-clay);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+.qq-button {
+  min-height: 54px;
+  padding: 14px 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  border: 1px solid var(--q-ink);
+  background: var(--q-ink);
+  color: var(--q-paper);
+  font:
+    500 15px/1.5 "Manrope",
+    sans-serif;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.qq-button:hover {
+  background: #285444;
+}
+.qq-button span,
+.qq-text-link span,
+.qq-property-switch span {
+  font-size: 20px;
+  line-height: 1;
+}
+.qq-button-ivory {
+  background: var(--q-paper);
+  border-color: var(--q-paper);
+  color: var(--q-ink);
+}
+.qq-button-ivory:hover {
+  background: #eae6d9;
+}
+.qq-button-outline {
+  background: transparent;
+  color: var(--q-ink);
+}
+.qq-button-outline:hover {
+  color: var(--q-paper);
+}
+.qq-text-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 26px;
+  min-height: 44px;
+  border-bottom: 1px solid currentColor;
+  padding-block: 8px;
+  font-size: 15px;
+  font-weight: 500;
+}
+.qq-text-link:hover {
+  color: var(--q-clay);
+}
+.qq-actions {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.qq-header {
+  position: sticky;
+  z-index: 50;
+  top: 0;
+  background: #f8f6f0;
+  border-bottom: 1px solid #d6d9cc;
+  color: #17392d;
+  height: 88px;
+}
+.qq-header-inner {
+  max-width: 1600px;
+  height: 100%;
+  padding-inline: 48px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.qq-brand {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 17px;
+  text-decoration: none;
+}
+.qq-brand-image {
+  position: relative;
+  width: 100px;
+  height: 62px;
+  overflow: hidden;
+  display: block;
+}
+.qq-brand-image img {
+  position: absolute;
+  max-width: none;
+  width: 100%;
+  height: auto;
+  left: 0;
+  top: -5px;
+}
+.qq-brand-name {
+  font-size: 16px;
+  letter-spacing: 0.12em;
+  line-height: 1.3;
+  border-left: 1px solid currentColor;
+  padding-left: 17px;
+}
+.qq-brand-name > span {
+  font-size: 12px;
+  display: block;
+  letter-spacing: 0.02em;
+  margin-top: 5px;
+}
+.qq-brand-light .qq-brand-image img {
+  filter: brightness(0) invert(1);
+}
+.qq-nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.qq-nav a {
+  position: relative;
+  font-size: 14px;
+  font-weight: 500;
+  padding-block: 12px;
+  white-space: nowrap;
+}
+.qq-nav a:hover,
+.qq-nav .is-active {
+  color: var(--q-clay);
+}
+.qq-nav .is-active::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: currentColor;
+}
+.qq-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.qq-property-switch {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-size: 14px;
+  min-height: 44px;
+  white-space: nowrap;
+}
+.qq-header-book {
+  min-height: 48px;
+  padding: 10px 22px;
+}
+.qq-menu-trigger {
+  display: none;
+  border: 1px solid var(--q-line);
+  width: 44px;
+  height: 44px;
+  padding: 12px;
+  background: transparent;
+  color: var(--q-ink);
+}
+.qq-menu-trigger span {
+  display: block;
+  height: 1px;
+  background: currentColor;
+  width: 20px;
+  margin-block: 5px;
+}
+.qq-skip {
+  position: fixed;
+  z-index: 200;
+  padding: 14px 20px;
+  background: #17392d;
+  color: #fff;
+  transform: translateY(-150%);
+}
+.qq-skip:focus {
+  transform: translateY(0);
+}
+.qq-menu {
+  position: fixed;
+  inset: 0 0 0 auto;
+  width: min(500px, 100%);
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  max-width: none;
+  padding: 26px;
+  border: 0;
+  background: #f8f6f0;
+  color: #17392d;
+}
+.qq-menu::backdrop {
+  background: #10271ca6;
+}
+.qq-menu-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.qq-menu-top button {
+  background: transparent;
+  border: 1px solid #d6d9cc;
+  min-width: 44px;
+  height: 44px;
+  font-size: 30px;
+}
+.qq-menu nav {
+  display: grid;
+  margin: 44px 0;
+}
+.qq-menu nav a {
+  padding: 16px 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 32px;
+  border-bottom: 1px solid #d6d9cc;
+}
+.qq-menu > p {
+  font-size: 14px;
+  margin-top: 28px;
+}
+.qq-stay-hero {
+  height: min(790px, calc(100svh - 88px));
+  min-height: 600px;
+  position: relative;
+  color: #fffdf5;
+  display: flex;
+  align-items: center;
+  isolation: isolate;
+}
+.qq-stay-hero > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 60%;
+  z-index: -2;
+}
+.qq-stay-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(9, 27, 20, 0.78), rgba(9, 27, 20, 0.25) 61%, rgba(9, 27, 20, 0.08)),
+    linear-gradient(0deg, rgba(9, 27, 20, 0.5), transparent 45%);
+}
+.qq-stay-hero-content {
+  padding-block: 56px 100px;
+}
+.qq-stay-hero .qq-eyebrow {
+  color: #eee5cf;
+}
+.qq-stay-hero h1 {
+  max-width: 920px;
+  font-size: clamp(60px, 6.6vw, 96px);
+  line-height: 0.98;
+}
+.qq-stay-hero-content > p:not(.qq-eyebrow) {
+  margin-top: 28px;
+  font-size: 18px;
+  line-height: 1.7;
+}
+.qq-stay-hero .qq-actions {
+  margin-top: 32px;
+}
+.qq-stay-hero .qq-text-link:hover {
+  color: #e9d1b7;
+}
+.qq-hero-caption {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 24px;
+  left: 0;
+  right: 0;
+  padding-top: 20px;
+  border-top: 1px solid #ffffff4a;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+.qq-intro {
+  padding-block: 100px;
+  display: grid;
+  grid-template-columns: 0.7fr 1.5fr 1.5fr;
+  gap: 42px;
+  align-items: start;
+}
+.qq-intro h2 {
+  font-size: clamp(38px, 3.7vw, 54px);
+}
+.qq-intro > .qq-eyebrow {
+  margin-top: 8px;
+}
+.qq-intro > div p {
+  margin-bottom: 22px;
+  color: var(--q-muted);
+}
+.qq-stay-selection {
+  padding-bottom: 100px;
+}
+.qq-section-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 32px;
+  margin-bottom: 32px;
+}
+.qq-section-top h2 {
+  font-size: clamp(38px, 3.6vw, 52px);
+}
+.qq-section-top .qq-text-link {
+  flex-shrink: 0;
+}
+.qq-selection-grid {
+  border-top: 1px solid var(--q-line);
+}
+.qq-selection-link {
+  padding: 30px 0;
+  display: grid;
+  grid-template-columns: 60px 1fr 40px;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 1px solid var(--q-line);
+  transition: padding 0.2s;
+}
+.qq-selection-link:hover {
+  padding-inline: 16px;
+}
+.qq-selection-number {
+  color: var(--q-clay);
+  font-size: 14px;
+}
+.qq-selection-link > div {
+  display: grid;
+  grid-template-columns: 120px 1fr 1fr;
+  align-items: center;
+  gap: 24px;
+}
+.qq-selection-link h3 {
+  font-size: 32px;
+}
+.qq-selection-link > div > p {
+  font-size: 14px;
+}
+.qq-selection-link > div > span {
+  font-size: 14px;
+  color: var(--q-muted);
+}
+.qq-selection-link > span:last-child {
+  font-size: 24px;
+}
+.qq-restaurant-story {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #eaece1;
+}
+.qq-restaurant-story figure {
+  position: relative;
+  height: 650px;
+  overflow: hidden;
+}
+.qq-restaurant-story figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 58%;
+}
+.qq-restaurant-story figcaption {
+  position: absolute;
+  bottom: 0;
+  padding: 28px 32px;
+  color: #fff;
+  width: 100%;
+  background: linear-gradient(transparent, #13281bd9);
+  font-size: 12px;
+}
+.qq-restaurant-story > div {
+  align-self: center;
+  padding: 64px clamp(32px, 6vw, 112px);
+}
+.qq-restaurant-story p:not(.qq-eyebrow) {
+  color: var(--q-muted);
+  margin-block: 30px;
+  max-width: 510px;
+}
+.qq-purpose {
+  padding-block: 110px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 8vw, 130px);
+  align-items: center;
+}
+.qq-purpose p:not(.qq-eyebrow) {
+  color: var(--q-muted);
+  margin-top: 24px;
+}
+.qq-purpose .qq-text-link {
+  margin-top: 22px;
+}
+.qq-purpose figure img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+}
+.qq-purpose figcaption {
+  color: var(--q-muted);
+  font-size: 12px;
+  padding-top: 14px;
+}
+.qq-stay-contact {
+  padding-block: 64px;
+  background: #ede9df;
+  border-top: 1px solid var(--q-line);
+}
+.qq-stay-contact > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+  align-items: center;
+}
+.qq-stay-contact h2 {
+  font-size: 52px;
+}
+.qq-stay-contact p:not(.qq-eyebrow) {
+  margin-top: 18px;
+  color: var(--q-muted);
+  max-width: 560px;
+}
+.qq-stay-contact .qq-actions {
+  display: grid;
+  gap: 14px;
+  flex-shrink: 0;
+}
+.qq-footer {
+  padding: 64px 0 24px;
+  background: #17392d;
+  color: #f8f6f0;
+}
+.qq-footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 60px;
+}
+.qq-footer .qq-eyebrow {
+  color: #d9c9b7;
+}
+.qq-footer-grid > div:first-child > p {
+  margin-top: 24px;
+}
+.qq-footer p {
+  color: #c8d1c8;
+  font-size: 15px;
+}
+.qq-footer-grid :is(nav, div):not(.qq-brand-image) > a:not(.qq-brand) {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 12px;
+  overflow-wrap: anywhere;
+}
+.qq-footer a:hover {
+  color: #e4c1a8;
+}
+.qq-footer-bottom {
+  margin-top: 48px;
+  padding-top: 22px;
+  border-top: 1px solid #ffffff30;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+}
+.qq-footer-bottom p,
+.qq-footer-bottom a {
+  font-size: 12px;
+}
+.qq-catalog {
+  padding-block: 68px 90px;
+}
+.qq-catalog-heading {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 60px;
+  align-items: end;
+  padding-bottom: 44px;
+}
+.qq-catalog-heading > p {
+  max-width: 500px;
+  color: var(--q-muted);
+  padding-bottom: 6px;
+}
+.qq-catalog-heading h1 {
+  font-size: clamp(56px, 5.5vw, 80px);
+}
+.qq-filters {
+  border-top: 1px solid var(--q-line);
+  border-bottom: 1px solid var(--q-line);
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  column-gap: 40px;
+  align-items: center;
+  padding-block: 24px;
+}
+.qq-category-tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.qq-category-tabs button {
+  border: 1px solid transparent;
+  padding: 12px 16px;
+  font-size: 14px;
+  color: var(--q-ink);
+  background: transparent;
+}
+.qq-category-tabs button[aria-pressed="true"] {
+  border-color: var(--q-ink);
+  background: var(--q-ink);
+  color: #fff;
+}
+.qq-filter-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 26px;
+}
+.qq-filter-fields label {
+  font-size: 12px;
+  font-weight: 500;
+  display: grid;
+  align-content: space-between;
+  gap: 7px;
+}
+.qq-filter-fields select {
+  display: block;
+  border: 1px solid var(--q-line);
+  background: transparent;
+  font-size: 15px;
+  padding: 8px 12px;
+  color: var(--q-ink);
+  width: 100%;
+  min-height: 44px;
+}
+.qq-filter-fields input[type="range"] {
+  width: 100%;
+  accent-color: var(--q-ink);
+  height: 44px;
+}
+.qq-extra-filters {
+  grid-column: 1 / -1;
+  margin-top: 14px;
+}
+.qq-extra-filters summary {
+  font-size: 13px;
+  display: flex;
+  gap: 20px;
+  width: fit-content;
+  padding-block: 8px;
+}
+.qq-amenity-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  padding-top: 14px;
+}
+.qq-amenity-options label {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 14px;
+  min-height: 36px;
+}
+.qq-amenity-options input {
+  accent-color: var(--q-ink);
+  width: 17px;
+  height: 17px;
+}
+.qq-results {
+  margin-block: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--q-muted);
+  font-size: 13px;
+}
+.qq-catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 48px 30px;
+}
+.qq-casita-card {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--q-line);
+}
+.qq-card-photo {
+  display: block;
+  position: relative;
+  height: 260px;
+  overflow: hidden;
+}
+.qq-card-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+.qq-card-photo:hover img {
+  transform: scale(1.025);
+}
+.qq-card-photo > span {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 24px 12px 10px;
+  color: white;
+  font-size: 11px;
+  background: linear-gradient(transparent, #10271cd9);
+}
+.qq-card-body {
+  padding: 24px 0 20px;
+}
+.qq-card-body .qq-eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px !important;
+}
+.qq-card-body h2 {
+  font-size: 34px;
+  margin-bottom: 12px;
+}
+.qq-card-body > p:not(.qq-eyebrow) {
+  font-size: 15px;
+  color: var(--q-muted);
+}
+.qq-card-amenities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  padding-top: 18px;
+  color: var(--q-muted);
+  font-size: 12px;
+}
+.qq-card-amenities span + span::before {
+  content: "·";
+  margin-right: 18px;
+}
+.qq-card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 18px;
+  padding-bottom: 26px;
+  margin-top: auto;
+}
+.qq-card-bottom p {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 8px;
+  align-items: baseline;
+}
+.qq-card-bottom p > span {
+  font-size: 12px;
+  color: var(--q-muted);
+}
+.qq-card-bottom p > span:first-child {
+  display: block;
+  flex: 0 0 100%;
+}
+.qq-card-bottom strong {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 32px;
+  font-weight: 500;
+}
+.qq-card-bottom .qq-text-link {
+  font-size: 14px;
+  gap: 16px;
+  flex-shrink: 0;
+}
+.qq-empty {
+  padding: 70px 30px;
+  text-align: center;
+}
+.qq-empty h2 {
+  font-size: 40px;
+}
+.qq-empty p {
+  margin-block: 20px 28px;
+}
+.qq-catalog-help {
+  margin-top: 60px;
+  padding: 30px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  border-block: 1px solid var(--q-line);
+}
+.qq-detail {
+  padding-block: 30px 90px;
+}
+.qq-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--q-muted);
+}
+.qq-breadcrumb a:hover {
+  color: var(--q-clay);
+}
+.qq-detail-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 40px;
+  margin-block: 42px 34px;
+}
+.qq-detail-heading h1 {
+  font-size: clamp(48px, 5.6vw, 76px);
+}
+.qq-detail-heading .qq-eyebrow {
+  margin-bottom: 10px !important;
+}
+.qq-detail-heading p:not(.qq-eyebrow) {
+  margin-top: 16px;
+  color: var(--q-muted);
+}
+.qq-detail-heading > .qq-button {
+  flex-shrink: 0;
+}
+.qq-detail-gallery {
+  position: relative;
+  margin-bottom: 60px;
+}
+.qq-detail-gallery > img {
+  width: 100%;
+  height: 470px;
+  object-fit: cover;
+  object-position: center 65%;
+}
+.qq-detail-gallery figcaption {
+  font-size: 12px;
+  color: var(--q-muted);
+  padding-top: 12px;
+}
+.qq-gallery-controls {
+  position: absolute;
+  left: 24px;
+  bottom: 65px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.qq-gallery-controls button {
+  min-height: 44px;
+  font-size: 12px;
+  background: #f8f6f0;
+  color: #17392d;
+  padding: 10px 16px;
+  border: 1px solid #f8f6f0;
+}
+.qq-gallery-controls button[aria-pressed="true"] {
+  background: #17392d;
+  color: #fff;
+}
+.qq-detail-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: clamp(48px, 7vw, 106px);
+  align-items: start;
+}
+.qq-detail-description > section + section {
+  margin-top: 40px;
+  padding-top: 34px;
+  border-top: 1px solid var(--q-line);
+}
+.qq-detail-description h2 {
+  font-size: 36px;
+  margin-bottom: 18px;
+}
+.qq-detail-description h3 {
+  font-size: 28px;
+  margin-block: 26px 18px;
+}
+.qq-detail-description p {
+  color: var(--q-muted);
+}
+.qq-detail-note {
+  font-size: 14px;
+  color: var(--q-muted);
+  margin-top: 14px !important;
+}
+.qq-rates {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 24px;
+  gap: 1px;
+  border: 1px solid var(--q-line);
+  background: var(--q-line);
+}
+.qq-rates > div {
+  background: var(--q-paper);
+  padding: 20px 12px;
+  text-align: center;
+}
+.qq-rates dt {
+  font-size: 12px;
+}
+.qq-rates dd {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 32px;
+  margin-top: 5px;
+}
+.qq-virtues {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.qq-virtues li {
+  border-bottom: 1px solid var(--q-line);
+  padding: 12px 0;
+  font-size: 15px;
+  display: flex;
+  gap: 14px;
+}
+.qq-virtues li::before {
+  content: "+";
+  color: var(--q-clay);
+}
+.qq-amenities {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 8px 24px;
+  flex-wrap: wrap;
+}
+.qq-amenities li {
+  font-size: 14px;
+}
+.qq-amenities li::before {
+  content: "·";
+  margin-right: 8px;
+  color: var(--q-clay);
+}
+.qq-detail-assistance {
+  margin-top: 42px;
+  padding-top: 26px;
+  border-top: 1px solid var(--q-line);
+}
+.qq-detail-assistance .qq-text-link {
+  margin-top: 14px;
+}
+.qq-booking-panel {
+  padding: 32px;
+  background: #eceee4;
+  border-top: 2px solid var(--q-ink);
+}
+.qq-booking-panel > h2 {
+  font-size: 38px;
+}
+.qq-booking-panel .qq-eyebrow {
+  margin-bottom: 12px !important;
+}
+.qq-booking-form {
+  margin-top: 26px;
+  display: grid;
+  gap: 16px;
+}
+.qq-booking-form label {
+  font-size: 13px;
+  font-weight: 500;
+  display: block;
+}
+.qq-booking-form label > span {
+  font-weight: 400;
+  color: var(--q-muted);
+}
+.qq-booking-form :is(input, select, textarea) {
+  width: 100%;
+  min-width: 0;
+  display: block;
+  font-size: 16px;
+  margin-top: 7px;
+  padding: 12px;
+  border: 1px solid #b8c0b3;
+  border-radius: 0;
+  background: #f8f6f0;
+  color: var(--q-ink);
+  min-height: 48px;
+}
+.qq-booking-form :is(input, textarea)::placeholder {
+  color: #778176;
+}
+.qq-date-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  min-width: 0;
+}
+.qq-date-fields > label {
+  min-width: 0;
+}
+.qq-date-fields input {
+  padding-inline: 8px;
+  font-size: 14px;
+}
+.qq-booking-notes summary {
+  font-size: 13px;
+  padding-block: 8px;
+}
+.qq-booking-notes label {
+  margin-top: 12px;
+}
+.qq-quote-summary {
+  padding-block: 20px 0;
+  border-top: 1px solid #b8c0b3;
+}
+.qq-quote > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+.qq-quote dd {
+  text-align: right;
+}
+.qq-quote-total {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #b8c0b3;
+  align-items: baseline;
+}
+.qq-quote-total dt {
+  font-size: 15px;
+}
+.qq-quote-total dd {
+  font:
+    500 36px/1 "Cormorant Garamond",
+    Georgia,
+    serif;
+  white-space: nowrap;
+}
+.qq-quote-summary > p {
+  font-size: 12px;
+  color: var(--q-muted);
+  margin-top: 16px;
+}
+.qq-form-warning {
+  color: #9c3826;
+  font-size: 14px;
+}
+.qq-booking-form > .qq-button {
+  margin-top: 4px;
+  width: 100%;
+}
+.qq-booking-form > .qq-button:disabled {
+  background: #526c5e;
+  opacity: 0.7;
+}
+.qq-form-disclaimer {
+  font-size: 12px;
+  color: var(--q-muted);
+}
+.qq-booking-success > h2 {
+  font-size: 40px;
+}
+.qq-booking-success > p:not(.qq-eyebrow) {
+  margin-block: 24px;
+}
+.qq-booking-success .qq-quote {
+  margin-block: 24px;
+}
+.qq-booking-success > .qq-button {
+  margin-bottom: 12px;
+}
+.qq-booking-success > button {
+  background: transparent;
+}
+.qq-calendar {
+  margin-top: 24px;
+}
+.qq-calendar-inner {
+  border: 1px solid var(--q-line);
+  padding: 22px;
+}
+.qq-calendar-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.qq-calendar-top h3 {
+  font-size: 26px;
+  margin: 0;
+}
+.qq-calendar-top > div {
+  display: flex;
+  gap: 8px;
+}
+.qq-calendar-top button {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--q-line);
+  background: transparent;
+}
+.qq-calendar-instruction {
+  margin-block: 18px !important;
+  font-size: 13px;
+}
+.qq-calendar-weekdays,
+.qq-calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 4px;
+}
+.qq-calendar-weekdays {
+  text-align: center;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+.qq-calendar-days button {
+  height: 44px;
+  color: var(--q-ink);
+  background: transparent;
+  border: 1px solid transparent;
+  font-size: 14px;
+}
+.qq-calendar-days button:hover {
+  border-color: var(--q-ink);
+}
+.qq-calendar-days button:disabled {
+  text-decoration: line-through;
+  color: #8b9288;
+  background: #eeeee6;
+}
+.qq-calendar-days .is-in-range {
+  background: #dae2d6;
+}
+.qq-calendar-days .is-selected {
+  background: var(--q-ink);
+  color: #fff;
+}
+.qq-calendar-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 24px;
+  border-top: 1px solid var(--q-line);
+  padding-top: 16px;
+  margin-top: 18px;
+  font-size: 12px;
+}
+.qq-calendar-legend > span {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.qq-calendar-legend i {
+  width: 12px;
+  height: 12px;
+  background: #17392d;
+}
+.qq-calendar-legend .unavailable {
+  background: #eeeee6;
+  border: 1px solid #8b9288;
+}
+
+@media (max-width: 1190px) {
+  .qq-header-inner {
+    padding-inline: 28px;
+  }
+  .qq-nav {
+    gap: 20px;
+  }
+  .qq-header-actions {
+    gap: 20px;
+  }
+  .qq-header-book {
+    display: none;
+  }
+  .qq-wrap {
+    width: calc(100% - 72px);
+  }
+  .qq-intro {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 54px;
+    padding-block: 76px;
+  }
+  .qq-intro > .qq-eyebrow {
+    grid-column: 1 / -1;
+    margin: 0 !important;
+  }
+  .qq-selection-link > div {
+    grid-template-columns: 1fr 1.5fr;
+  }
+  .qq-selection-link > div > p {
+    grid-column: 1 / -1;
+    margin-bottom: -12px;
+  }
+  .qq-purpose {
+    gap: 54px;
+  }
+  .qq-footer-grid {
+    gap: 32px;
+  }
+  .qq-catalog-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .qq-filters {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .qq-filter-fields {
+    max-width: 600px;
+  }
+  .qq-extra-filters {
+    margin-top: -8px;
+  }
+}
+@media (max-width: 840px) {
+  .qq-detail-layout {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+  .qq-detail-layout > .qq-booking-panel {
+    grid-row: 1;
+  }
+  .qq-detail-heading {
+    align-items: start;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .qq-detail-gallery > img {
+    height: 400px;
+  }
+  .qq-booking-panel {
+    max-width: 640px;
+    width: 100%;
+  }
+  .qq-header {
+    height: 76px;
+  }
+  .qq-header-inner {
+    padding-inline: 22px;
+  }
+  .qq-nav {
+    display: none;
+  }
+  .qq-menu-trigger {
+    display: block;
+  }
+  .qq-brand-image {
+    width: 88px;
+    height: 50px;
+  }
+  .qq-brand-image img {
+    width: 100%;
+    left: 0;
+    top: -6px;
+  }
+  .qq-brand {
+    gap: 10px;
+  }
+  .qq-brand-name {
+    padding-left: 10px;
+    font-size: 14px;
+  }
+  .qq-brand-name > span {
+    display: none;
+  }
+  .qq-header-actions {
+    gap: 16px;
+  }
+  .qq-stay-hero {
+    min-height: 630px;
+    height: calc(100svh - 76px);
+    max-height: 780px;
+  }
+  .qq-stay-hero h1 {
+    font-size: clamp(58px, 8vw, 78px);
+  }
+  .qq-intro {
+    grid-template-columns: 1fr;
+  }
+  .qq-intro > div {
+    max-width: 640px;
+  }
+  .qq-section-top {
+    align-items: start;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .qq-selection-link {
+    grid-template-columns: 32px 1fr 24px;
+    gap: 18px;
+  }
+  .qq-selection-link > div {
+    display: block;
+  }
+  .qq-selection-link > div > p {
+    margin-bottom: 8px;
+  }
+  .qq-selection-link h3 {
+    margin-bottom: 8px;
+  }
+  .qq-restaurant-story {
+    grid-template-columns: 1fr;
+  }
+  .qq-restaurant-story figure {
+    height: 480px;
+  }
+  .qq-restaurant-story > div {
+    padding: 54px 36px;
+  }
+  .qq-purpose {
+    grid-template-columns: 1fr;
+    padding-block: 76px;
+    gap: 42px;
+  }
+  .qq-purpose figure img {
+    height: auto;
+    max-height: 500px;
+  }
+  .qq-stay-contact > div {
+    align-items: start;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .qq-footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .qq-footer-grid > div:first-child {
+    grid-column: 1 / -1;
+  }
+  .qq-footer-bottom {
+    flex-wrap: wrap;
+    gap: 12px 28px;
+  }
+  .qq-catalog-heading {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .qq-catalog-heading > p {
+    max-width: 640px;
+  }
+  .qq-catalog-help {
+    align-items: start;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+@media (max-width: 560px) {
+  .qq-detail {
+    padding-top: 22px;
+  }
+  .qq-detail-heading {
+    margin-top: 28px;
+  }
+  .qq-detail-heading h1 {
+    font-size: 48px;
+  }
+  .qq-detail-gallery {
+    margin-bottom: 40px;
+  }
+  .qq-detail-gallery > img {
+    height: 320px;
+  }
+  .qq-gallery-controls {
+    position: static;
+    margin-top: 12px;
+    gap: 8px;
+  }
+  .qq-gallery-controls button {
+    border-color: var(--q-line);
+    padding: 8px 10px;
+  }
+  .qq-detail-description h2 {
+    font-size: 34px;
+  }
+  .qq-rates {
+    grid-template-columns: 1fr;
+  }
+  .qq-rates > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+  }
+  .qq-rates dd {
+    margin-top: 0;
+  }
+  .qq-booking-panel {
+    padding: 26px 20px;
+  }
+  .qq-calendar-inner {
+    padding: 16px 12px;
+  }
+  .qq-calendar-days {
+    gap: 2px;
+  }
+  .qq-wrap {
+    width: calc(100% - 44px);
+  }
+  .qq-header-inner {
+    padding-inline: 16px;
+    gap: 12px;
+  }
+  .qq-header-actions {
+    gap: 12px;
+  }
+  .qq-brand-name > span {
+    display: none;
+  }
+  .qq-property-switch {
+    font-size: 12px;
+    gap: 6px;
+  }
+  .qq-brand-name {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+  }
+  .qq-brand-image {
+    width: 76px;
+    height: 44px;
+  }
+  .qq-brand-image img {
+    width: 100%;
+    left: 0;
+    top: -5px;
+  }
+  .qq-menu .qq-brand-image {
+    width: 90px;
+  }
+  .qq-menu .qq-brand-image img {
+    width: 100%;
+    top: -6px;
+  }
+  .qq-stay-hero {
+    min-height: 610px;
+    max-height: 750px;
+  }
+  .qq-stay-hero::before {
+    background:
+      linear-gradient(90deg, #10271ca8, #10271c52), linear-gradient(0deg, #10271c99, transparent);
+  }
+  .qq-stay-hero > img {
+    object-position: 55% center;
+  }
+  .qq-stay-hero h1 {
+    font-size: clamp(48px, 12vw, 66px);
+  }
+  .qq-stay-hero .qq-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+  }
+  .qq-stay-hero-content {
+    padding-block: 48px 104px;
+  }
+  .qq-stay-hero-content > p:not(.qq-eyebrow) {
+    font-size: 16px;
+    margin-top: 24px;
+  }
+  .qq-stay-hero .qq-actions {
+    align-items: start;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 28px;
+  }
+  .qq-hero-caption {
+    font-size: 11px;
+    gap: 20px;
+    bottom: 20px;
+  }
+  .qq-hero-caption > span:last-child {
+    max-width: 160px;
+    text-align: right;
+  }
+  .qq-intro,
+  .qq-purpose {
+    padding-block: 60px;
+  }
+  .qq-public h2 {
+    font-size: 40px;
+  }
+  .qq-stay-selection {
+    padding-bottom: 60px;
+  }
+  .qq-selection-link h3 {
+    font-size: 30px;
+  }
+  .qq-selection-link > div > span {
+    font-size: 13px;
+  }
+  .qq-restaurant-story figure {
+    height: 420px;
+  }
+  .qq-restaurant-story > div {
+    padding: 44px 22px;
+  }
+  .qq-footer {
+    padding-top: 48px;
+  }
+  .qq-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .qq-footer-grid > div:first-child {
+    grid-column: auto;
+  }
+  .qq-footer-bottom {
+    display: grid;
+  }
+  .qq-catalog {
+    padding-block: 46px 60px;
+  }
+  .qq-catalog-heading h1 {
+    font-size: 52px;
+  }
+  .qq-category-tabs {
+    gap: 2px;
+  }
+  .qq-category-tabs button {
+    font-size: 13px;
+    padding: 10px 11px;
+  }
+  .qq-filter-fields {
+    gap: 18px;
+  }
+  .qq-catalog-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .qq-card-photo {
+    height: 280px;
+  }
+  .qq-card-body h2 {
+    font-size: 34px;
+  }
+  .qq-card-bottom {
+    padding-bottom: 22px;
+  }
+  .qq-card-photo > span {
+    font-size: 12px;
+  }
+}
+@media (max-width: 390px) {
+  .qq-header-inner {
+    padding-inline: 12px;
+    gap: 8px;
+  }
+  .qq-header-actions {
+    gap: 8px;
+  }
+  .qq-header .qq-brand {
+    gap: 8px;
+  }
+  .qq-header .qq-brand-image {
+    width: 70px;
+  }
+  .qq-header .qq-brand-name {
+    padding-left: 8px;
+  }
+  .qq-header .qq-property-switch {
+    font-size: 13px;
+  }
+  .qq-header .qq-property-switch span {
+    display: none;
+  }
+  .qq-date-fields {
+    grid-template-columns: 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  .qq-public *,
+  .qq-public *::before,
+  .qq-public *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

@@ -1,29 +1,20 @@
-﻿import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav, SiteFooter } from "@/components/site-nav";
-import { HeroSection } from "@/components/sections/HeroSection";
-import { RoomsSection } from "@/components/sections/RoomsSection";
-import { ExperiencesSection } from "@/components/sections/ExperiencesSection";
-import { GallerySection } from "@/components/sections/GallerySection";
-import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
+import { RESTAURANT_URL } from "@/lib/public-site";
 import { WA_URL } from "@/lib/casitas";
-import { useScrollReveal } from "@/hooks/useScrollAnimation";
-import { Phone, ArrowRight, ShieldCheck, Sparkles, MessageCircle } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "QuinuaQ Casitas — Refugio de Alta Montaña frente al Valle" },
+      { title: "Casitas QuinuaQ — Quédate un poco más. Quinua, Ayacucho" },
       {
         name: "description",
         content:
-          "Casitas privadas de campo en Quinua, Ayacucho. Vistas panorámicas al valle, fogatas privadas bajo las estrellas, desayuno andino y desconexión a 3.500 msnm.",
+          "Casitas de campo en Quinua, Ayacucho. El paisaje, la cocina de QuinuaQ y tiempo para desconectar. Conoce nuestros alojamientos y consulta tu estancia.",
       },
-      { property: "og:title", content: "QuinuaQ Casitas — Dormir cerca del silencio" },
-      {
-        property: "og:description",
-        content: "Entre montañas y neblina, un refugio boutique donde el silencio se convierte en descanso.",
-      },
-      { property: "og:type", content: "website" },
+      { property: "og:title", content: "Casitas QuinuaQ — Quédate un poco más" },
+      { property: "og:description", content: "Campo, cocina y hospitalidad en Quinua, Ayacucho." },
+      { property: "og:image", content: "/images/atardecer-quinuaq.png" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
@@ -31,91 +22,135 @@ export const Route = createFileRoute("/")({
 });
 
 function HomePage() {
-  useScrollReveal();
-
   return (
-    <main className="bg-[#08140E] text-[#FBF8F1] overflow-x-hidden font-sans">
-      <SiteNav variant="overlay" />
-      <HeroSection />
-      <RoomsSection />
-      <ExperiencesSection />
-      <GallerySection />
-      <TestimonialsSection />
-      <ConciergeSection />
-      <SiteFooter />
-    </main>
-  );
-}
-
-/* ── VIP Concierge & Direct Inquiries Section ── */
-function ConciergeSection() {
-  return (
-    <section id="contacto" className="py-24 md:py-36 bg-[#08140E] text-[#FBF8F1]">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="bg-[#10271C] border border-white/10 p-8 md:p-14 shadow-2xl rounded-2xl relative overflow-hidden">
-          <div className="grid lg:grid-cols-12 gap-10 items-center relative z-10">
-            
-            {/* Left Narrative */}
-            <div className="lg:col-span-7 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 text-[10px] uppercase tracking-[0.25em] text-[#E2B94E] border border-white/10 rounded-full font-medium">
-                <Sparkles className="w-3 h-3 text-[#E2B94E]" />
-                Atención Personalizada
-              </div>
-              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#FBF8F1] font-light">
-                ¿Planeas un viaje especial a Quinua?
-              </h2>
-              <p className="text-sm text-[#A2B3A8] font-light leading-relaxed max-w-xl">
-                Nuestro concierge está disponible para coordinar traslados privados desde el aeropuerto de Huamanga, reservas grupales o atenciones exclusivas para tu estadía.
-              </p>
-              
-              <div className="pt-2 flex flex-wrap gap-6 text-xs text-[#A2B3A8]">
-                <div className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-[#E2B94E]" />
-                  <span>Tarifa oficial sin comisiones de terceros</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Phone className="w-4 h-4 text-[#E2B94E]" />
-                  <span>Respuesta rápida por WhatsApp</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Quick Action Cards */}
-            <div className="lg:col-span-5 flex flex-col gap-4">
-              <a
-                href={WA_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="p-5 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-medium text-xs uppercase tracking-wider rounded-xl transition-all flex items-center justify-between shadow-lg group"
-              >
-                <div className="flex items-center gap-3">
-                  <MessageCircle className="w-6 h-6" />
-                  <div className="text-left">
-                    <span className="block font-bold">Chatear con Concierge</span>
-                    <span className="text-[11px] opacity-90 lowercase font-mono">+51 946 393 256</span>
-                  </div>
-                </div>
-                <span className="text-lg group-hover:translate-x-1 transition-transform font-serif">↗</span>
-              </a>
-
-              <a
-                href="#casitas"
-                className="p-5 bg-[#E2B94E] hover:bg-[#F3D78A] text-[#08140E] font-bold text-xs uppercase tracking-wider rounded-xl transition-all flex items-center justify-between shadow-lg group"
-              >
-                <div className="flex items-center gap-3">
-                  <Sparkles className="w-5 h-5 text-[#08140E]" />
-                  <div className="text-left">
-                    <span className="block">Elegir Casita & Cotizar</span>
-                    <span className="text-[11px] opacity-80 normal-case font-sans">Ver disponibilidad y fotos en vivo</span>
-                  </div>
-                </div>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+    <div className="qq-public">
+      <SiteNav />
+      <main id="contenido" tabIndex={-1}>
+        <section className="qq-stay-hero" aria-labelledby="stay-title">
+          <img
+            src="/images/atardecer-quinuaq.png"
+            alt="El sol cae sobre el valle de Quinua, visto desde el arco de QuinuaQ"
+            fetchPriority="high"
+            width="1920"
+            height="1280"
+          />
+          <div className="qq-wrap qq-stay-hero-content">
+            <p className="qq-eyebrow">Casitas de campo · Quinua, Ayacucho</p>
+            <h1 id="stay-title">
+              El paisaje invita.
+              <br />
+              <em>Tú decides quedarte.</em>
+            </h1>
+            <p>
+              Una buena mesa. El aire del campo.
+              <br />Y tiempo para volver a lo esencial.
+            </p>
+            <div className="qq-actions">
+              <Link to="/casitas" className="qq-button qq-button-ivory">
+                Descubre las casitas <span aria-hidden="true">↗</span>
+              </Link>
+              <a href="#el-lugar" className="qq-text-link">
+                Conoce el lugar <span aria-hidden="true">↓</span>
               </a>
             </div>
-
           </div>
-        </div>
-      </div>
-    </section>
+          <div className="qq-wrap qq-hero-caption">
+            <span>QuinuaQ Casitas</span>
+            <span>El otro lado de una buena mesa.</span>
+          </div>
+        </section>
+        <section className="qq-wrap qq-intro" id="el-lugar">
+          <p className="qq-eyebrow">El gusto de quedarse</p>
+          <h2>
+            Ayacucho se disfruta
+            <br />
+            <em>sin mirar el reloj.</em>
+          </h2>
+          <div>
+            <p>
+              Casitas de campo en Quinua. Elige tu estancia, selecciona tus fechas y coordinemos tu visita.
+            </p>
+            <Link to="/casitas" className="qq-text-link">
+              Encuentra tu estancia <span aria-hidden="true">↗</span>
+            </Link>
+          </div>
+        </section>
+        <section className="qq-stay-selection qq-wrap" aria-labelledby="selection-title">
+          <div className="qq-section-top">
+            <div>
+              <p className="qq-eyebrow">A tu manera</p>
+              <h2 id="selection-title">Un lugar para cada viaje.</h2>
+            </div>
+            <Link to="/casitas" className="qq-text-link">
+              Ver todas las casitas <span aria-hidden="true">↗</span>
+            </Link>
+          </div>
+          <div className="qq-selection-grid">
+            <Link to="/casitas" search={{ category: "couples" }} className="qq-selection-link">
+              <span className="qq-selection-number">01</span>
+              <div>
+                <p>Para dos</p>
+                <h3>Una pausa compartida.</h3>
+                <span>Casitas y habitaciones para 1 a 2 personas</span>
+              </div>
+              <span aria-hidden="true">↗</span>
+            </Link>
+            <Link to="/casitas" search={{ category: "family" }} className="qq-selection-link">
+              <span className="qq-selection-number">02</span>
+              <div>
+                <p>En familia</p>
+                <h3>Más tiempo juntos.</h3>
+                <span>Casita Kallen para hasta 4 personas</span>
+              </div>
+              <span aria-hidden="true">↗</span>
+            </Link>
+            <Link
+              to="/casitas"
+              search={{ category: "groups", guests: 5 }}
+              className="qq-selection-link"
+            >
+              <span className="qq-selection-number">03</span>
+              <div>
+                <p>Entre amigos</p>
+                <h3>El campo se comparte.</h3>
+                <span>Habitación dúplex para grupos de hasta 6</span>
+              </div>
+              <span aria-hidden="true">↗</span>
+            </Link>
+          </div>
+        </section>
+        <section className="qq-wrap py-24 text-center" style={{ borderTop: '1px solid var(--border-subtle)', borderBottom: '1px solid var(--border-subtle)', marginTop: '4rem', marginBottom: '4rem' }}>
+          <p className="font-serif text-3xl md:text-4xl text-[var(--text-ivory)] mb-6">
+            La cocina de QuinuaQ es parte de la experiencia.
+          </p>
+          <a href={RESTAURANT_URL} className="qq-text-link inline-flex">
+            Conoce el restaurante <span aria-hidden="true">↗</span>
+          </a>
+        </section>
+        <section className="qq-stay-contact" id="contacto">
+          <div className="qq-wrap">
+            <div>
+              <p className="qq-eyebrow">Tu próxima escapada</p>
+              <h2>Nos vemos en Quinua.</h2>
+              <p>Cuéntanos cuándo vienes y con quién. Te ayudamos a elegir tu estancia.</p>
+              <div className="mt-8 space-y-2 text-[var(--text-muted)]">
+                <p>📍 Jr. 9 de Diciembre s/n, Lorenzayocc, Quinua</p>
+                <p>📞 +51 946 393 256</p>
+                <p>✉️ reservas@quinuaq.com</p>
+              </div>
+            </div>
+            <div className="qq-actions">
+              <Link to="/casitas" className="qq-button">
+                Ver las casitas <span aria-hidden="true">↗</span>
+              </Link>
+              <a href={WA_URL} target="_blank" rel="noreferrer" className="qq-button qq-button-outline">
+                Escríbenos por WhatsApp <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+      <SiteFooter />
+    </div>
   );
 }

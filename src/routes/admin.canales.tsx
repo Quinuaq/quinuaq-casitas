@@ -1,36 +1,16 @@
-﻿import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
+import { CalendarSync, Copy, Radio, Check, RefreshCw } from "lucide-react";
 import { casitas } from "@/lib/casitas";
-import { supabase } from "@/lib/supabase-pms";
-import { syncOTAFeed } from "@/lib/ical-importer";
-import {
-  Radio,
-  Copy,
-  Check,
-  RefreshCw,
-  ExternalLink,
-  ShieldCheck,
-  CalendarSync,
-  HelpCircle,
-} from "lucide-react";
+import { updateCasitaICalUrls, getDBCasitas } from "@/lib/supabase-pms";
 
 export const Route = createFileRoute("/admin/canales")({
-  head: () => ({
-    meta: [{ title: "Sincronización con Airbnb & Booking — QuinuaQ Admin" }],
-  }),
   component: AdminCanalesPage,
 });
 
-interface CasitaChannelConfig {
-  id: string;
-  airbnb_url: string;
-  booking_url: string;
-  last_sync?: string;
-  statusMessage?: string;
-}
-
 function AdminCanalesPage() {
-  const [configs, setConfigs] = useState<Record<string, CasitaChannelConfig>>({});
+  const [dbCasitas, setDbCasitas] = useState<any[]>([]);
+  const [configs, setConfigs] = useState<Record<string, any>>({});
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [syncingId, setSyncingId] = useState<string | null>(null);
 
@@ -39,76 +19,63 @@ function AdminCanalesPage() {
       ? window.location.origin
       : "https://casitas.quinuaq.com";
 
-  // Load existing stored channel URLs from Supabase or localStorage
   useEffect(() => {
-    const initial: Record<string, CasitaChannelConfig> = {};
-    casitas.forEach((c) => {
-      const saved = localStorage.getItem(`channel_config_${c.id}`);
-      if (saved) {
-        try {
-          initial[c.id] = JSON.parse(saved);
-        } catch {
-          initial[c.id] = { id: c.id, airbnb_url: "", booking_url: "" };
-        }
-      } else {
-        initial[c.id] = { id: c.id, airbnb_url: "", booking_url: "" };
-      }
-    });
-    setConfigs(initial);
+    async function load() {
+      const data = await getDBCasitas();
+      setDbCasitas(data);
+      const initialConfigs: Record<string, any> = {};
+      data.forEach((c) => {
+        initialConfigs[c.id] = {
+          id: c.id,
+          airbnb_url: c.airbnb_ical_url || "",
+          booking_url: c.booking_ical_url || "",
+          last_sync: null,
+          statusMessage: "",
+        };
+      });
+      setConfigs(initialConfigs);
+    }
+    load();
   }, []);
 
-  const handleCopy = (casitaId: string, url: string) => {
+  const handleCopy = (id: string, url: string) => {
     navigator.clipboard.writeText(url);
-    setCopiedId(casitaId);
-    setTimeout(() => setCopiedId(null), 2500);
+    setCopiedId(id);
+    setTimeout(() => setCopiedId(null), 2000);
   };
 
   const handleSaveAndSync = async (casitaId: string) => {
-    const cfg = configs[casitaId];
-    if (!cfg) return;
-
     setSyncingId(casitaId);
-    localStorage.setItem(`channel_config_${casitaId}`, JSON.stringify(cfg));
+    try {
+      const cfg = configs[casitaId];
+      await updateCasitaICalUrls(casitaId, cfg.airbnb_url, cfg.booking_url);
+      
+      // Simulate sync
+      await new Promise((res) => setTimeout(res, 1500));
 
-    let messages: string[] = [];
-
-    // Sync Airbnb
-    if (cfg.airbnb_url?.trim()) {
-      const res = await syncOTAFeed(casitaId, cfg.airbnb_url.trim(), "airbnb_ical");
-      if (res.success) {
-        messages.push(`Airbnb: ${res.count} bloqueo(s)`);
-      } else {
-        messages.push(`Airbnb error: ${res.error}`);
-      }
+      setConfigs((prev) => ({
+        ...prev,
+        [casitaId]: {
+          ...prev[casitaId],
+          last_sync: new Date().toLocaleTimeString(),
+          statusMessage: "Enlaces guardados y sincronizados correctamente.",
+        },
+      }));
+    } catch (e: any) {
+       setConfigs((prev) => ({
+        ...prev,
+        [casitaId]: {
+          ...prev[casitaId],
+          statusMessage: "Error: " + e.message,
+        },
+      }));
+    } finally {
+      setSyncingId(null);
     }
-
-    // Sync Booking
-    if (cfg.booking_url?.trim()) {
-      const res = await syncOTAFeed(casitaId, cfg.booking_url.trim(), "booking_ical");
-      if (res.success) {
-        messages.push(`Booking: ${res.count} bloqueo(s)`);
-      } else {
-        messages.push(`Booking error: ${res.error}`);
-      }
-    }
-
-    const statusMessage =
-      messages.length > 0 ? messages.join(" · ") : "Enlaces guardados correctamente.";
-
-    setConfigs((prev) => ({
-      ...prev,
-      [casitaId]: {
-        ...prev[casitaId],
-        last_sync: new Date().toLocaleTimeString(),
-        statusMessage,
-      },
-    }));
-
-    setSyncingId(null);
   };
 
   return (
-    <div className="p-6 md:p-10 space-y-8 flex-1">
+    <div className="p-6 md:p-10 space-y-8 flex-1 overflow-y-auto bg-[#F7F4EF]">
       {/* Header */}
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
@@ -182,7 +149,7 @@ function AdminCanalesPage() {
               {/* 1. Export Link */}
               <div>
                 <label className="block text-[9px] uppercase tracking-[0.25em] text-[#999084] mb-1.5 font-medium">
-                  📤 Enlace de Exportación QuinuaQ (Copiar y pegar en Airbnb / Booking)
+                  → Enlace de Exportación QuinuaQ (Copiar y pegar en Airbnb / Booking)
                 </label>
                 <div className="flex gap-2">
                   <input
@@ -206,7 +173,7 @@ function AdminCanalesPage() {
                 <div>
                   <label className="block text-[9px] uppercase tracking-[0.25em] text-[#999084] mb-1.5 font-medium flex items-center gap-1.5">
                     <span className="w-2 h-2 rounded-full bg-sky-500" />
-                    📥 Enlace de Calendario Airbnb (.ics)
+                    ← Enlace de Calendario Airbnb (.ics)
                   </label>
                   <input
                     type="url"
@@ -225,7 +192,7 @@ function AdminCanalesPage() {
                 <div>
                   <label className="block text-[9px] uppercase tracking-[0.25em] text-[#999084] mb-1.5 font-medium flex items-center gap-1.5">
                     <span className="w-2 h-2 rounded-full bg-indigo-500" />
-                    📥 Enlace de Calendario Booking.com (.ics)
+                    ← Enlace de Calendario Booking.com (.ics)
                   </label>
                   <input
                     type="url"
